@@ -1,0 +1,147 @@
+﻿@using Hotel_Reservation.Models
+@model List<CartItem>
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+@if (Model == null || Model.Count == 0)
+{
+    <p class="text-info text-center">
+        Empty Cart
+    </p>
+}
+else
+{
+    //using (Ajax.BeginForm("Create", "Reservations", new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "Get" }))
+    //{
+        <div class="vk-gallery-grid-full-banner">
+            <div class="vk-about-banner">
+                <div class="vk-about-banner-destop">
+                    <div class="vk-banner-img"></div>
+                    <div class="vk-about-banner-caption">
+                        <h2>Shop Cart</h2>
+                        <h3>
+                            <a href="#">Shop</a>
+                            <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                            <a href="#">Cart</a>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vk-shop-cart-body">
+            <div class="vk-shop-cart4">
+                <div class="container">
+                    <!-- Cart -->
+                    <div class="vk-shop-cart-form">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Room</th>
+                                    <th>No. Travller</th>
+                                    <th>Price</th>
+                                    <th>Extra Fee</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody class="vk-shop-cart4-cnt">
+                                
+                            @foreach (CartItem item in Model)
+                            {
+                                <tr>
+                                    <td class="w-td" style="width: 25%">
+                                        <img src="@item.image" alt="story" style="width:unset; height:120px">
+                                    </td>
+                                    <td>
+                                        <h3 class="h3-a">@item.typeName</h3>
+                                    </td>
+                                    <td>
+                                        <h3 class="h3-a">@item.traveler</h3>
+                                    </td>
+                                    <td class="price-hide">
+                                        <span class="price">$@item.unitPrice</span>
+                                        @{
+                                            if (ViewBag.Discount != 0)
+                                            {
+                                                <span> -@ViewBag.Discount %</span>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        <span class="price">$@item.extraFee</span>
+                                    </td>
+                                    <td><span class="price">$@item.totalPrice</span></td>
+                                    <td>
+                                        <span class="del del-hide">
+                                            <a href="@Url.Action("DeleteItem", new { roomNumber = item.roomNumber })">
+                                                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                                
+                            </tbody>
+                        </table>
+                        @using (Ajax.BeginForm("UpdateDate", "Cart", new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "Get" }))
+                        {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="control-label">CHECK - IN</label>
+                                    <div class="input-group date date-check-in" data-date="12-02-2017" data-date-format="mm-dd-yyyy">
+                                        <input name="date1" class="form-control" type="text" value="12-02-2017">
+                                        <span class="input-group-addon btn"><span class="ti-calendar" id="ti-calendar1"></span></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="control-label">CHECK - OUT</label>
+                                    <div class="input-group date date-check-out" data-date="12-02-2017" data-date-format="mm-dd-yyyy">
+                                        <input name="date2" class="form-control" type="text" value="12-02-2017">
+                                        <span class="input-group-addon btn"><span class="ti-calendar" id="ti-calendar2"></span></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <button class="upload-cart">Update Date</button>
+                                </div>
+                            </div>
+                        }
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- End Cart -->
+                    <!-- Total -->
+                    <div class="vk-shop-cart-ship-total">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="cart-totals">
+                                    <h3>Cart Totals</h3>
+                                    <ul>
+                                        <li><strong>Subtotal</strong> <span>$ @ViewBag.Subtotal</span></li>
+                                        <li><strong>Shipping</strong> <span>$ 5.0</span></li>
+                                        <li><strong>Totals</strong> <span>$ @ViewBag.Total</span></li>
+                                    </ul>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="vk-btn-send">
+                                                <a href="@Url.Action("Create", "Reservations")" class="btn vk-btn-primary btn-block" 
+                                                   onclick="return confirm('Are you sure to checkout the booking ?')"><h3>Checkout</h3></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- Total -->
+
+                </div>
+            </div>
+        </div>
+    @*}*@
+}

@@ -1,0 +1,136 @@
+﻿@model IEnumerable<Hotel_Reservation.Models.Room_Catalog>
+
+@{
+    ViewBag.Title = "Index";
+}
+@Html.Raw(TempData["deleteFail"])
+@Html.Raw(TempData["deleteSuccess"])
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-concierge-bell"></i>
+        Room Information
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            Image
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.typeName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.price)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.description)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.quantityOfRooms)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.numberOfAdults)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.extraFee)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.catalogStatus)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            @foreach (var pic in item.Image_Details)
+                            {
+                                <td>
+                                    <img src="@pic.image" style="max-height:100px"/>
+                                </td>
+                            }
+                            <td>
+                                @Html.DisplayFor(modelItem => item.typeName)
+                            </td>
+                            <td>
+                                @{
+                                    if (item.promotionId == "SD1")
+                                    {
+                                        <label>$</label> @Html.DisplayFor(modelItem => item.price)
+                                        <label style="color:#17a2b8; font-weight:bold"> -5%</label>
+                                    }
+                                    else
+                                    {
+                                        <label>$</label> @Html.DisplayFor(modelItem => item.price)
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.quantityOfRooms)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.numberOfAdults)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.extraFee)
+                            </td>
+                            <td>
+                                @{
+                                    if (item.catalogStatus == "Active")
+                                    {
+                                        <div class="btn btn-success active-btn">
+                                            @Html.DisplayFor(modelItem => item.catalogStatus)
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="btn btn-danger inactive-btn">
+                                            @Html.DisplayFor(modelItem => item.catalogStatus)
+                                        </div>
+                                    }
+                                }
+                            </td>
+                            
+                                
+
+                            
+                            <td>
+                                <a href="javascript:void(0);" class="EditCatalog btn btn-success" data-id="@item.typeId"
+                                   data-toggle="modal" data-target="#myModal">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <a href="@Url.Action("Delete", "Room_Catalog", new { id = item.typeId })" 
+                                   class="btn btn-danger" onclick="return confirm('Are you sure ?')">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent' style="padding:15px">
+            </div>
+        </div>
+    </div>
+</div>

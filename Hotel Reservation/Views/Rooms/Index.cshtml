@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Hotel_Reservation.Models.Room>
+
+@{
+    ViewBag.Title = "Index";
+}
+@Html.Raw(TempData["deleteFail"])
+@Html.Raw(TempData["deleteSuccess"])
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-concierge-bell"></i>
+        Customer Information
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.roomNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Room_Catalog.typeName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.roomStatus)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.operationStatus)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.roomNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Room_Catalog.typeName)
+                            </td>
+                            <td>
+                                @{
+                                    if (item.roomStatus == "Available")
+                                    {
+                                        <div class="badge bg-success" style="color:#fff">
+                                            @Html.DisplayFor(modelItem => item.roomStatus)
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="badge bg-danger" style="color:#fff">
+                                            @Html.DisplayFor(modelItem => item.roomStatus)
+                                        </div>
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @{
+                                    if (item.operationStatus == "Active")
+                                    {
+                                        <div class="badge bg-success" style="color:#fff">
+                                            @Html.DisplayFor(modelItem => item.operationStatus)
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="badge bg-danger" style="color:#fff">
+                                            @Html.DisplayFor(modelItem => item.operationStatus)
+                                        </div>
+                                    }
+                                }
+                            </td>
+                            <td style="text-align:center">
+                                <a href="javascript:void(0);" class="EditRoom btn btn-success" data-id="@item.roomNumber"
+                                   data-toggle="modal" data-target="#myModal">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <a href="@Url.Action("Delete", "Rooms", new { id = item.roomNumber, typeId = item.typeId })" 
+                                   class="btn btn-danger" onclick="return confirm('Are you sure ?')">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent' style="padding:15px">
+            </div>
+        </div>
+    </div>
+</div>

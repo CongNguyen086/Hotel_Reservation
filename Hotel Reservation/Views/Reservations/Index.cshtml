@@ -1,0 +1,132 @@
+﻿@model IEnumerable<Hotel_Reservation.Models.Reservation>
+
+@{
+    ViewBag.Title = "Index";
+    List<String> status = new List<string> { "Processing", "Checkin", "Checkout", "Cancelled" };
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@*@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()*@
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-concierge-bell"></i>
+            Reservation Information
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.checkInDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.checkOutDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.customerName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.phone)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.email)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.reservationStatus)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.checkInDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.checkOutDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.customerName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.phone)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.email)
+                                </td>
+                                @*<td>
+                                    @Html.DropDownListFor(modelItem => item.reservationStatus, status)
+                                    <form action="@Url.Action("UpdateStatus")" method="get">
+                                        <input type="hidden" name="id" value="@item.reservationId" />
+                                        @Html.DropDownListFor(modelItem => item.reservationStatus, status)
+                                        <input type="submit" value="Update" class="btn btn-success" />
+                                    </form>
+                                </td>*@
+                                <td style="text-align:right">
+                                    @{
+                                        if (Session["Update"] == null)
+                                        {
+                                            <span style="margin-right">
+                                                @Html.DisplayFor(modelItem => item.reservationStatus)
+                                            </span>
+                                            <a href="@Url.Action("UpdateForm", "Reservations", new { id = item.reservationId})"
+                                               class="btn btn-success">
+                                                <i class="fas fa-edit"></i> Update
+                                            </a>
+                                        }
+                                        else if (Session["Update"] != null)
+                                        {
+                                            if (item.reservationId == int.Parse(Session["Update"].ToString()))
+                                            {
+                                                <form action="@Url.Action("UpdateStatus")" method="get">
+                                                    <input type="hidden" name="id" value="@item.reservationId" />
+                                                    <select id="status" name="status">
+                                                        @foreach (var s in status)
+                                                        {
+                                                            if (s == item.reservationStatus)
+                                                            {
+                                                                <option value="@s" selected="selected">@s</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@s">@s</option>
+                                                            }
+                                                        }
+                                                    </select>
+                                                    <input type="submit" value="Accept" class="btn btn-primary" />
+                                                </form>
+                                                @*@Html.DropDownListFor(modelItem => item.reservationStatus, status)
+                                                    <input type="submit" value="Accept" class="btn btn-primary" />*@
+                                            }
+                                            else
+                                            {
+                                                @Html.DisplayFor(modelItem => item.reservationStatus)
+                                            }
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("ReservationDetails", "Reservations", new { id = item.reservationId })" class="btn btn-info">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+@*}*@

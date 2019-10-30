@@ -1,0 +1,121 @@
+﻿@model Hotel_Reservation.Models.Room_Catalog
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+<div class="vk-gallery-grid-full-banner">
+    <div class="vk-about-banner">
+        <div class="vk-about-banner-destop">
+            <div class="vk-banner-img"></div>
+            <div class="vk-about-banner-caption">
+                <h2>Room Details</h2>
+                <h3>
+                    <a href="#">Rooms</a>
+                    <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                    <a href="#">Details</a>
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="vk-room-details-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="vk-room-details-content-left">
+                    <div class="vk-room-details-left-slide">
+                        <div id="owl-slide-room-details" class="vk-owl-one-item owl-carousel owl-theme">
+                            <div class="item">
+                                @foreach (var pic in Model.Image_Details)
+                                {
+                                    <img src="@pic.image" alt="" class="img-responsive">
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vk-room-details-title-price">
+                        <div class="vk-room-details-title">
+                            <h2>@Model.typeName</h2>
+                        </div>
+                        <div class="vk-room-details-price">
+                            <ul>
+                                <li>
+                                    <p>$@Model.price/<span>NIGHT</span></p>
+                                </li>
+                                @{
+                                    if (Model.promotionId != null)
+                                    {
+                                        if (Model.Promotion.roomDiscount != null)
+                                        {
+                                            var discount = Model.Promotion.roomDiscount * (decimal)100;
+                                            <li>
+                                                -@string.Format("{0:N0}", discount) %
+                                            </li>
+                                        }
+                                    }
+                                }
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="vk-room-details-description">
+                        <h4>Description</h4>
+                        <p>
+                            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
+                            turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget,
+                            tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
+                            ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est
+                            et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo
+                            vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum,
+                            eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in
+                            turpis pulvinar facilisis.
+                        </p>
+                    </div>
+                    <div class="vk-room-details-info">
+                        <div class="row">
+                            <div class="col-6">
+                                <ul>
+                                    <li>
+                                        <p><i class="fa fa-info-circle" aria-hidden="true"></i> Details <span> : @Model.description</span></p>
+                                    </li>
+                                    <li>
+                                        <p><i class="fa fa-users" aria-hidden="true"></i> Max Occupancy <span> : @Model.numberOfAdults</span></p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-6">
+                                <ul>
+                                    <li>
+                                        <p><i class="fa fa-users" aria-hidden="true"></i> Availability <span> : @ViewBag.Availability</span></p>
+                                    </li>
+                                    <li>
+                                        <p><i class="fa fa-wifi" aria-hidden="true"></i> Wifi <span> : Yes</span></p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="vk-room-details-content-right">
+                    <h3>@ViewBag.Status</h3>
+                    @if (ViewBag.Status != "Reserved")
+                    {
+                        <div class="col-md-12" style="margin-top:10px">
+                            <div class="vk-btn-send">
+                                <a href="@Url.Action("AddToCart", "Cart", 
+                                        new { typeId = Model.typeId })" 
+                                    class="btn vk-btn-primary btn-block">Add To Cart</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

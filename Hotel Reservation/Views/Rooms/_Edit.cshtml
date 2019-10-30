@@ -1,0 +1,55 @@
+﻿@model Hotel_Reservation.Models.Room
+
+@{
+    ViewBag.Title = "Edit";
+    List<SelectListItem> roomstatus = new List<SelectListItem>();
+    roomstatus.Add(new SelectListItem() { Text = "Available", Value = "Available" });
+    roomstatus.Add(new SelectListItem() { Text = "Reserved", Value = "Reserved" });
+
+    List<SelectListItem> operationstatus = new List<SelectListItem>();
+    operationstatus.Add(new SelectListItem() { Text = "Active", Value = "Active" });
+    operationstatus.Add(new SelectListItem() { Text = "Inactive", Value = "Inactive" });
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Room</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.roomNumber)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.typeId, "typeId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("typeId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.typeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.roomStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.roomStatus, roomstatus, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.roomStatus, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.operationStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.operationStatus, operationstatus, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.operationStatus, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update" class="btn btn-default" onclick="return alert('Update Successfully!')" />
+                <input type="submit" value="Cancel" class="btn btn-default" data-dismiss="modal" />
+            </div>
+        </div>
+    </div>
+}

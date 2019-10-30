@@ -1,0 +1,70 @@
+﻿@model Hotel_Reservation.Models.Room
+
+@{
+    ViewBag.Title = "Create";
+    List<SelectListItem> roomstatus = new List<SelectListItem>();
+    roomstatus.Add(new SelectListItem() { Text = "Available", Value = "Available", Selected = true });
+    roomstatus.Add(new SelectListItem() { Text = "Reserved", Value = "Reserved" });
+
+    List<SelectListItem> operationstatus = new List<SelectListItem>();
+    operationstatus.Add(new SelectListItem() { Text = "Active", Value = "Active"});
+    operationstatus.Add(new SelectListItem() { Text = "Inactive", Value = "Inactive" });
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <div class="breadcrumb" style="display:inherit">
+            <h4>Room</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.roomNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.roomNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.roomNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.typeId, "typeId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("typeId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.typeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            
+            <div style="display:none;" class="form-group">
+                @Html.LabelFor(model => model.roomStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.roomStatus, roomstatus, "--Select Room Status--", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.roomStatus, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.operationStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.operationStatus, operationstatus, "--Select Operation Status--", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.operationStatus, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+    
+}

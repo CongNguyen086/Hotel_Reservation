@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Hotel_Reservation.Models.Promotion>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-concierge-bell"></i>
+        Promotion Information
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.promotionDescription)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Room_Catalog.typeName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.roomDiscount)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.startDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.endDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.promotionStatus)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.promotionDescription)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Room_Catalog.typeName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.roomDiscount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.startDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.endDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.promotionStatus)
+                            </td>
+                            <td style="text-align:center">
+                                <a href="javascript:void(0);" class="EditPromotion btn btn-success" data-id="@item.promotionId" 
+                                   data-toggle="modal" data-target="#myModal">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <a href="@Url.Action("Delete", "Promotions", new { id = item.promotionId })" 
+                                   class="btn btn-danger" onclick="return confirm('Are you sure ?')">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent' style="padding:15px">
+            </div>
+        </div>
+    </div>
+</div>

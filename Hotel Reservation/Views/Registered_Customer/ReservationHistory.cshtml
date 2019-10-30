@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Hotel_Reservation.Models.Reservation>
+
+@{
+    ViewBag.Title = "ReservationHistory";
+}
+
+<h2>Reservation History</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="breadcrumb" style="display:inherit">
+    <div class="row" style="text-align:center">
+        <div class="col">
+            <span class="font-weight-bold">
+                <i class="fas fa-user"></i> @Html.DisplayNameFor(model => model.customerName)
+            </span>
+
+            <span style="padding-left:5px">
+                @ViewBag.CustomerName
+            </span>
+        </div>
+        
+        <div class="col">
+            <span class="font-weight-bold" >
+                <i class="fas fa-phone"></i> @Html.DisplayNameFor(model => model.Registered_Customer.phone)
+            </span>
+
+            <span style="padding-left:5px">
+                @ViewBag.Phone
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-concierge-bell"></i>
+        Customer Information
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.checkInDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.checkOutDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.reservationStatus)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.checkInDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.checkOutDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.reservationStatus)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("ReservationDetails", "Reservations", new { id = item.reservationId })" class="btn btn-success">
+                                    <i class="fas fa-info-circle"></i> Details
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+﻿@model IEnumerable<Hotel_Reservation.Models.Reservation_Detail>
+
+@{
+    ViewBag.Title = "ReservationDetails";
+}
+
+<h2>ReservationDetails</h2>
+
+<div class="breadcrumb" style="display:inherit">
+    <div class="row" style="text-align:center">
+        <div class="col">
+            <span class="font-weight-bold">
+                @Html.DisplayNameFor(model => model.Reservation.customerName)
+            </span>
+
+            <span style="padding-left:5px">
+                @ViewBag.CustomerName
+            </span>
+        </div>
+
+        <div class="col">
+            <span class="font-weight-bold">
+                @Html.DisplayName("Room Quantity")
+            </span>
+
+            <span style="padding-left:5px">
+                @Model.Count()
+            </span>
+        </div>
+
+        <div class="w-100"></div>
+        
+        <div class="col">
+            <span class="font-weight-bold">
+                @Html.DisplayNameFor(model => model.Reservation.phone)
+            </span>
+
+            <span style="padding-left:5px">
+                @ViewBag.Phone
+            </span>
+        </div>
+
+        <div class="col">
+            <span class="font-weight-bold">
+                @Html.DisplayName("Total")
+            </span>
+
+            <span style="padding-left:5px">
+                @ViewBag.Total
+            </span>
+        </div>
+
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-concierge-bell"></i>
+        Customer Information
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Room.Room_Catalog.typeName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.roomNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.numberOfTravelers)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.extraFee)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.totalPrice)
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th>
+                                @Html.DisplayFor(modelItem => item.Room.Room_Catalog.typeName)
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.roomNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.numberOfTravelers)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.extraFee)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.totalPrice)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>

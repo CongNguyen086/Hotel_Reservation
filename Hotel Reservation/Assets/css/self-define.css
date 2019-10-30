@@ -1,0 +1,42 @@
+﻿.active-btn:hover {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.inactive-btn:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.hotel-logo {
+    max-width: 80%;
+    position: relative;
+    left: 20px;
+}
+
+.dropdown-item-sidebar {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+
+.dropdown-item-sidebar:hover, .dropdown-item-sidebar:focus {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  background-color: none;
+}
+
+.col-md-2 {
+    max-width: none;
+}
+
+.table thead th {
+    vertical-align: middle;
+}
