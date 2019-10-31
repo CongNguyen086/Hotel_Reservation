@@ -1,12 +1,17 @@
-﻿.active-btn:hover {
-    background-color: #28a745;
-    border-color: #28a745;
-}
-
-.inactive-btn:hover {
+﻿/*.inactive-btn:hover {
     background-color: #dc3545;
     border-color: #dc3545;
+}*/
+.inactive-btn {
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
 }
+    .inactive-btn:hover {
+        color: #fff;
+        background-color: #ec971f;
+        border-color: #d58512;
+    }
 
 .hotel-logo {
     max-width: 80%;
@@ -27,11 +32,11 @@
     border: 0;
 }
 
-.dropdown-item-sidebar:hover, .dropdown-item-sidebar:focus {
-  color: rgba(255, 255, 255, 0.75);
-  text-decoration: none;
-  background-color: none;
-}
+    .dropdown-item-sidebar:hover, .dropdown-item-sidebar:focus {
+        color: rgba(255, 255, 255, 0.75);
+        text-decoration: none;
+        background-color: none;
+    }
 
 .col-md-2 {
     max-width: none;
@@ -40,3 +45,11 @@
 .table thead th {
     vertical-align: middle;
 }
+
+.roomitem {
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+    .roomitem:hover {
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    }

@@ -54,6 +54,10 @@ namespace Hotel_Reservation.Controllers
             {
                 Room_Catalog rc = db.Room_Catalogs.SingleOrDefault(m => m.typeId == room.typeId);
                 rc.quantityOfRooms++;
+                if (!rc.catalogStatus.Equals("Active"))
+                {
+                    rc.catalogStatus = "Active";
+                }
 
                 db.Rooms.Add(room);
                 db.Entry(rc).State = EntityState.Modified;

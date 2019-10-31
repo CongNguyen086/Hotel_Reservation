@@ -11,7 +11,8 @@ namespace Hotel_Reservation.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Room_Catalog
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,17 +22,47 @@ namespace Hotel_Reservation.Models
             this.Promotions = new HashSet<Promotion>();
             this.Rooms = new HashSet<Room>();
         }
-    
+
+        [Key]
+        [Display(Name = "Room Type ID")]
+        [StringLength(50)]
         public string typeId { get; set; }
+
+        [Required]
+        [Display(Name = "Type Name")]
+        [StringLength(50)]
         public string typeName { get; set; }
+
+        [Display(Name = "Price")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:#.#}")]
+        [Range(1, 100000, ErrorMessage = "Price must be between 1 and 100000")]
         public decimal price { get; set; }
+
+        [Required]
+        [Display(Name = "Description")]
+        [StringLength(200)]
         public string description { get; set; }
-        public Nullable<int> quantityOfRooms { get; set; }
+
+        [Display(Name = "Quantity of Rooms")]
+        public int quantityOfRooms { get; set; }
+
+        [Display(Name = "Number of Adults")]
+        [Range(1, 6, ErrorMessage = "Number of Adults must be between 1 and 6")]
         public int numberOfAdults { get; set; }
+
+        [Display(Name = "Extra Fee")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:#.#}")]
         public decimal extraFee { get; set; }
+
+        [Display(Name = "Promotion ID")]
+        [StringLength(50)]
         public string promotionId { get; set; }
+
+        [Required]
+        [Display(Name = "Status")]
+        [StringLength(50)]
         public string catalogStatus { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Image_Detail> Image_Details { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

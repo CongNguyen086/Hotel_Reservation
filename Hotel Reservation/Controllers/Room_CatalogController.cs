@@ -75,6 +75,7 @@ namespace Hotel_Reservation.Controllers
             if (ModelState.IsValid)
             {
                 room_Catalog.promotionId = null;
+                room_Catalog.quantityOfRooms = 0;
                 db.Room_Catalogs.Add(room_Catalog);
 
                 //db = new ModelContext();

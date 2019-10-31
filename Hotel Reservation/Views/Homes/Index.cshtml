@@ -20,7 +20,7 @@
                                             <h3 class="animated fadeInDown slide-delay-1">Swimming Pool</h3>
                                             <h2 class="animated fadeInUp slide-delay-2">Sparta Plaza Hotel</h2>
                                             <div class="clearfix"></div>
-                                            <div class="vk-slide-cation-btn">
+                                            @*<div class="vk-slide-cation-btn">
                                                 <ul>
                                                     <li>
                                                         <a href="#">OUR ROOMS</a>
@@ -29,7 +29,7 @@
                                                         <a href="#">BOOK NOW <span class="ti-arrow-right"></span></a>
                                                     </li>
                                                 </ul>
-                                            </div>
+                                            </div>*@
                                         </div>
                                     </div>
                                 </div>
@@ -42,7 +42,7 @@
                                             <h3 class="animated fadeInDown slide-delay-1">Swimming Pool</h3>
                                             <h2 class="animated fadeInUp slide-delay-2">Sparta Plaza Hotel</h2>
                                             <div class="clearfix"></div>
-                                            <div class="vk-slide-cation-btn">
+                                            @*<div class="vk-slide-cation-btn">
                                                 <ul>
                                                     <li>
                                                         <a href="#">OUR ROOMS</a>
@@ -51,7 +51,7 @@
                                                         <a href="#">BOOK NOW <span class="ti-arrow-right"></span></a>
                                                     </li>
                                                 </ul>
-                                            </div>
+                                            </div>*@
                                         </div>
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@
                                             <h3 class="animated fadeInDown slide-delay-1">Swimming Pool</h3>
                                             <h2 class="animated fadeInUp slide-delay-2">Sparta Plaza Hotel</h2>
                                             <div class="clearfix"></div>
-                                            <div class="vk-slide-cation-btn">
+                                            @*<div class="vk-slide-cation-btn">
                                                 <ul>
                                                     <li>
                                                         <a href="#">OUR ROOMS</a>
@@ -73,10 +73,65 @@
                                                         <a href="#">BOOK NOW <span class="ti-arrow-right"></span></a>
                                                     </li>
                                                 </ul>
-                                            </div>
+                                            </div>*@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="vk-booking-transparent-1">
+                            <div class="container">
+                                <form action="http://html.vikitheme.com/sparta/action.php" class="form-horizontal  booking-hotel-all">
+                                    <ul>
+                                        <li>
+                                            <h4>Check - In</h4>
+                                            <div class="input-group date date-check-in" data-date="12-02-2017" data-date-format="mm-dd-yyyy">
+                                                <input name="date1" class="form-control" type="text" value="12-02-2017">
+                                                <span class="input-group-addon btn"><span class="ti-calendar" id="ti-calendar1"></span></span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <h4>Check - Out</h4>
+                                            <div class="input-group date date-check-out" data-date="12-02-2017" data-date-format="mm-dd-yyyy">
+                                                <input name="date2" class="form-control" type="text" value="12-02-2017">
+                                                <span class="input-group-addon btn"><span class="ti-calendar" id="ti-calendar2"></span></span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <h4>Adults</h4>
+                                            <div class="wrap-select">
+                                                <div id="dd" class="wrapper-dropdown-3">
+                                                    <span>1</span>
+                                                    <ul class="dropdown">
+                                                        <li><a href="#">2</a></li>
+                                                        <li><a href="#">3</a></li>
+                                                        <li><a href="#">4</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <h4>Children</h4>
+                                            <div class="wrap-select">
+                                                <div id="dda" class="wrapper-dropdown-3">
+                                                    <span>0</span>
+                                                    <ul class="dropdown">
+                                                        <li><a href="#">1</a></li>
+   
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="vk-btn-check">
+                                                <button type="submit" class="btn vk-btn-primary btn-block btn-check">Check  Availability</button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </form>
+                                <div class="clearfix"></div>
                             </div>
                         </div>
                     </div>
@@ -99,7 +154,7 @@
                                             //{
                                             foreach (var item in Model)
                                             {
-                                                    <div class="item">
+                                                    <div class="roomitem item">
                                                         <div class="col-md-6 vk-dark-our-room-item-left  vk-clear-padding">
                                                             <div class="vk-dark-our-room-item-img">
                                                                 <img src="~/CustomerLayout/images/04_01_room_list/img/img.jpg" alt="" class="img-responsive">
