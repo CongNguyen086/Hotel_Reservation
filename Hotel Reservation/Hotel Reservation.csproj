@@ -5895,11 +5895,11 @@
     <Content Include="Views\Shared\_LayoutCustomer.cshtml" />
     <Content Include="Views\Homes\Index.cshtml" />
     <Content Include="Views\Homes\Details.cshtml" />
-    <Content Include="Views\Cart\Cart_3.cshtml" />
-    <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Admins\LoginAdmin.cshtml" />
     <Content Include="Views\Registered_Customer\LoginCustomer.cshtml" />
     <Content Include="Views\Room_Catalog\_Edit.cshtml" />
+    <Content Include="Views\Cart\Cart_3.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -5911,7 +5911,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Assets\libs\angular-1.7.2\i18n\ngLocale\" />
     <Folder Include="img\" />
-    <Folder Include="Views\Customers\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
