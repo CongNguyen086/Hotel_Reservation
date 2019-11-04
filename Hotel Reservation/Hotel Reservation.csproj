@@ -5911,6 +5911,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Assets\libs\angular-1.7.2\i18n\ngLocale\" />
     <Folder Include="img\" />
+    <Folder Include="Views\Customers\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

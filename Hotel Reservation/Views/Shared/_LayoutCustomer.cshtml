@@ -6,7 +6,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>01_07_center_logo</title>
+    <title>SB Customer</title>
     <link rel="stylesheet" href="~/CustomerLayout/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/CustomerLayout/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="~/CustomerLayout/css/style.css">
@@ -155,18 +155,27 @@
                                 <div class="row">
                                     <nav class="main-navigation">
                                         <div class="inner-navigation">
-                                            <ul class="nav-bar vk-navbar-right">
+                                            <ul class="nav-bar vk-navrbar-left">
                                                 <li>
                                                     <a href="@Url.Action("Index","Homes")">Home</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">History</a>
+                                                    <a href="#">Services</a>
                                                 </li>
                                                 <li>
-                                                    <a href="@Url.Action("Index","Cart")">Cart</a>
+                                                    <a href="#">Room</a>
                                                 </li>
                                             </ul>
-                                            <ul class="nav-bar vk-navbar-right" style="text-align:right">
+                                            <ul class="nav-bar vk-navbar-right">
+                                                <li>
+                                                    <a href="@Url.Action("Index","Cart")">Booking</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Review</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">About</a>
+                                                </li>
                                                 <li class="vk-icon-search"><i class="fa fa-search" aria-hidden="true"></i></li>
                                             </ul>
                                             <div class="clearfix"></div>
@@ -175,19 +184,18 @@
                                 </div>
                                 <!--./vk-navbar-collapse-->
                                 <!--shortcode-->
-                                
                                 <!--search-->
                                 @using (Ajax.BeginForm("Index", "Homes", new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "Get" }))
                                 {
                                     <div class="box-search-header collapse in" id="box-search-header">
                                         <div class="vk-input-group">
                                             <div class="input-group stylish-input-group">
-                                              <input type="text" id="txtRoom" name="txtRoom" class="form-control" 
-                                                     placeholder="Type keywords..." value="@Request["txtRoom"]">
-                                               <span class="input-group-addon">
-                                                   <button type="submit">
-                                                      <i class="fa fa-search" aria-hidden="true"></i>
-                                                   </button>
+                                                <input type="text" id="txtRoom" name="txtRoom" class="form-control"
+                                                       placeholder="Type keywords..." value="@Request["txtRoom"]">
+                                                <span class="input-group-addon">
+                                                    <button type="submit">
+                                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                                    </button>
                                                 </span>
                                             </div>
                                         </div>
@@ -228,10 +236,10 @@
             </header>
 
             <!--BODY LAYOUT-->
-            
+
             @RenderBody()
-                        
-            
+
+
             <footer class="site-footer footer-default">
                 <div class="footer-main-content">
                     <div class="container">
@@ -268,11 +276,11 @@
                                             <h3 class="widget-title"> Company</h3>
                                             <div class="widget-content">
                                                 <ul class="vk-widget-content-2">
-                                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Home</a></li>
-                                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> About us</a></li>
-                                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Testimonial</a></li>
-                                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Blog</a></li>
-                                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Contact</a></li>
+                                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Home</a></li>
+                                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>About us</a></li>
+                                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Testimonial</a></li>
+                                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Blog</a></li>
+                                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Contact</a></li>
                                                 </ul>
                                             </div>
                                         </div>
