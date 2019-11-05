@@ -35,7 +35,7 @@ namespace Hotel_Reservation.Controllers
                 {
                     if (acc.adminPass.Equals(loginAdmin.adminPass))
                     {
-                        return RedirectToAction("Index", "Room_Catalog");
+                        return RedirectToAction("Index", "AdminRoom_Catalog");
                     }
                     else
                     {

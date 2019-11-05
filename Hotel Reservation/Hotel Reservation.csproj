@@ -5816,16 +5816,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminRoom_CatalogController.cs" />
     <Compile Include="Controllers\AdminsController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomesController.cs" />
     <Compile Include="Controllers\Image_DetailController.cs" />
-    <Compile Include="Controllers\PromotionsController.cs" />
+    <Compile Include="Controllers\AdminPromotionsController.cs" />
+    <Compile Include="Controllers\AdminRegistered_CustomerController.cs" />
     <Compile Include="Controllers\Registered_CustomerController.cs" />
+    <Compile Include="Controllers\AdminReservationsController.cs" />
+    <Compile Include="Controllers\AdminReservation_DetailController.cs" />
+    <Compile Include="Controllers\AdminRoomsController.cs" />
     <Compile Include="Controllers\ReservationsController.cs" />
-    <Compile Include="Controllers\Reservation_DetailController.cs" />
-    <Compile Include="Controllers\RoomsController.cs" />
-    <Compile Include="Controllers\Room_CatalogController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -5880,26 +5882,26 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Room_Catalog\Create.cshtml" />
-    <Content Include="Views\Room_Catalog\Index.cshtml" />
-    <Content Include="Views\Rooms\Create.cshtml" />
-    <Content Include="Views\Rooms\Index.cshtml" />
-    <Content Include="Views\Promotions\Create.cshtml" />
-    <Content Include="Views\Promotions\Index.cshtml" />
-    <Content Include="Views\Registered_Customer\Index.cshtml" />
-    <Content Include="Views\Reservations\Index.cshtml" />
-    <Content Include="Views\Registered_Customer\ReservationHistory.cshtml" />
-    <Content Include="Views\Reservations\ReservationDetails.cshtml" />
-    <Content Include="Views\Promotions\_Edit.cshtml" />
-    <Content Include="Views\Rooms\_Edit.cshtml" />
+    <Content Include="Views\AdminRooms\Create.cshtml" />
+    <Content Include="Views\AdminRooms\Index.cshtml" />
+    <Content Include="Views\AdminPromotions\Create.cshtml" />
+    <Content Include="Views\AdminPromotions\Index.cshtml" />
+    <Content Include="Views\AdminRegistered_Customer\Index.cshtml" />
+    <Content Include="Views\AdminReservations\Index.cshtml" />
+    <Content Include="Views\AdminRegistered_Customer\ReservationHistory.cshtml" />
+    <Content Include="Views\AdminReservations\ReservationDetails.cshtml" />
+    <Content Include="Views\AdminPromotions\_Edit.cshtml" />
+    <Content Include="Views\AdminRooms\_Edit.cshtml" />
     <Content Include="Views\Shared\_LayoutCustomer.cshtml" />
     <Content Include="Views\Homes\Index.cshtml" />
     <Content Include="Views\Homes\Details.cshtml" />
     <Content Include="Views\Admins\LoginAdmin.cshtml" />
     <Content Include="Views\Registered_Customer\LoginCustomer.cshtml" />
-    <Content Include="Views\Room_Catalog\_Edit.cshtml" />
+    <Content Include="Views\AdminRoom_Catalog\_Edit.cshtml" />
     <Content Include="Views\Cart\Cart_3.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\AdminRoom_Catalog\Index.cshtml" />
+    <Content Include="Views\AdminRoom_Catalog\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -5911,6 +5913,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Assets\libs\angular-1.7.2\i18n\ngLocale\" />
     <Folder Include="img\" />
+    <Folder Include="Views\Reservations\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

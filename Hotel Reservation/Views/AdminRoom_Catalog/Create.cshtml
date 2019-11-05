@@ -12,7 +12,7 @@
 @using (Html.BeginForm("Create", "Room_Catalog", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Room_Catalog</h4>
         <hr />
@@ -87,7 +87,7 @@
         </div>
 
         <div class="form-group">
-            <label class = "control-label col-md-2">Image</label>
+            <label class="control-label col-md-2">Image</label>
             <div class="col-md-10">
                 <input type="file" name="file" id="file" class="input-group" />
             </div>

@@ -10,7 +10,7 @@ using Hotel_Reservation.Models;
 
 namespace Hotel_Reservation.Controllers
 {
-    public class PromotionsController : Controller
+    public class AdminPromotionsController : Controller
     {
         private ModelContext db = new ModelContext();
 

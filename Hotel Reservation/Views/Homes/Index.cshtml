@@ -145,81 +145,99 @@
                                     <div class="vk-room-list-header">
                                         <h3>Welcome To</h3>
                                         <h2>Sparta Plaza Hotel</h2>
-                                        <div class="vk-room-list-border"></div>
+                                        <div class="vk-sparta-about-border"></div>
                                     </div>
                                     <div class="row">
+                                        <div class="col-md-10 col-md-offset-1">
+                                            <div class="vk-sparta-about-text">
+                                                <p>
+                                                    Sparta Plaza Hotel is a luxurious place. The weather is amazing,
+                                                    walk with me through the pathway of more success. Take this journey with me, Lion!
+                                                    Let me be clear, you have to make it through the jungle to make it to paradise,
+                                                    that’s the key, Lion! Wraith talk. They key is to have every key, the key to open
+                                                    every door. Put it this way, it took me twenty five years to get these plants,
+                                                    twenty five years of blood sweat and tears, and I’m never giving up, I’m just
+                                                    getting started.
+                                                </p>
+                                            </div>
+                                            <div class="vk-sparta-about-author">
+                                                <p>Victor Henderson - <span>Manager</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top:80px">
                                         @{
                                             //var search = Request["txtRoom"];
                                             //if (string.IsNullOrEmpty(search))
                                             //{
                                             foreach (var item in Model)
                                             {
-                                                    <div class="roomitem item">
-                                                        <div class="col-md-6 vk-dark-our-room-item-left  vk-clear-padding">
-                                                            <div class="vk-dark-our-room-item-img">
-                                                                <img src="~/CustomerLayout/images/04_01_room_list/img/img.jpg" alt="" class="img-responsive">
-                                                            </div>
+                                                <div class="roomitem item">
+                                                    <div class="col-md-6 vk-dark-our-room-item-left  vk-clear-padding">
+                                                        <div class="vk-dark-our-room-item-img">
+                                                            <img src="~/CustomerLayout/images/04_01_room_list/img/img.jpg" alt="" class="img-responsive">
                                                         </div>
-                                                        <div class="col-md-6 vk-dark-our-room-item-right vk-clear-padding">
-                                                            <div class="vk-dark-our-room-item-content">
-                                                                <h3><a href="#">@item.typeName</a></h3>
-                                                                <ul>
-                                                                    <li><p><i class="fa fa-users" aria-hidden="true"></i> Max Occupancy <span> : @item.numberOfAdults</span></p></li>
-                                                                    <li><p><i class="fa fa-info-circle" aria-hidden="true"></i> Details <span> : @item.description</span></p></li>
-                                                                    @{
-                                                                        if (item.promotionId != null)
+                                                    </div>
+                                                    <div class="col-md-6 vk-dark-our-room-item-right vk-clear-padding">
+                                                        <div class="vk-dark-our-room-item-content">
+                                                            <h3><a href="#">@item.typeName</a></h3>
+                                                            <ul>
+                                                                <li><p><i class="fa fa-users" aria-hidden="true"></i> Max Occupancy <span> : @item.numberOfAdults</span></p></li>
+                                                                <li><p><i class="fa fa-info-circle" aria-hidden="true"></i> Details <span> : @item.description</span></p></li>
+                                                                @{
+                                                                    if (item.promotionId != null)
+                                                                    {
+                                                                        if (item.Promotion.roomDiscount != null)
                                                                         {
-                                                                            if (item.Promotion.roomDiscount != null)
-                                                                            {
-                                                                                var discount = item.Promotion.roomDiscount * (decimal)100;
-                                                                                <li>
-                                                                                    <p>
-                                                                                        <i class="fa fa-angle-double-up" aria-hidden="true"></i> Discount
-                                                                                        <span> : @string.Format("{0:N0}", discount) %</span>
-                                                                                    </p>
-                                                                                </li>
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                <li>
-                                                                                    <p>
-                                                                                        <i class="fa fa-angle-double-up" aria-hidden="true"></i> Discount
-                                                                                        <span> : @item.Promotion.promotionDescription</span>
-                                                                                    </p>
-                                                                                </li>
-                                                                            }
+                                                                            var discount = item.Promotion.roomDiscount * (decimal)100;
+                                                                            <li>
+                                                                                <p>
+                                                                                    <i class="fa fa-angle-double-up" aria-hidden="true"></i> Discount
+                                                                                    <span> : @string.Format("{0:N0}", discount) %</span>
+                                                                                </p>
+                                                                            </li>
                                                                         }
                                                                         else
                                                                         {
-                                                                            <li><p><i class="fa fa-angle-double-up" aria-hidden="true"></i> Discount <span> : Not Available</span></p></li>
+                                                                            <li>
+                                                                                <p>
+                                                                                    <i class="fa fa-angle-double-up" aria-hidden="true"></i> Discount
+                                                                                    <span> : @item.Promotion.promotionDescription</span>
+                                                                                </p>
+                                                                            </li>
                                                                         }
-
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <li><p><i class="fa fa-angle-double-up" aria-hidden="true"></i> Discount <span> : Not Available</span></p></li>
                                                                     }
 
-                                                                </ul>
-                                                                <div class="vk-dark-our-room-item-book">
-                                                                    <div class="vk-dark-our-room-item-book-left">
-                                                                        <ul>
-                                                                            <li>
-                                                                                <p>Price: </p>
-                                                                            </li>
-                                                                            <li>
-                                                                                <p>$@item.price/ <span>Night</span></p>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="vk-dark-our-room-item-book-right">
-                                                                        <a href="@Url.Action("Details","Homes", new { id = item.typeId})"> Details <i class="fa fa-caret-right" aria-hidden="true"></i></a>
-                                                                    </div>
-                                                                    <div class="clearfix"></div>
+                                                                }
+
+                                                            </ul>
+                                                            <div class="vk-dark-our-room-item-book">
+                                                                <div class="vk-dark-our-room-item-book-left">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <p>Price: </p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>$@item.price/ <span>Night</span></p>
+                                                                        </li>
+                                                                    </ul>
                                                                 </div>
+                                                                <div class="vk-dark-our-room-item-book-right">
+                                                                    <a href="@Url.Action("Details","Homes", new { id = item.typeId})"> Details <i class="fa fa-caret-right" aria-hidden="true"></i></a>
+                                                                </div>
+                                                                <div class="clearfix"></div>
                                                             </div>
                                                         </div>
-                                                        <div class="clearfix"></div>
                                                     </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
                                             }
                                         }
-                                    
+
                                     </div>
                                 </div>
                             </div>

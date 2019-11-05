@@ -14,10 +14,12 @@ namespace Hotel_Reservation.Controllers
     {
         private ModelContext db = new ModelContext();
 
+        // Login Customer
         public ActionResult LoginCustomer()
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LoginCustomer(Registered_Customer loginCustomer)
@@ -52,6 +54,7 @@ namespace Hotel_Reservation.Controllers
             return View();
         }
 
+        // Logout Customer
         public ActionResult LogoutCustomer()
         {
             Session["customerId"] = null;
@@ -61,12 +64,6 @@ namespace Hotel_Reservation.Controllers
             Session["CheckIn"] = null;
             Session["CheckOut"] = null;
             return RedirectToAction("LoginCustomer", "Registered_Customer");
-        }
-
-        // GET: Registered_Customer
-        public ActionResult Index()
-        {
-            return View(db.Registered_Customers.ToList());
         }
 
         public ActionResult ReservationHistory(int? id)
@@ -82,21 +79,6 @@ namespace Hotel_Reservation.Controllers
             ViewBag.Phone = cus.phone;
 
             return View(reserv.ToList());
-        }
-
-        // GET: Registered_Customer/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Registered_Customer registered_Customer = db.Registered_Customers.Find(id);
-            if (registered_Customer == null)
-            {
-                return HttpNotFound();
-            }
-            return View(registered_Customer);
         }
 
         protected override void Dispose(bool disposing)

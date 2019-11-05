@@ -26,25 +26,28 @@
                             Image
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.typeName)
+                            ID
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.price)
+                            Room Type
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.description)
+                            Price
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.quantityOfRooms)
+                            Description
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.numberOfAdults)
+                            Room Quantity
+                        </th>
+                        <th>
+                            Adults & Children
                         </th>
                         @*<th>
-                            @Html.DisplayNameFor(model => model.extraFee)
-                        </th>*@
+                                @Html.DisplayNameFor(model => model.extraFee)
+                            </th>*@
                         <th>
-                            @Html.DisplayNameFor(model => model.catalogStatus)
+                            Status
                         </th>
                         <th></th>
                     </tr>
@@ -54,12 +57,12 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            @foreach (var pic in item.Image_Details)
-                            {
-                                <td>
-                                    <img src="@pic.image" style="max-height:100px"/>
-                                </td>
-                            }
+                            <td>
+                                <img src="@item.Image_Details.First()" style="max-height:100px" />
+                            </td>
+                            <td>
+                                <label>@Html.DisplayFor(modelItem => item.typeId)</label>
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.typeName)
                             </td>
@@ -86,8 +89,8 @@
                                 @Html.DisplayFor(modelItem => item.numberOfAdults)
                             </td>
                             @*<td>
-                                @Html.DisplayFor(modelItem => item.extraFee)
-                            </td>*@
+                                    @Html.DisplayFor(modelItem => item.extraFee)
+                                </td>*@
                             <td>
                                 @{
                                     if (item.catalogStatus == "Active")
@@ -104,13 +107,13 @@
                                     }
                                 }
                             </td>
-                                                        
+
                             <td style="text-align:center">
                                 <a href="javascript:void(0);" class="EditCatalog btn btn-success" data-id="@item.typeId"
                                    data-toggle="modal" data-target="#myModal">
                                     <i class="fas fa-edit"></i> Edit
                                 </a>
-                                <a href="@Url.Action("Delete", "Room_Catalog", new { id = item.typeId })" 
+                                <a href="@Url.Action("Delete", "Room_Catalog", new { id = item.typeId })"
                                    class="btn btn-danger" onclick="return confirm('Are you sure ?')">
                                     <i class="fas fa-trash-alt"></i> Delete
                                 </a>

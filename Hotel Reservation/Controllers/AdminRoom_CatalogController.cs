@@ -12,7 +12,7 @@ using System.IO;
 
 namespace Hotel_Reservation.Controllers
 {
-    public class Room_CatalogController : Controller
+    public class AdminRoom_CatalogController : Controller
     {
         private ModelContext db = new ModelContext();
 

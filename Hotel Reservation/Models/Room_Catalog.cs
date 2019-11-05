@@ -43,7 +43,7 @@ namespace Hotel_Reservation.Models
         [StringLength(200)]
         public string description { get; set; }
 
-        [Display(Name = "Quantity of Rooms")]
+        [Display(Name = "Room Quantity")]
         public int quantityOfRooms { get; set; }
 
         [Display(Name = "Number of Adults")]
