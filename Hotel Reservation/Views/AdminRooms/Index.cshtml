@@ -23,16 +23,16 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.roomNumber)
+                            Room Number
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Room_Catalog.typeName)
+                            Room Type
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.roomStatus)
+                            Status
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.operationStatus)
+                            Operation Status
                         </th>
                         <th></th>
                     </tr>
@@ -85,7 +85,7 @@
                                    data-toggle="modal" data-target="#myModal">
                                     <i class="fas fa-edit"></i> Edit
                                 </a>
-                                <a href="@Url.Action("Delete", "Rooms", new { id = item.roomNumber, typeId = item.typeId })" 
+                                <a href="@Url.Action("Delete", "AdminRooms", new { id = item.roomNumber, typeId = item.typeId })" 
                                    class="btn btn-danger" onclick="return confirm('Are you sure ?')">
                                     <i class="fas fa-trash-alt"></i> Delete
                                 </a>

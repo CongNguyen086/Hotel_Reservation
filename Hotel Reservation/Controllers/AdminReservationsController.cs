@@ -64,6 +64,20 @@ namespace Hotel_Reservation.Controllers
             return View(rs.ToList());
         }
 
+        public ActionResult ReservationHistory(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Registered_Customer cus = db.Registered_Customers.Find(id);
+            var reserv = db.Reservations.Where(m => m.customerId == id);
+
+            ViewBag.CustomerName = cus.customerName;
+            ViewBag.Phone = cus.phone;
+
+            return View(reserv.ToList());
+        }
 
         // GET: Reservations/Create
         //public ActionResult Create()

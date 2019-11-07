@@ -16,46 +16,20 @@ namespace Hotel_Reservation.Models
 
     public partial class Promotion
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Promotion()
-        {
-            this.Room_Catalog1 = new HashSet<Room_Catalog>();
-        }
-
-        [StringLength(50)]
         public string promotionId { get; set; }
-
-        [Required]
-        [Display(Name = "Promotion")]
-        [StringLength(200)]
         public string promotionDescription { get; set; }
-
-        [Required]
-        [Display(Name = "Promoted Room Type")]
-        [StringLength(50)]
         public string appliedRoomType { get; set; }
-
-        [Display(Name = "Discount")]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:#.##}")]
-        public decimal? roomDiscount { get; set; }
-
+        public Nullable<decimal> roomDiscount { get; set; }
         [Column(TypeName = "date")]
-        [Display(Name = "Start Date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime startDate { get; set; }
 
         [Column(TypeName = "date")]
-        [Display(Name = "End Date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime endDate { get; set; }
 
-        [Required]
-        [Display(Name = "Status")]
-        [StringLength(50)]
         public string promotionStatus { get; set; }
-
+    
         public virtual Room_Catalog Room_Catalog { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Room_Catalog> Room_Catalog1 { get; set; }
     }
 }

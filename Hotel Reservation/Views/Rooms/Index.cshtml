@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Hotel_Reservation.Models.Room_Catalog>
+﻿@using Hotel_Reservation.Models
+@model List<RoomCatalog_Promotion>
 
 @{
     ViewBag.Title = "Index";
@@ -21,15 +22,15 @@
                                             <h2 class="animated fadeInUp slide-delay-2">Sparta Plaza Hotel</h2>
                                             <div class="clearfix"></div>
                                             @*<div class="vk-slide-cation-btn">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#">OUR ROOMS</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">BOOK NOW <span class="ti-arrow-right"></span></a>
-                                                    </li>
-                                                </ul>
-                                            </div>*@
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">OUR ROOMS</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">BOOK NOW <span class="ti-arrow-right"></span></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>*@
                                         </div>
                                     </div>
                                 </div>
@@ -43,15 +44,15 @@
                                             <h2 class="animated fadeInUp slide-delay-2">Sparta Plaza Hotel</h2>
                                             <div class="clearfix"></div>
                                             @*<div class="vk-slide-cation-btn">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#">OUR ROOMS</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">BOOK NOW <span class="ti-arrow-right"></span></a>
-                                                    </li>
-                                                </ul>
-                                            </div>*@
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">OUR ROOMS</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">BOOK NOW <span class="ti-arrow-right"></span></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>*@
                                         </div>
                                     </div>
                                 </div>
@@ -65,15 +66,15 @@
                                             <h2 class="animated fadeInUp slide-delay-2">Sparta Plaza Hotel</h2>
                                             <div class="clearfix"></div>
                                             @*<div class="vk-slide-cation-btn">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#">OUR ROOMS</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">BOOK NOW <span class="ti-arrow-right"></span></a>
-                                                    </li>
-                                                </ul>
-                                            </div>*@
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">OUR ROOMS</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">BOOK NOW <span class="ti-arrow-right"></span></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>*@
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +119,7 @@
                                                     <span>0</span>
                                                     <ul class="dropdown">
                                                         <li><a href="#">1</a></li>
-   
+
                                                     </ul>
                                                 </div>
                                             </div>
@@ -170,7 +171,7 @@
                                             //var search = Request["txtRoom"];
                                             //if (string.IsNullOrEmpty(search))
                                             //{
-                                            foreach (var item in Model)
+                                            foreach (RoomCatalog_Promotion room in Model)
                                             {
                                                 <div class="roomitem item">
                                                     <div class="col-md-6 vk-dark-our-room-item-left  vk-clear-padding">
@@ -180,54 +181,58 @@
                                                     </div>
                                                     <div class="col-md-6 vk-dark-our-room-item-right vk-clear-padding">
                                                         <div class="vk-dark-our-room-item-content">
-                                                            <h3><a href="#">@item.typeName</a></h3>
+                                                            <h3><a href="#">@room.typeName</a></h3>
                                                             <ul>
-                                                                <li><p><i class="fa fa-users" aria-hidden="true"></i> Max Occupancy <span> : @item.numberOfAdults</span></p></li>
-                                                                <li><p><i class="fa fa-info-circle" aria-hidden="true"></i> Details <span> : @item.description</span></p></li>
+                                                                <li><p><i class="fa fa-users" aria-hidden="true"></i>Max Occupancy <span> : @room.numberOfAdults</span></p></li>
+                                                                <li><p><i class="fa fa-info-circle" aria-hidden="true"></i> Info <span> : @room.description</span></p></li>
                                                                 @{
-                                                                    if (item.isPromoted == true)
+                                                                    if (room.roomDiscount != null)
                                                                     {
-                                                                        if (item.Promotion.roomDiscount != null)
-                                                                        {
-                                                                            var discount = item.Promotion.roomDiscount * (decimal)100;
-                                                                            <li>
-                                                                                <p>
-                                                                                    <i class="fa fa-angle-double-up" aria-hidden="true"></i> Discount
-                                                                                    <span> : @string.Format("{0:N0}", discount) %</span>
-                                                                                </p>
-                                                                            </li>
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            <li>
-                                                                                <p>
-                                                                                    <i class="fa fa-angle-double-up" aria-hidden="true"></i> Discount
-                                                                                    <span> : @item.Promotion.promotionDescription</span>
-                                                                                </p>
-                                                                            </li>
-                                                                        }
+                                                                        var discount = room.roomDiscount * (decimal)100;
+                                                                        <li>
+                                                                            <p>
+                                                                                <i class="fa fa-angle-double-up" aria-hidden="true"></i> Discount
+                                                                                <span> : @string.Format("{0:N0}", discount) %</span>
+                                                                            </p>
+                                                                        </li>
+                                                                    }
+                                                                    else if (room.roomDiscount == null && room.appliedRoomType != null)
+                                                                    {
+                                                                        <li>
+                                                                            <p>
+                                                                                <i class="fa fa-angle-double-up" aria-hidden="true" style="margin-left: 2px"></i>
+                                                                                <label style="color: #b0914f">@room.promotionDescription</label>
+                                                                            </p>
+                                                                        </li>
                                                                     }
                                                                     else
                                                                     {
-                                                                        <li><p><i class="fa fa-angle-double-up" aria-hidden="true"></i> Discount <span> : Not Available</span></p></li>
+                                                                        <li><p style="height:40px"></p></li>
                                                                     }
-
                                                                 }
 
                                                             </ul>
-                                                            <div class="vk-dark-our-room-item-book">
+
+                                                            @*<div class="room-details">
+                                                                <a href="@Url.Action("Details","Homes", new { id = room.typeId})"> Details <i class="fa fa-caret-right" aria-hidden="true"></i></a>
+                                                            </div>*@
+                                                            
+                                                            <div class="vk-dark-our-room-item-book" style="margin-top:50px">
                                                                 <div class="vk-dark-our-room-item-book-left">
                                                                     <ul>
                                                                         <li>
                                                                             <p>Price: </p>
                                                                         </li>
                                                                         <li>
-                                                                            <p>$@item.price/ <span>Night</span></p>
+                                                                            <p>$@room.price/ <span>Night</span></p>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
                                                                 <div class="vk-dark-our-room-item-book-right">
-                                                                    <a href="@Url.Action("Details","Homes", new { id = item.typeId})"> Details <i class="fa fa-caret-right" aria-hidden="true"></i></a>
+                                                                    <h4>
+                                                                        <a href="#" class="btn-book-now"> BOOK NOW</a>
+                                                                    </h4>
+                                                                    @*<div class="clearfix"></div>*@
                                                                 </div>
                                                                 <div class="clearfix"></div>
                                                             </div>
@@ -249,5 +254,7 @@
         </div>
     </div>
 </div>
+
+
 
 

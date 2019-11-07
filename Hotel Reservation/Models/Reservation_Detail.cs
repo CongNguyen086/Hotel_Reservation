@@ -25,17 +25,10 @@ namespace Hotel_Reservation.Models
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int roomNumber { get; set; }
-
         public int numberOfTravelers { get; set; }
-
-        [Display(Name = "Extra Fee")]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:#.##}")]
         public decimal extraFee { get; set; }
-
-        [Display(Name = "Total")]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:#.##}")]
         public decimal totalPrice { get; set; }
-
+    
         public virtual Reservation Reservation { get; set; }
         public virtual Room Room { get; set; }
     }

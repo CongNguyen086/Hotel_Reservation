@@ -17,7 +17,8 @@ namespace Hotel_Reservation.Controllers
         // GET: Homes
         public ActionResult Index(string txtRoom)
         {
-            var room_Catalogs = db.Room_Catalogs.Include(r => r.Promotion).Where(m => m.catalogStatus == "Active");
+            var room_Catalogs = db.Room_Catalogs.Where(m => m.catalogStatus == "Active");
+            var promotions = db.Promotions.Where(p => (p.promotionStatus == "Processing") && (p.Room_Catalog.catalogStatus == "Active"));
             if (!string.IsNullOrEmpty(txtRoom))
             {
                 room_Catalogs = room_Catalogs.Where(b => b.typeName.Contains(txtRoom));
@@ -62,7 +63,6 @@ namespace Hotel_Reservation.Controllers
         // GET: Homes/Create
         public ActionResult Create()
         {
-            ViewBag.promotionId = new SelectList(db.Promotions, "promotionId", "promotionDescription");
             return View();
         }
 
@@ -71,7 +71,7 @@ namespace Hotel_Reservation.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "typeId,typeName,price,description,quantityOfRooms,numberOfAdults,extraFee,promotionId,catalogStatus")] Room_Catalog room_Catalog)
+        public ActionResult Create([Bind(Include = "typeId,typeName,price,description,quantityOfRooms,numberOfAdults,extraFee,isPromoted,catalogStatus")] Room_Catalog room_Catalog)
         {
             if (ModelState.IsValid)
             {
@@ -79,8 +79,6 @@ namespace Hotel_Reservation.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.promotionId = new SelectList(db.Promotions, "promotionId", "promotionDescription", room_Catalog.promotionId);
             return View(room_Catalog);
         }
 
@@ -96,7 +94,6 @@ namespace Hotel_Reservation.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.promotionId = new SelectList(db.Promotions, "promotionId", "promotionDescription", room_Catalog.promotionId);
             return View(room_Catalog);
         }
 
@@ -105,7 +102,7 @@ namespace Hotel_Reservation.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "typeId,typeName,price,description,quantityOfRooms,numberOfAdults,extraFee,promotionId,catalogStatus")] Room_Catalog room_Catalog)
+        public ActionResult Edit([Bind(Include = "typeId,typeName,price,description,quantityOfRooms,numberOfAdults,extraFee,isPromoted,catalogStatus")] Room_Catalog room_Catalog)
         {
             if (ModelState.IsValid)
             {
@@ -113,7 +110,6 @@ namespace Hotel_Reservation.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.promotionId = new SelectList(db.Promotions, "promotionId", "promotionDescription", room_Catalog.promotionId);
             return View(room_Catalog);
         }
 

@@ -13,7 +13,7 @@
     <div class="row" style="text-align:center">
         <div class="col">
             <span class="font-weight-bold">
-                <i class="fas fa-user"></i> @Html.DisplayNameFor(model => model.customerName)
+                <i class="fas fa-user"></i> Customer Name
             </span>
 
             <span style="padding-left:5px">
@@ -23,7 +23,7 @@
         
         <div class="col">
             <span class="font-weight-bold" >
-                <i class="fas fa-phone"></i> @Html.DisplayNameFor(model => model.Registered_Customer.phone)
+                <i class="fas fa-phone"></i> Phone
             </span>
 
             <span style="padding-left:5px">
@@ -70,7 +70,7 @@
                                 @Html.DisplayFor(modelItem => item.reservationStatus)
                             </td>
                             <td>
-                                <a href="@Url.Action("ReservationDetails", "Reservations", new { id = item.reservationId })" class="btn btn-success">
+                                <a href="@Url.Action("ReservationDetails", "AdminReservations", new { id = item.reservationId })" class="btn btn-success">
                                     <i class="fas fa-info-circle"></i> Details
                                 </a>
                             </td>

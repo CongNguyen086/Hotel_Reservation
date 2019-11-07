@@ -19,7 +19,7 @@ namespace Hotel_Reservation.Controllers
         // GET: Room_Catalog
         public ActionResult Index()
         {
-            var room_Catalogs = db.Room_Catalogs.Include(r => r.Promotion);
+            var room_Catalogs = db.Room_Catalogs;
             return View(room_Catalogs.ToList());
         }
 
@@ -74,7 +74,7 @@ namespace Hotel_Reservation.Controllers
             //ModelState.AddModelError("", room_Catalog.promotionId);
             if (ModelState.IsValid)
             {
-                room_Catalog.promotionId = null;
+                room_Catalog.isPromoted = false;
                 room_Catalog.quantityOfRooms = 0;
                 db.Room_Catalogs.Add(room_Catalog);
 
@@ -96,8 +96,6 @@ namespace Hotel_Reservation.Controllers
 
                 return RedirectToAction("Index");
             }
-
-            ViewBag.promotionId = new SelectList(db.Promotions, "promotionId", "promotionDescription", room_Catalog.promotionId);
             return View(room_Catalog);
         }
 
@@ -114,7 +112,6 @@ namespace Hotel_Reservation.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.promotionId = new SelectList(db.Promotions, "promotionId", "promotionDescription", room_Catalog.promotionId);
             return PartialView("../Room_Catalog/_Edit", room_Catalog);
         }
 
@@ -132,7 +129,6 @@ namespace Hotel_Reservation.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.promotionId = new SelectList(db.Promotions, "promotionId", "promotionDescription", room_Catalog.promotionId);
             return View(room_Catalog);
         }
 

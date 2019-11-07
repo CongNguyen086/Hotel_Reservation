@@ -21,13 +21,13 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.customerName)
+                            Customer Name
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.phone)
+                            Phone
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.email)
+                            Email
                         </th>
                         <th></th>
                     </tr>
@@ -47,7 +47,7 @@
                                 @Html.DisplayFor(modelItem => item.email)
                             </td>
                             <td style="text-align:center">
-                                <a href="@Url.Action("ReservationHistory", "Registered_Customer", new { id = item.customerId })" class="btn btn-success">
+                                <a href="@Url.Action("ReservationHistory", "AdminReservations", new { id = item.customerId })" class="btn btn-success">
                                     View Booking
                                 </a>
                             </td>

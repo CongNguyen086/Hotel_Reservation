@@ -86,8 +86,9 @@
           <Property Name="description" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="quantityOfRooms" Type="int" />
           <Property Name="numberOfAdults" Type="int" Nullable="false" />
+          <Property Name="numberOfChild" Type="int" />
           <Property Name="extraFee" Type="decimal" Precision="18" Scale="1" Nullable="false" />
-          <Property Name="promotionId" Type="nvarchar" MaxLength="50" />
+          <Property Name="isPromoted" Type="bit" />
           <Property Name="catalogStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_Image Details_Room Catalog">
@@ -150,18 +151,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Room Catalog_Promotion">
-          <End Role="Promotion" Type="Self.Promotion" Multiplicity="0..1" />
-          <End Role="Room Catalog" Type="Self.Room Catalog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Promotion">
-              <PropertyRef Name="promotionId" />
-            </Principal>
-            <Dependent Role="Room Catalog">
-              <PropertyRef Name="promotionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Room_Room Catalog1">
           <End Role="Room Catalog" Type="Self.Room Catalog" Multiplicity="1" />
           <End Role="Room" Type="Self.Room" Multiplicity="*" />
@@ -203,10 +192,6 @@
             <End Role="Registered Customer" EntitySet="Registered Customer" />
             <End Role="Reservation" EntitySet="Reservation" />
           </AssociationSet>
-          <AssociationSet Name="FK_Room Catalog_Promotion" Association="Self.FK_Room Catalog_Promotion">
-            <End Role="Promotion" EntitySet="Promotion" />
-            <End Role="Room Catalog" EntitySet="Room Catalog" />
-          </AssociationSet>
           <AssociationSet Name="FK_Room_Room Catalog1" Association="Self.FK_Room_Room Catalog1">
             <End Role="Room Catalog" EntitySet="Room Catalog" />
             <End Role="Room" EntitySet="Room" />
@@ -246,7 +231,6 @@
           <Property Name="endDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="promotionStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Room_Catalog" Relationship="Self.FK_Promotion_Room_Catalog" FromRole="Promotion" ToRole="Room_Catalog" />
-          <NavigationProperty Name="Room_Catalog1" Relationship="Self.FK_Room_Catalog_Promotion" FromRole="Promotion" ToRole="Room_Catalog" />
         </EntityType>
         <EntityType Name="Registered_Customer">
           <Key>
@@ -308,12 +292,12 @@
           <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="quantityOfRooms" Type="Int32" />
           <Property Name="numberOfAdults" Type="Int32" Nullable="false" />
+          <Property Name="numberOfChild" Type="Int32" />
           <Property Name="extraFee" Type="Decimal" Precision="18" Scale="1" Nullable="false" />
-          <Property Name="promotionId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isPromoted" Type="Boolean" />
           <Property Name="catalogStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Image_Details" Relationship="Self.FK_Image_Details_Room_Catalog" FromRole="Room_Catalog" ToRole="Image_Details" />
           <NavigationProperty Name="Promotions" Relationship="Self.FK_Promotion_Room_Catalog" FromRole="Room_Catalog" ToRole="Promotion" />
-          <NavigationProperty Name="Promotion" Relationship="Self.FK_Room_Catalog_Promotion" FromRole="Room_Catalog" ToRole="Promotion" />
           <NavigationProperty Name="Rooms" Relationship="Self.FK_Room_Room_Catalog1" FromRole="Room_Catalog" ToRole="Room" />
         </EntityType>
         <Association Name="FK_Image_Details_Room_Catalog">
@@ -337,18 +321,6 @@
             </Principal>
             <Dependent Role="Promotion">
               <PropertyRef Name="appliedRoomType" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Room_Catalog_Promotion">
-          <End Role="Promotion" Type="Self.Promotion" Multiplicity="0..1" />
-          <End Role="Room_Catalog" Type="Self.Room_Catalog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Promotion">
-              <PropertyRef Name="promotionId" />
-            </Principal>
-            <Dependent Role="Room_Catalog">
-              <PropertyRef Name="promotionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -416,10 +388,6 @@
           <AssociationSet Name="FK_Promotion_Room_Catalog" Association="Self.FK_Promotion_Room_Catalog">
             <End Role="Room_Catalog" EntitySet="Room_Catalogs" />
             <End Role="Promotion" EntitySet="Promotions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Room_Catalog_Promotion" Association="Self.FK_Room_Catalog_Promotion">
-            <End Role="Promotion" EntitySet="Promotions" />
-            <End Role="Room_Catalog" EntitySet="Room_Catalogs" />
           </AssociationSet>
           <AssociationSet Name="FK_Reservation_Registered_Customer" Association="Self.FK_Reservation_Registered_Customer">
             <End Role="Registered_Customer" EntitySet="Registered_Customers" />
@@ -530,8 +498,9 @@
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="quantityOfRooms" ColumnName="quantityOfRooms" />
                 <ScalarProperty Name="numberOfAdults" ColumnName="numberOfAdults" />
+                <ScalarProperty Name="numberOfChild" ColumnName="numberOfChild" />
                 <ScalarProperty Name="extraFee" ColumnName="extraFee" />
-                <ScalarProperty Name="promotionId" ColumnName="promotionId" />
+                <ScalarProperty Name="isPromoted" ColumnName="isPromoted" />
                 <ScalarProperty Name="catalogStatus" ColumnName="catalogStatus" />
               </MappingFragment>
             </EntityTypeMapping>

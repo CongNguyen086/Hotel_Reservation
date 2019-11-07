@@ -21,22 +21,22 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.promotionDescription)
+                            Description
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Room_Catalog.typeName)
+                            Room Type
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.roomDiscount)
+                            Discount
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.startDate)
+                            Start Date
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.endDate)
+                            End Date
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.promotionStatus)
+                            Status
                         </th>
                         <th></th>
                     </tr>
@@ -69,7 +69,7 @@
                                    data-toggle="modal" data-target="#myModal">
                                     <i class="fas fa-edit"></i> Edit
                                 </a>
-                                <a href="@Url.Action("Delete", "Promotions", new { id = item.promotionId })" 
+                                <a href="@Url.Action("Delete", "AdminPromotions", new { id = item.promotionId })" 
                                    class="btn btn-danger" onclick="return confirm('Are you sure ?')">
                                     <i class="fas fa-trash-alt"></i> Delete
                                 </a>

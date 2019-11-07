@@ -26,22 +26,22 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.checkInDate)
+                                Checkin Date
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.checkOutDate)
+                                Checkout Date
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.customerName)
+                                Customer Name
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.phone)
+                                Phone
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.email)
+                                Email
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.reservationStatus)
+                                Status
                             </th>
                             <th></th>
                         </tr>
@@ -81,7 +81,7 @@
                                             <span style="margin-right">
                                                 @Html.DisplayFor(modelItem => item.reservationStatus)
                                             </span>
-                                            <a href="@Url.Action("UpdateForm", "Reservations", new { id = item.reservationId})"
+                                            <a href="@Url.Action("UpdateForm", "AdminReservations", new { id = item.reservationId})"
                                                class="btn btn-success">
                                                 <i class="fas fa-edit"></i> Update
                                             </a>
@@ -118,7 +118,7 @@
                                     }
                                 </td>
                                 <td>
-                                    <a href="@Url.Action("ReservationDetails", "Reservations", new { id = item.reservationId })" class="btn btn-info">
+                                    <a href="@Url.Action("ReservationDetails", "AdminReservations", new { id = item.reservationId })" class="btn btn-info">
                                         <i class="fas fa-info-circle"></i> Details
                                     </a>
                                 </td>

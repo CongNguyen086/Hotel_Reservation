@@ -11,9 +11,7 @@ namespace Hotel_Reservation.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class Registered_Customer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,30 +19,13 @@ namespace Hotel_Reservation.Models
         {
             this.Reservations = new HashSet<Reservation>();
         }
-
-        [Key]
-        [Display(Name = "Customer ID")]
+    
         public int customerId { get; set; }
-
-        [Required]
-        [Display(Name = "Customer Name")]
-        [StringLength(50)]
         public string customerName { get; set; }
-
-        [Required]
-        [Display(Name = "Phone")]
-        [StringLength(50)]
         public string phone { get; set; }
-
-        [Required]
-        [Display(Name = "Email")]
-        [StringLength(50)]
         public string email { get; set; }
-
-        [Required]
-        [StringLength(50)]
         public string password { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservation> Reservations { get; set; }
     }

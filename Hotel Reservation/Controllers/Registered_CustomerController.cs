@@ -39,7 +39,7 @@ namespace Hotel_Reservation.Controllers
                         Session["customerName"] = acc.customerName;
                         Session["phone"] = acc.phone;
                         Session["email"] = acc.email;
-                        return RedirectToAction("Index", "Homes");
+                        return RedirectToAction("Index", "Rooms");
                     }
                     else
                     {
@@ -64,21 +64,6 @@ namespace Hotel_Reservation.Controllers
             Session["CheckIn"] = null;
             Session["CheckOut"] = null;
             return RedirectToAction("LoginCustomer", "Registered_Customer");
-        }
-
-        public ActionResult ReservationHistory(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Registered_Customer cus = db.Registered_Customers.Find(id);
-            var reserv = db.Reservations.Where(m => m.customerId == id);
-
-            ViewBag.CustomerName = cus.customerName;
-            ViewBag.Phone = cus.phone;
-
-            return View(reserv.ToList());
         }
 
         protected override void Dispose(bool disposing)

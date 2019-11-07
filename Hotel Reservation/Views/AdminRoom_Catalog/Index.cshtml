@@ -23,10 +23,10 @@
                 <thead>
                     <tr>
                         <th>
-                            Image
+                            ID
                         </th>
                         <th>
-                            ID
+                            Image
                         </th>
                         <th>
                             Room Type
@@ -41,7 +41,7 @@
                             Room Quantity
                         </th>
                         <th>
-                            Adults & Children
+                            Max Occupancy
                         </th>
                         @*<th>
                                 @Html.DisplayNameFor(model => model.extraFee)
@@ -58,26 +58,29 @@
                     {
                         <tr>
                             <td>
-                                <img src="@item.Image_Details.First()" style="max-height:100px" />
+                                <label>@Html.DisplayFor(modelItem => item.typeId)</label>
                             </td>
                             <td>
-                                <label>@Html.DisplayFor(modelItem => item.typeId)</label>
+                                @{
+                                    var image_Details = item.Image_Details.Where(i => (i.typeId.Equals(item.typeId)) && (i.imageOrder == 1));
+                                }
+                                <img src="@image_Details.FirstOrDefault().image" style="max-height:100px" />
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.typeName)
                             </td>
                             <td>
-                                @{
+                                @*@{
                                     if (item.promotionId == "SD1")
                                     {
                                         <label>$</label> @Html.DisplayFor(modelItem => item.price)
                                         <label style="color:#17a2b8; font-weight:bold"> -5%</label>
                                     }
                                     else
-                                    {
+                                    {*@
                                         <label>$</label> @Html.DisplayFor(modelItem => item.price)
-                                    }
-                                }
+                                    @*}
+                                }*@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.description)
@@ -86,7 +89,13 @@
                                 @Html.DisplayFor(modelItem => item.quantityOfRooms)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.numberOfAdults)
+                                <label class="adultNum">
+                                    @Html.DisplayFor(modelItem => item.numberOfAdults)&nbsp;
+                                </label> 
+                                <label>, </label>
+                                <label class="childNum">
+                                    @Html.DisplayFor(modelItem => item.numberOfChild)&nbsp;
+                                </label>
                             </td>
                             @*<td>
                                     @Html.DisplayFor(modelItem => item.extraFee)
@@ -113,7 +122,7 @@
                                    data-toggle="modal" data-target="#myModal">
                                     <i class="fas fa-edit"></i> Edit
                                 </a>
-                                <a href="@Url.Action("Delete", "Room_Catalog", new { id = item.typeId })"
+                                <a href="@Url.Action("Delete", "AdminRoom_Catalog", new { id = item.typeId })"
                                    class="btn btn-danger" onclick="return confirm('Are you sure ?')">
                                     <i class="fas fa-trash-alt"></i> Delete
                                 </a>
@@ -134,3 +143,45 @@
         </div>
     </div>
 </div>
+
+<script src="~/Assets/libs/jQuery/dist/jquery.js"></script>
+<script>
+    function PluralDetect() {
+        let adultIdCount = 0
+        let childIdCount = 0
+        $('.adultNum').each(function () {
+            let adult = parseInt($(this).text())
+            adultIdCount++
+            if (adult > 1) {
+                let adultId = "adultLbl" + adultIdCount.toString()
+                let adultLabel = $(`<label id=${adultId}></label>`).text('Adults')
+                $(this).after(adultLabel)
+                console.log('adults')
+            } else {
+                let adultId = "adultLbl" + adultIdCount.toString()
+                let adultLabel = $(`<label id=${adultId}></label>`).text('Adult')
+                $(this).after(adultLabel)
+                console.log('adult')
+            }
+            console.log(this)
+        })
+
+        $('.childNum').each(function () {
+            let child = parseInt($(this).text())
+            childIdCount++
+            if (child > 1) {
+                let childId = "childLbl" + childIdCount.toString()
+                let childLabel = $(`<label id=${childId}></label>`).text('Children')
+                $(this).after(childLabel)
+                console.log('children')
+            } else {
+                let childId = "adultLbl" + childIdCount.toString()
+                let childLabel = $(`<label id=${childId}></label>`).text('Child')
+                $(this).after(childLabel)
+                console.log('child')
+            }
+        })
+    }
+
+    $(document).ready(() => PluralDetect())
+</script>

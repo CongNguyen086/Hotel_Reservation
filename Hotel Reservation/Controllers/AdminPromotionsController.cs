@@ -48,16 +48,16 @@ namespace Hotel_Reservation.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "promotionId,promotionDescription,appliedRoomType,roomDiscount,startDate,endDate,promotionStatus")] Promotion promotion)
+        public ActionResult Create([Bind(Include = "isPromoted,promotionDescription,appliedRoomType,roomDiscount,startDate,endDate,promotionStatus")] Promotion promotion)
         {
             if (ModelState.IsValid)
             {
                 var rc = db.Room_Catalogs.SingleOrDefault(i => i.typeId.Equals(promotion.appliedRoomType));
                 if(rc != null)
                 {
-                    if(rc.promotionId == null)
+                    if(rc.isPromoted == false)
                     {
-                        rc.promotionId = promotion.promotionId;
+                        rc.isPromoted = true;
 
                         db.Promotions.Add(promotion);
                         db.Entry(rc).State = EntityState.Modified;
@@ -95,14 +95,14 @@ namespace Hotel_Reservation.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "promotionId,promotionDescription,appliedRoomType,roomDiscount,startDate,endDate,promotionStatus")] Promotion promotion)
+        public ActionResult Edit([Bind(Include = "isPromoted,promotionDescription,appliedRoomType,roomDiscount,startDate,endDate,promotionStatus")] Promotion promotion)
         {
             if (ModelState.IsValid)
             {
-                var rc = db.Room_Catalogs.SingleOrDefault(i => i.promotionId.Equals(promotion.promotionId));
+                var rc = db.Room_Catalogs.SingleOrDefault(i => i.isPromoted == true);
                 if(rc != null && promotion.promotionStatus.Equals("Overdued"))
                 {
-                    rc.promotionId = null;
+                    rc.isPromoted = false;
                     db.Entry(rc).State = EntityState.Modified;
                 }
 

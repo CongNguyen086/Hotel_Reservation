@@ -7,6 +7,7 @@
     background-color: #f0ad4e;
     border-color: #eea236;
 }
+
     .inactive-btn:hover {
         color: #fff;
         background-color: #ec971f;
@@ -52,4 +53,28 @@
 
     .roomitem:hover {
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    }
+
+.room-details {
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+
+.btn-book-now {
+    border: 1px solid #b0914f;
+    padding: 12px 36px;
+    background: #b0914f;
+    color:#ffffff !important;
+    -webkit-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+    .btn-book-now:hover {
+        background: #ffffff;
+        color: #b0914f !important;
+        text-decoration: none;
+        -webkit-transition: all 0.5s;
+        -o-transition: all 0.5s;
+        transition: all 0.5s;
     }

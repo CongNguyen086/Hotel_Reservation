@@ -5828,6 +5828,7 @@
     <Compile Include="Controllers\AdminReservation_DetailController.cs" />
     <Compile Include="Controllers\AdminRoomsController.cs" />
     <Compile Include="Controllers\ReservationsController.cs" />
+    <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -5868,6 +5869,7 @@
     <Compile Include="Models\Room.cs">
       <DependentUpon>ModelContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RoomCatalog_Promotion.cs" />
     <Compile Include="Models\Room_Catalog.cs">
       <DependentUpon>ModelContext.tt</DependentUpon>
     </Compile>
@@ -5888,7 +5890,7 @@
     <Content Include="Views\AdminPromotions\Index.cshtml" />
     <Content Include="Views\AdminRegistered_Customer\Index.cshtml" />
     <Content Include="Views\AdminReservations\Index.cshtml" />
-    <Content Include="Views\AdminRegistered_Customer\ReservationHistory.cshtml" />
+    <Content Include="Views\AdminReservations\ReservationHistory.cshtml" />
     <Content Include="Views\AdminReservations\ReservationDetails.cshtml" />
     <Content Include="Views\AdminPromotions\_Edit.cshtml" />
     <Content Include="Views\AdminRooms\_Edit.cshtml" />
@@ -5902,6 +5904,7 @@
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\AdminRoom_Catalog\Index.cshtml" />
     <Content Include="Views\AdminRoom_Catalog\Create.cshtml" />
+    <Content Include="Views\Rooms\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

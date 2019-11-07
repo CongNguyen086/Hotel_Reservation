@@ -22,15 +22,8 @@ namespace Hotel_Reservation.Models
             this.Promotions = new HashSet<Promotion>();
             this.Rooms = new HashSet<Room>();
         }
-
-        [Key]
-        [Display(Name = "Room Type ID")]
-        [StringLength(50)]
+    
         public string typeId { get; set; }
-
-        [Required]
-        [Display(Name = "Type Name")]
-        [StringLength(50)]
         public string typeName { get; set; }
 
         [Display(Name = "Price")]
@@ -38,36 +31,18 @@ namespace Hotel_Reservation.Models
         [Range(1, 100000, ErrorMessage = "Price must be between 1 and 100000")]
         public decimal price { get; set; }
 
-        [Required]
-        [Display(Name = "Description")]
-        [StringLength(200)]
         public string description { get; set; }
-
-        [Display(Name = "Room Quantity")]
-        public int quantityOfRooms { get; set; }
-
-        [Display(Name = "Number of Adults")]
-        [Range(1, 6, ErrorMessage = "Number of Adults must be between 1 and 6")]
+        public Nullable<int> quantityOfRooms { get; set; }
         public int numberOfAdults { get; set; }
-
-        [Display(Name = "Extra Fee")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:#.#}")]
+        public Nullable<int> numberOfChild { get; set; }
         public decimal extraFee { get; set; }
-
-        [Display(Name = "Promotion ID")]
-        [StringLength(50)]
-        public string promotionId { get; set; }
-
-        [Required]
-        [Display(Name = "Status")]
-        [StringLength(50)]
+        public Nullable<bool> isPromoted { get; set; }
         public string catalogStatus { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Image_Detail> Image_Details { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Promotion> Promotions { get; set; }
-        public virtual Promotion Promotion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Room> Rooms { get; set; }
     }

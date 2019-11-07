@@ -24,9 +24,7 @@ namespace Hotel_Reservation.Models
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Display(Name = "Reservation ID")]
         public int reservationId { get; set; }
-
         [Column(TypeName = "date")]
         [Display(Name = "Checkin Date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
@@ -37,29 +35,12 @@ namespace Hotel_Reservation.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime checkOutDate { get; set; }
 
-        [Display(Name = "Customer ID")]
-        public int? customerId { get; set; }
-
-        [Required]
-        [Display(Name = "Customer Name")]
-        [StringLength(50)]
+        public Nullable<int> customerId { get; set; }
         public string customerName { get; set; }
-
-        [Required]
-        [Display(Name = "Phone")]
-        [StringLength(50)]
         public string phone { get; set; }
-
-        [Required]
-        [Display(Name = "Email")]
-        [StringLength(50)]
         public string email { get; set; }
-
-        [Required]
-        [Display(Name = "Status")]
-        [StringLength(50)]
         public string reservationStatus { get; set; }
-
+    
         public virtual Registered_Customer Registered_Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservation_Detail> Reservation_Details { get; set; }

@@ -11,9 +11,7 @@ namespace Hotel_Reservation.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class Room
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,27 +19,12 @@ namespace Hotel_Reservation.Models
         {
             this.Reservation_Details = new HashSet<Reservation_Detail>();
         }
-
-        [Key]
-        [Display(Name = "Room Number")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+    
         public int roomNumber { get; set; }
-
-        [Required]
-        [Display(Name = "Room Type ID")]
-        [StringLength(50)]
         public string typeId { get; set; }
-
-        [Required]
-        [Display(Name = "Room Status")]
-        [StringLength(50)]
         public string roomStatus { get; set; }
-
-        [Required]
-        [Display(Name = "Operation Status")]
-        [StringLength(50)]
         public string operationStatus { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservation_Detail> Reservation_Details { get; set; }
         public virtual Room_Catalog Room_Catalog { get; set; }
