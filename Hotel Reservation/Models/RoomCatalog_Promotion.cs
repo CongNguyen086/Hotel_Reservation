@@ -24,6 +24,8 @@ namespace Hotel_Reservation.Models
         public Nullable<int> numberOfChild { get; set; }
         public decimal extraFee { get; set; }
         public string catalogStatus { get; set; }
+        public List<Image_Detail> image { get; set; }
+        public string promotionId { get; set; }
         public string promotionDescription { get; set; }
         public string appliedRoomType { get; set; }
         public Nullable<decimal> roomDiscount { get; set; }

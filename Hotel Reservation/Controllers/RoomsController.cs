@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -15,7 +16,7 @@ namespace Hotel_Reservation.Controllers
         private ModelContext db = new ModelContext();
 
         // GET: Rooms
-        public ActionResult Index(string txtRoom)
+        public ActionResult Index(string checkIn, string checkOut)
         {
             var room_Catalogs = db.Room_Catalogs.Where(m => m.catalogStatus == "Active");
             var promotions = db.Promotions.Where(p => p.promotionStatus == "Processing");
@@ -24,11 +25,46 @@ namespace Hotel_Reservation.Controllers
             var isPromoted = false;
             foreach (var rc in room_Catalogs)
             {
-                foreach(var p in promotions)
+                if (!isFullReserved(rc, checkIn, checkOut))
                 {
-                    if(p.appliedRoomType.Equals(rc.typeId))
+                    var imageList = rc.Image_Details.Where(i => i.typeId.Equals(rc.typeId));
+                    List<Image_Detail> imageList_Promotion = new List<Image_Detail>();
+                    foreach (var i in imageList)
                     {
-                        isPromoted = true;
+                        imageList_Promotion.Add(new Image_Detail
+                        {
+                            imageId = i.imageId,
+                            image = i.image,
+                            imageOrder = i.imageOrder,
+                        });
+                    }
+                    foreach (var p in promotions)
+                    {
+                        if (p.appliedRoomType.Equals(rc.typeId))
+                        {
+                            isPromoted = true;
+                            activeRoom = new RoomCatalog_Promotion()
+                            {
+                                typeId = rc.typeId,
+                                typeName = rc.typeName,
+                                price = rc.price,
+                                description = rc.description,
+                                quantityOfRooms = rc.quantityOfRooms,
+                                numberOfAdults = rc.numberOfAdults,
+                                numberOfChild = rc.numberOfChild,
+                                extraFee = rc.extraFee,
+                                catalogStatus = rc.catalogStatus,
+                                promotionDescription = p.promotionDescription,
+                                appliedRoomType = p.appliedRoomType,
+                                roomDiscount = p.roomDiscount,
+                                image = imageList_Promotion,
+                            };
+                            activeRoomList.Add(activeRoom);
+                            break;
+                        }
+                    }
+                    if (!isPromoted)
+                    {
                         activeRoom = new RoomCatalog_Promotion()
                         {
                             typeId = rc.typeId,
@@ -40,43 +76,82 @@ namespace Hotel_Reservation.Controllers
                             numberOfChild = rc.numberOfChild,
                             extraFee = rc.extraFee,
                             catalogStatus = rc.catalogStatus,
-                            promotionDescription = p.promotionDescription,
-                            appliedRoomType = p.appliedRoomType,
-                            roomDiscount = p.roomDiscount,
+                            promotionDescription = null,
+                            appliedRoomType = null,
+                            roomDiscount = null,
+                            image = imageList_Promotion,
                         };
                         activeRoomList.Add(activeRoom);
-                        break;
+                    }
+                    else
+                    {
+                        isPromoted = false;
                     }
                 }
-                if(!isPromoted)
-                {
-                    activeRoom = new RoomCatalog_Promotion()
-                    {
-                        typeId = rc.typeId,
-                        typeName = rc.typeName,
-                        price = rc.price,
-                        description = rc.description,
-                        quantityOfRooms = rc.quantityOfRooms,
-                        numberOfAdults = rc.numberOfAdults,
-                        numberOfChild = rc.numberOfChild,
-                        extraFee = rc.extraFee,
-                        catalogStatus = rc.catalogStatus,
-                        promotionDescription = null,
-                        appliedRoomType = null,
-                        roomDiscount = null,
-                    };
-                    activeRoomList.Add(activeRoom);
-                } else
-                {
-                    isPromoted = false;
-                }
-            }
-            if (!string.IsNullOrEmpty(txtRoom))
-            {
-                room_Catalogs = room_Catalogs.Where(b => b.typeName.Contains(txtRoom));
             }
 
             return View(activeRoomList);
+        } 
+
+        public Boolean isDateRangeOverlap(string checkIn, string checkOut, string start2, string end2)
+        {
+            if ((checkIn != null) && (checkOut != null)) {
+                var startDate1 = DateTime.ParseExact(checkIn, "dd/MM/yyyy", null);
+                var endDate1 = DateTime.ParseExact(checkOut, "dd/MM/yyyy", null);
+                var startDate2 = DateTime.ParseExact(start2, "dd/MM/yyyy", null);
+                var endDate2 = DateTime.ParseExact(end2, "dd/MM/yyyy", null);
+                var maxStart = startDate1 > startDate2 ? startDate1 : startDate2;
+                var minEnd = endDate1 < endDate2 ? endDate1 : endDate2;
+                return maxStart < minEnd;
+            }
+            return false;
+        }
+
+        public Boolean hasAvailableRoom(Room_Catalog rc)
+        {
+            var availableRoomList = db.Rooms.Where(r => r.typeId.Equals(rc.typeId)
+                                                        && r.roomStatus.Equals("Available")
+                                                        && r.operationStatus.Equals("Active")
+                                                    ).FirstOrDefault();
+            return availableRoomList != null ? true : false;
+        }
+
+        public Boolean isFullReserved(Room_Catalog rc, string checkIn, string checkOut)
+        {
+            if (!hasAvailableRoom(rc))
+            {
+                // get all reserve details that relate to rc
+                var reservationDt = db.Reservation_Details.Where(rd => rd.Room.typeId.Equals(rc.typeId));
+                var roomList = db.Rooms.Where(r => r.typeId.Equals(rc.typeId));
+                ArrayList reservedRoomList = new ArrayList();
+                var hasAvailableInDateRange = false;
+                foreach (var rd in reservationDt)
+                {
+                    var reservation = db.Reservations.Find(rd.reservationId);
+                    if (isDateRangeOverlap(checkIn, checkOut, reservation.checkInDate.ToString("dd/MM/yyyy"), reservation.checkOutDate.ToString("dd/MM/yyyy")))
+                    {
+                        if (!reservedRoomList.Contains(rd.roomNumber))
+                        {
+                            reservedRoomList.Add(rd.roomNumber);
+                        }
+                    }
+                }
+                if (reservedRoomList != null)
+                {
+                    foreach (var room in roomList)
+                    {
+                        if (!reservedRoomList.Contains(room.roomNumber) && room.operationStatus.Equals("Active"))
+                        {
+                            hasAvailableInDateRange = true;
+                        }
+                    }
+                    if (!hasAvailableInDateRange)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         // GET: Rooms/Details/5

@@ -83,19 +83,22 @@
 
                         <div class="vk-booking-transparent-1">
                             <div class="container">
-                                <form action="http://html.vikitheme.com/sparta/action.php" class="form-horizontal  booking-hotel-all">
+                                @using (Ajax.BeginForm("Index", "Rooms",
+                                    new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "Get" }, new { @class = "form-horizontal  booking-hotel-all" })
+                                    )
+                                {
                                     <ul>
                                         <li>
                                             <h4>Check - In</h4>
                                             <div class="input-group date date-check-in" data-date="12-02-2017" data-date-format="mm-dd-yyyy">
-                                                <input name="date1" class="form-control" type="text" value="12-02-2017">
+                                                <input id="checkIn" name="checkIn" class="form-control" type="text" value="@Request["checkIn"]">
                                                 <span class="input-group-addon btn"><span class="ti-calendar" id="ti-calendar1"></span></span>
                                             </div>
                                         </li>
                                         <li>
                                             <h4>Check - Out</h4>
                                             <div class="input-group date date-check-out" data-date="12-02-2017" data-date-format="mm-dd-yyyy">
-                                                <input name="date2" class="form-control" type="text" value="12-02-2017">
+                                                <input id="checkOut" name="checkOut" class="form-control" type="text" value="@Request["checkOut"]">
                                                 <span class="input-group-addon btn"><span class="ti-calendar" id="ti-calendar2"></span></span>
                                             </div>
                                         </li>
@@ -126,12 +129,14 @@
                                         </li>
                                         <li>
                                             <div class="vk-btn-check">
-                                                <button type="submit" class="btn vk-btn-primary btn-block btn-check">Check  Availability</button>
+                                                <button type="submit" class="btn vk-btn-primary btn-block btn-check">
+                                                    Check  Availability
+                                                </button>
                                             </div>
                                         </li>
                                     </ul>
                                     <div class="clearfix"></div>
-                                </form>
+                                }
                                 <div class="clearfix"></div>
                             </div>
                         </div>
@@ -141,7 +146,7 @@
                 <section class="site-content-area">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="vk-room-list-content">
+                            <div class="vk-room-list-content" style="padding-top: 80px">
                                 <div class="container">
                                     <div class="vk-room-list-header">
                                         <h3>Welcome To</h3>
@@ -176,7 +181,10 @@
                                                 <div class="roomitem item">
                                                     <div class="col-md-6 vk-dark-our-room-item-left  vk-clear-padding">
                                                         <div class="vk-dark-our-room-item-img">
-                                                            <img src="~/CustomerLayout/images/04_01_room_list/img/img.jpg" alt="" class="img-responsive">
+                                                            @{
+                                                                var image_Details = room.image.Where(i => i.imageOrder == 1).FirstOrDefault();
+                                                            }
+                                                            <img src="@image_Details.image" class="img-responsive" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6 vk-dark-our-room-item-right vk-clear-padding">
@@ -214,9 +222,9 @@
                                                             </ul>
 
                                                             @*<div class="room-details">
-                                                                <a href="@Url.Action("Details","Homes", new { id = room.typeId})"> Details <i class="fa fa-caret-right" aria-hidden="true"></i></a>
-                                                            </div>*@
-                                                            
+                                                                    <a href="@Url.Action("Details","Homes", new { id = room.typeId})"> Details <i class="fa fa-caret-right" aria-hidden="true"></i></a>
+                                                                </div>*@
+
                                                             <div class="vk-dark-our-room-item-book" style="margin-top:50px">
                                                                 <div class="vk-dark-our-room-item-book-left">
                                                                     <ul>
@@ -230,7 +238,9 @@
                                                                 </div>
                                                                 <div class="vk-dark-our-room-item-book-right">
                                                                     <h4>
-                                                                        <a href="#" class="btn-book-now"> BOOK NOW</a>
+                                                                        <a href="@Url.Action("Details","Homes", new { id = room.typeId, promotionId = room.promotionId })" class="btn-book-now">
+                                                                            &nbsp;BOOK NOW
+                                                                        </a>
                                                                     </h4>
                                                                     @*<div class="clearfix"></div>*@
                                                                 </div>
@@ -255,6 +265,16 @@
     </div>
 </div>
 
-
+@*<script src="~/Assets/libs/jQuery/dist/jquery.js"></script>
+<script>
+    $(document).ready(() => {
+        $('.btn-book-now').click(() => {
+            $.ajax({
+                type: 'POST',
+                data: model
+            })
+        })
+    })
+</script>*@
 
 

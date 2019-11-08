@@ -4901,6 +4901,7 @@
     <Content Include="CustomerLayout\img\video-play.html" />
     <Content Include="CustomerLayout\img\vimeo-play.html" />
     <Content Include="CustomerLayout\img\youtube-play.html" />
+    <Content Include="CustomerLayout\js\ajax\ajax.js" />
     <Content Include="CustomerLayout\js\bootstrap-datepicker.min.js" />
     <Content Include="CustomerLayout\js\bootstrap-datepicker.tr.min.js" />
     <Content Include="CustomerLayout\js\bootstrap-datetimepicker.fr.js" />

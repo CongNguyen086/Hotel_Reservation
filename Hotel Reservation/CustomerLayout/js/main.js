@@ -326,10 +326,13 @@ jQuery(document).ready(function ($) {
     //=============Calendar=============
     moment.locale('tr');
     var date = new Date();
+    var date2 = new Date();
+    date2.setDate(date.getDate() + 1)
     var bugun = moment(date).format("DD/MM/YYYY");
+    var bugun2 = moment(date2).format("DD/MM/YYYY");
 
-    var date_input1=$('input[name="date1"]'); //our date input has the name "date"
-    var date_input2=$('input[name="date2"]'); //our date input has the name "date"
+    var date_input1=$('input[name="checkIn"]'); //our date input has the name "date"
+    var date_input2=$('input[name="checkOut"]'); //our date input has the name "date"
     var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
     var options={
         container: container,
@@ -338,10 +341,10 @@ jQuery(document).ready(function ($) {
         format: 'dd/mm/yyyy',
         language: 'tr'
     };
-    date_input1.val(bugun);
+    //date_input1.val(bugun);
     date_input1.datepicker(options).on('focus', function(date_input){
     });
-    date_input2.val(bugun);
+    //date_input2.val(bugun2);
     date_input2.datepicker(options).on('focus', function(date_input){
     });
 

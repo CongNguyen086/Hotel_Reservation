@@ -187,13 +187,13 @@
                                                                 @{
                                                                     if (item.isPromoted == true)
                                                                     {
-                                                                        if (item.Promotion.roomDiscount != null)
+                                                                        if (item.Promotions != null)
                                                                         {
-                                                                            var discount = item.Promotion.roomDiscount * (decimal)100;
+                                                                            //var discount = item.Promotion.roomDiscount * (decimal)100;
                                                                             <li>
                                                                                 <p>
                                                                                     <i class="fa fa-angle-double-up" aria-hidden="true"></i> Discount
-                                                                                    <span> : @string.Format("{0:N0}", discount) %</span>
+                                                                                    @*<span> : @string.Format("{0:N0}", discount) %</span>*@
                                                                                 </p>
                                                                             </li>
                                                                         }
@@ -202,7 +202,7 @@
                                                                             <li>
                                                                                 <p>
                                                                                     <i class="fa fa-angle-double-up" aria-hidden="true"></i> Discount
-                                                                                    <span> : @item.Promotion.promotionDescription</span>
+                                                                                    <span> @*: @item.Promotion.promotionDescription*@</span>
                                                                                 </p>
                                                                             </li>
                                                                         }

@@ -46,15 +46,13 @@
                                     <p>$@Model.price/<span>NIGHT</span></p>
                                 </li>
                                 @{
-                                    if (Model.promotionId != null)
+                                    var promotion = Model.Promotions.Where(p => p.promotionId.Equals(ViewBag.PromotionId)).FirstOrDefault();
+                                    if (promotion != null && promotion.roomDiscount != 0)
                                     {
-                                        if (Model.Promotion.roomDiscount != null)
-                                        {
-                                            var discount = Model.Promotion.roomDiscount * (decimal)100;
-                                            <li>
-                                                -@string.Format("{0:N0}", discount) %
-                                            </li>
-                                        }
+                                        var discount = promotion.roomDiscount * (decimal)100;
+                                        <li>
+                                            -@string.Format("{0:N0}", discount) %
+                                        </li>
                                     }
                                 }
                             </ul>
@@ -88,9 +86,9 @@
                             </div>
                             <div class="col-6">
                                 <ul>
-                                    <li>
+                                    @*<li>
                                         <p><i class="fa fa-users" aria-hidden="true"></i> Availability <span> : @ViewBag.Availability</span></p>
-                                    </li>
+                                    </li>*@
                                     <li>
                                         <p><i class="fa fa-wifi" aria-hidden="true"></i> Wifi <span> : Yes</span></p>
                                     </li>
