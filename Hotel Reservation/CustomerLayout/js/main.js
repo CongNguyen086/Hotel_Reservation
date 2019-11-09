@@ -341,10 +341,10 @@ jQuery(document).ready(function ($) {
         format: 'dd/mm/yyyy',
         language: 'tr'
     };
-    //date_input1.val(bugun);
+    date_input1.val(bugun);
     date_input1.datepicker(options).on('focus', function(date_input){
     });
-    //date_input2.val(bugun2);
+    date_input2.val(bugun2);
     date_input2.datepicker(options).on('focus', function(date_input){
     });
 

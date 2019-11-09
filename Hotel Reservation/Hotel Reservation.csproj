@@ -85,6 +85,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -5824,6 +5830,7 @@
     <Compile Include="Controllers\Image_DetailController.cs" />
     <Compile Include="Controllers\AdminPromotionsController.cs" />
     <Compile Include="Controllers\AdminRegistered_CustomerController.cs" />
+    <Compile Include="Controllers\PayPalsController.cs" />
     <Compile Include="Controllers\Registered_CustomerController.cs" />
     <Compile Include="Controllers\AdminReservationsController.cs" />
     <Compile Include="Controllers\AdminReservation_DetailController.cs" />
@@ -5855,6 +5862,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\PaypalConfig.cs" />
+    <Compile Include="Models\PaypalLogger.cs" />
     <Compile Include="Models\Promotion.cs">
       <DependentUpon>ModelContext.tt</DependentUpon>
     </Compile>
@@ -5906,6 +5915,8 @@
     <Content Include="Views\AdminRoom_Catalog\Index.cshtml" />
     <Content Include="Views\AdminRoom_Catalog\Create.cshtml" />
     <Content Include="Views\Rooms\Index.cshtml" />
+    <Content Include="Views\PayPals\Success.cshtml" />
+    <Content Include="Views\PayPals\Failure.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

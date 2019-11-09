@@ -86,7 +86,7 @@
           <Property Name="description" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="quantityOfRooms" Type="int" />
           <Property Name="numberOfAdults" Type="int" Nullable="false" />
-          <Property Name="numberOfChild" Type="int" />
+          <Property Name="numberOfChild" Type="int" Nullable="false" />
           <Property Name="extraFee" Type="decimal" Precision="18" Scale="1" Nullable="false" />
           <Property Name="isPromoted" Type="bit" />
           <Property Name="catalogStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -292,7 +292,7 @@
           <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="quantityOfRooms" Type="Int32" />
           <Property Name="numberOfAdults" Type="Int32" Nullable="false" />
-          <Property Name="numberOfChild" Type="Int32" />
+          <Property Name="numberOfChild" Type="Int32" Nullable="false" />
           <Property Name="extraFee" Type="Decimal" Precision="18" Scale="1" Nullable="false" />
           <Property Name="isPromoted" Type="Boolean" />
           <Property Name="catalogStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />

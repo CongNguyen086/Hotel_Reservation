@@ -32,9 +32,9 @@ namespace Hotel_Reservation.Controllers
                 Reservation_Detail rd = new Reservation_Detail();
                 rd.reservationId = rs.reservationId;
                 rd.roomNumber = item.roomNumber;
-                rd.numberOfTravelers = item.traveler;
+                rd.numberOfTravelers = item.guest;
                 rd.extraFee = item.extraFee;
-                rd.totalPrice = item.totalPrice;
+                rd.totalPrice = item.itemTotalPrice;
 
                 Room room = db.Rooms.Find(item.roomNumber);
                 room.roomStatus = "Reserved";

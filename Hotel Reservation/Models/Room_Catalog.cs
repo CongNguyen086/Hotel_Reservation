@@ -34,7 +34,7 @@ namespace Hotel_Reservation.Models
         public string description { get; set; }
         public Nullable<int> quantityOfRooms { get; set; }
         public int numberOfAdults { get; set; }
-        public Nullable<int> numberOfChild { get; set; }
+        public int numberOfChild { get; set; }
         public decimal extraFee { get; set; }
         public Nullable<bool> isPromoted { get; set; }
         public string catalogStatus { get; set; }
