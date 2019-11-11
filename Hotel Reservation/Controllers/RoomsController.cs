@@ -22,6 +22,12 @@ namespace Hotel_Reservation.Controllers
             var promotions = db.Promotions.Where(p => p.promotionStatus == "Processing");
             List<RoomCatalog_Promotion> activeRoomList = new List<RoomCatalog_Promotion>();
             RoomCatalog_Promotion activeRoom;
+            if (checkIn != null)
+            {
+                Session["CheckIn"] = DateTime.ParseExact(checkIn, "dd/MM/yyyy", null);
+                Session["CheckOut"] = DateTime.ParseExact(checkOut, "dd/MM/yyyy", null);
+            }
+
             var isPromoted = false;
             foreach (var rc in room_Catalogs)
             {

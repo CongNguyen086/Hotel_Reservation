@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -35,9 +36,25 @@ namespace Hotel_Reservation.Controllers
 
             List<CartItem> cart = Session[strCart] as List<CartItem>;
             Room_Catalog rc = db.Room_Catalogs.Find(typeId);
-            Room r = db.Rooms.Where(m => m.roomStatus == "Available").Where(m => m.operationStatus == "Active").FirstOrDefault(m => m.typeId == typeId);
+            Room r = db.Rooms.FirstOrDefault(m => (m.typeId == typeId) 
+                                                && (m.roomStatus == "Available")
+                                                && (m.operationStatus == "Active"));
             Image_Detail img = db.Image_Details.FirstOrDefault(m => m.typeId == typeId);
+            var checkIn = (DateTime)Session["CheckIn"];
+            var checkOut = (DateTime)Session["CheckOut"];
+            //var checkInParse = DateTime.ParseExact(checkIn.ToString("dd/MM/yyyy"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            //var checkOutParse = DateTime.ParseExact(checkOut.ToString("dd/MM/yyyy"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            var numberOfNight = (checkOut - checkIn).Days;
+            decimal discount = 0;
+            var itemPromotion = "";
+            var promotion = db.Promotions.FirstOrDefault(p => (p.appliedRoomType.Equals(typeId))
+                                                                && (p.promotionStatus.Equals("Processing")));
+            if(promotion != null)
+            {
 
+                discount = promotion.roomDiscount ?? 0;
+                itemPromotion = promotion.promotionDescription;
+            }
             CartItem newItem = new CartItem()
             {
                 roomNumber = r.roomNumber,
@@ -47,7 +64,10 @@ namespace Hotel_Reservation.Controllers
                 numberOfAdult = rc.numberOfAdults,
                 numberOfChild = rc.numberOfChild,
                 unitPrice = rc.price,
+                night = numberOfNight,
                 extraFee = 0,
+                discount = rc.price * discount,
+                promotion = itemPromotion,
             };
             
             cart.Add(newItem);
@@ -55,10 +75,10 @@ namespace Hotel_Reservation.Controllers
             return RedirectToAction("Details", "Homes", new { id = typeId });
         }
 
-        public RedirectToRouteResult UpdateDate(DateTime date1, DateTime date2)
+        public RedirectToRouteResult UpdateDate(DateTime checkIn, DateTime checkOut)
         {
-            Session["CheckIn"] = Convert.ToDateTime(date1);
-            Session["CheckOut"] = Convert.ToDateTime(date2);
+            Session["CheckIn"] = checkIn;
+            Session["CheckOut"] = checkOut;
             return RedirectToAction("Index");
         }
 

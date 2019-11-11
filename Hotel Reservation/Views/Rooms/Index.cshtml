@@ -199,8 +199,11 @@
                                                                         var discount = room.roomDiscount * (decimal)100;
                                                                         <li>
                                                                             <p>
-                                                                                <i class="fa fa-angle-double-up" aria-hidden="true"></i> Discount
-                                                                                <span> : @string.Format("{0:N0}", discount) %</span>
+                                                                                <i class="fa fa-angle-double-up" aria-hidden="true" style="margin-left: 2px"></i>
+                                                                                <label style="color: #b0914f">
+                                                                                    Discount @string.Format("{0:N0}", discount)% per room
+                                                                                </label>
+                                                                                @*<span> : @string.Format("{0:N0}", discount) % per room</span>*@
                                                                             </p>
                                                                         </li>
                                                                     }
@@ -232,7 +235,7 @@
                                                                             <p>Price: </p>
                                                                         </li>
                                                                         <li>
-                                                                            <p>$@room.price/ <span>Night</span></p>
+                                                                            <p>$@string.Format("{0:N0}", room.price)/ <span>Night</span></p>
                                                                         </li>
                                                                     </ul>
                                                                 </div>

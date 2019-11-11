@@ -17,6 +17,7 @@ namespace Hotel_Reservation.Models
         public int numberOfAdult { get; set; }
         public int numberOfChild { get; set; }
         public decimal unitPrice { get; set; }
+        public int night { get; set; }
         public decimal extraFee { get; set; }
         public decimal discount { get; set; }
         public string promotion { get; set; }
@@ -24,7 +25,7 @@ namespace Hotel_Reservation.Models
         {
             get
             {
-                return unitPrice * (1 - discount); 
+                return unitPrice * night; 
             }
             set
             {

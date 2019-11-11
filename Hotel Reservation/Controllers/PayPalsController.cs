@@ -42,12 +42,12 @@ namespace Hotel_Reservation.Controllers
             List<CartItem> cart = Session[strCart] as List<CartItem>;
             foreach (var cartItem in cart)
             {
-                //List<NameValuePair> supplementary_data = new List<NameValuePair>
-                //{
-                //    new NameValuePair{ name = "Adults", value = cartItem.numberOfAdult.ToString() },
-                //    new NameValuePair{ name = "Children", value = cartItem.numberOfChild.ToString() },
-                //    new NameValuePair{ name = "Discount", value = cartItem.discount.ToString() }
-                //};
+                List<NameValuePair> supplementary_data = new List<NameValuePair>
+                {
+                    new NameValuePair{ name = "Adults", value = cartItem.numberOfAdult.ToString() },
+                    new NameValuePair{ name = "Children", value = cartItem.numberOfChild.ToString() },
+                    new NameValuePair{ name = "Discount", value = cartItem.discount.ToString() }
+                };
                 //itemList.items.Add(new Item()
                 //{
                 //    name = cartItem.typeName,
@@ -59,10 +59,11 @@ namespace Hotel_Reservation.Controllers
                 itemList.items.Add(new Item()
                 {
                     name = cartItem.typeName,
-                    quantity = "1",
+                    quantity = cartItem.night.ToString(),
                     currency = "USD",
-                    price = "2",
-                    description = "abc",
+                    price = cartItem.unitPrice.ToString(),
+                    description = cartItem.promotion,
+                    supplementary_data = supplementary_data,
                 });
             }
 
@@ -77,29 +78,30 @@ namespace Hotel_Reservation.Controllers
                 cancel_url = redirectUrl,
                 return_url = redirectUrl
             };
-            // Adding Tax, shipping and Subtotal details  
+            // Adding Tax, shipping and Subtotal details
             var details = new Details()
             {
                 //fee = cart.Select(m => m.extraFee).Sum().ToString(),
-                ////shipping_discount = cart.Select(m => m.discount).Sum
-                //subtotal = cart.Select(m => m.itemTotalPrice).Sum().ToString(),
-                //fee = "1",
                 //shipping_discount = cart.Select(m => m.discount).Sum
-                subtotal = "2",
+                //subtotal = cart.Select(m => m.itemTotalPrice).Sum().ToString(),
+                tax = cart.Select(m => m.extraFee).Sum().ToString(),
+                shipping_discount = cart.Select(m => m.discount).Sum().ToString(),
+                subtotal = cart.Select(m => m.itemTotalPrice).Sum().ToString(),
             };
-            //Final amount with details  
+            //Final amount with details
+            var total = Convert.ToDouble(details.tax) + Convert.ToDouble(details.subtotal) - Convert.ToDouble(details.shipping_discount);
             var amount = new Amount()
             {
                 currency = "USD",
-                //total = (Convert.ToDouble(details.fee) + Convert.ToDouble(details.subtotal)).ToString(), // Total must be equal to sum of fee and subtotal.  
-                total = details.subtotal,
+                total = total.ToString(), // Total must be equal to sum of fee and subtotal.  
+                //total = details.subtotal + details.fee,
                 details = details
             };
             var transactionList = new List<Transaction>();
             // Adding description about the transaction  
             transactionList.Add(new Transaction()
             {
-                description = "Transaction description",
+                description = "Hotel Booking",
                 invoice_number = Convert.ToString((new Random()).Next(100000)), //Generate an Invoice No  
                 amount = amount,
                 item_list = itemList
