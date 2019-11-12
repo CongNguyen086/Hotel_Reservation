@@ -17,6 +17,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.typeId)
         @Html.HiddenFor(model => model.quantityOfRooms)
+        @Html.HiddenFor(model => model.isPromoted)
 
         <div class="form-group">
             @Html.LabelFor(model => model.typeName, "Room Type", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -63,14 +64,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.extraFee, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.extraFee, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.promotionId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.promotionId, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                @Html.ValidationMessageFor(model => model.promotionId, "", new { @class = "text-danger" })
             </div>
         </div>
 

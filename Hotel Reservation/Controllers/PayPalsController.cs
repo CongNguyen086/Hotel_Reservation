@@ -39,7 +39,7 @@ namespace Hotel_Reservation.Controllers
                 items = new List<Item>()
             };
             //Adding Item Details like name, currency, price
-            List<CartItem> cart = Session[strCart] as List<CartItem>;
+            List<BookingItem> cart = Session[strCart] as List<BookingItem>;
             foreach (var cartItem in cart)
             {
                 List<NameValuePair> supplementary_data = new List<NameValuePair>

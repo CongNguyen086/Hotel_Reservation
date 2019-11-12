@@ -16,7 +16,7 @@ namespace Hotel_Reservation.Controllers
         // GET: Cart
         public ActionResult Index()
         {
-            List<CartItem> cart = Session[strCart] as List<CartItem>;
+            List<BookingItem> cart = Session[strCart] as List<BookingItem>;
             if(cart != null)
             {
                 ViewBag.Subtotal = cart.Select(m => m.itemTotalPrice).Sum();
@@ -31,10 +31,10 @@ namespace Hotel_Reservation.Controllers
         {
             if (Session[strCart] == null)
             {
-                Session[strCart] = new List<CartItem>();  
+                Session[strCart] = new List<BookingItem>();  
             }
 
-            List<CartItem> cart = Session[strCart] as List<CartItem>;
+            List<BookingItem> cart = Session[strCart] as List<BookingItem>;
             Room_Catalog rc = db.Room_Catalogs.Find(typeId);
             Room r = db.Rooms.FirstOrDefault(m => (m.typeId == typeId) 
                                                 && (m.roomStatus == "Available")
@@ -51,11 +51,10 @@ namespace Hotel_Reservation.Controllers
                                                                 && (p.promotionStatus.Equals("Processing")));
             if(promotion != null)
             {
-
                 discount = promotion.roomDiscount ?? 0;
                 itemPromotion = promotion.promotionDescription;
             }
-            CartItem newItem = new CartItem()
+            BookingItem newItem = new BookingItem()
             {
                 roomNumber = r.roomNumber,
                 image = img.image,
@@ -84,8 +83,8 @@ namespace Hotel_Reservation.Controllers
 
         public RedirectToRouteResult DeleteItem(int roomNumber)
         {
-            List<CartItem> giohang = Session[strCart] as List<CartItem>;
-            CartItem item = giohang.FirstOrDefault(m => m.roomNumber == roomNumber);
+            List<BookingItem> giohang = Session[strCart] as List<BookingItem>;
+            BookingItem item = giohang.FirstOrDefault(m => m.roomNumber == roomNumber);
             if (item != null)
             {
                 giohang.Remove(item);

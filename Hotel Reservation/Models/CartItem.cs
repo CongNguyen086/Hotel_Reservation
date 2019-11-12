@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Hotel_Reservation.Models
 {
-    public class CartItem
+    public class BookingItem
     {
         [Key]
         public int roomNumber { get; set; }

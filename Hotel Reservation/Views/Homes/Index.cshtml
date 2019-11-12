@@ -20,16 +20,6 @@
                                             <h3 class="animated fadeInDown slide-delay-1">Swimming Pool</h3>
                                             <h2 class="animated fadeInUp slide-delay-2">Sparta Plaza Hotel</h2>
                                             <div class="clearfix"></div>
-                                            @*<div class="vk-slide-cation-btn">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#">OUR ROOMS</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">BOOK NOW <span class="ti-arrow-right"></span></a>
-                                                    </li>
-                                                </ul>
-                                            </div>*@
                                         </div>
                                     </div>
                                 </div>
@@ -42,16 +32,6 @@
                                             <h3 class="animated fadeInDown slide-delay-1">Swimming Pool</h3>
                                             <h2 class="animated fadeInUp slide-delay-2">Sparta Plaza Hotel</h2>
                                             <div class="clearfix"></div>
-                                            @*<div class="vk-slide-cation-btn">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#">OUR ROOMS</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">BOOK NOW <span class="ti-arrow-right"></span></a>
-                                                    </li>
-                                                </ul>
-                                            </div>*@
                                         </div>
                                     </div>
                                 </div>
@@ -64,37 +44,29 @@
                                             <h3 class="animated fadeInDown slide-delay-1">Swimming Pool</h3>
                                             <h2 class="animated fadeInUp slide-delay-2">Sparta Plaza Hotel</h2>
                                             <div class="clearfix"></div>
-                                            @*<div class="vk-slide-cation-btn">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#">OUR ROOMS</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">BOOK NOW <span class="ti-arrow-right"></span></a>
-                                                    </li>
-                                                </ul>
-                                            </div>*@
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="vk-booking-transparent-1">
                             <div class="container">
-                                <form action="http://html.vikitheme.com/sparta/action.php" class="form-horizontal  booking-hotel-all">
+                                @using (Ajax.BeginForm("Index", "Rooms",
+                                    new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "Get" }, 
+                                    new { @class = "form-horizontal  booking-hotel-all" }))
+                                {
                                     <ul>
                                         <li>
                                             <h4>Check - In</h4>
                                             <div class="input-group date date-check-in" data-date="12-02-2017" data-date-format="mm-dd-yyyy">
-                                                <input name="date1" class="form-control" type="text" value="12-02-2017">
+                                                <input id="checkIn" name="checkIn" class="form-control" type="text" value="@Request["checkIn"]">
                                                 <span class="input-group-addon btn"><span class="ti-calendar" id="ti-calendar1"></span></span>
                                             </div>
                                         </li>
                                         <li>
                                             <h4>Check - Out</h4>
                                             <div class="input-group date date-check-out" data-date="12-02-2017" data-date-format="mm-dd-yyyy">
-                                                <input name="date2" class="form-control" type="text" value="12-02-2017">
+                                                <input id="checkOut" name="checkOut" class="form-control" type="text" value="@Request["checkOut"]">
                                                 <span class="input-group-addon btn"><span class="ti-calendar" id="ti-calendar2"></span></span>
                                             </div>
                                         </li>
@@ -118,133 +90,465 @@
                                                     <span>0</span>
                                                     <ul class="dropdown">
                                                         <li><a href="#">1</a></li>
-   
+
                                                     </ul>
                                                 </div>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="vk-btn-check">
-                                                <button type="submit" class="btn vk-btn-primary btn-block btn-check">Check  Availability</button>
+                                                <button type="submit" class="btn vk-btn-primary btn-block btn-check">
+                                                    Check  Availability
+                                                </button>
                                             </div>
                                         </li>
                                     </ul>
                                     <div class="clearfix"></div>
-                                </form>
+                                }
                                 <div class="clearfix"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <section class="site-content-area">
+                <!-- Introduction -->
+                <div class="vk-sparta-transparents-welcometo" style="padding-top: 80px">
+                    <div class="col-md-6">
+                        <div class="vk-transparents-welcometo-img">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="vk-transparents-welcometo-info">
+                            <div class="vk-dark-about-right-header">
+                                <h3>Welcome To</h3>
+                                <h2>Sparta Plaza Hotel</h2>
+                                <div class="clearfix"></div>
+                                <div class="vk-dark-about-border"></div>
+                            </div>
+                            <div class="vk-dark-about-right-content">
+                                <p>
+                                    Lorem Khaled Ipsum is a major key to success. Bless up. The weather is
+                                    amazing, walk with me through the pathway of more success. Take this
+                                    journey with me, Lion! Let me be clear, you have to make it through the
+                                    jungle to make it to paradise, that’s the key, Lion! Wraith talk. They key is
+                                    to have every key, the key to open every door. Put it this way, it took me twenty
+                                    five years to get these plants, twenty five years of blood sweat and tears,
+                                    and I’m never giving up, I’m just getting started.
+                                </p>
+                            </div>
+                            <div class="vk-dark-about-right-author">
+                                <p>Victor Henderson - <span>Manager</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- Services -->
+                <div class="vk-sparta-image">
                     <div class="container-fluid">
+                        <div class="vk-sparta-head-title">
+                            <h3>Our Services</h3>
+                            <h2>Modern & Professional</h2>
+                            <div class="vk-sparta-about-border"></div>
+                        </div>
                         <div class="row">
-                            <div class="vk-room-list-content">
-                                <div class="container">
-                                    <div class="vk-room-list-header">
-                                        <h3>Welcome To</h3>
-                                        <h2>Sparta Plaza Hotel</h2>
-                                        <div class="vk-sparta-about-border"></div>
+                            <div class="col-md-3 col-sm-6 vk-clear-padding">
+                                <div class="vk-sparta-image-item">
+                                    <div class="vk-sparta-item-img">
+                                        <a href="#">
+                                            <img src="~/CustomerLayout/images/01_01_default/vk-sparta-image/img1.jpg" alt="" class="img-responsive">
+                                        </a>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-10 col-md-offset-1">
-                                            <div class="vk-sparta-about-text">
-                                                <p>
-                                                    Sparta Plaza Hotel is a luxurious place. The weather is amazing,
-                                                    walk with me through the pathway of more success. Take this journey with me, Lion!
-                                                    Let me be clear, you have to make it through the jungle to make it to paradise,
-                                                    that’s the key, Lion! Wraith talk. They key is to have every key, the key to open
-                                                    every door. Put it this way, it took me twenty five years to get these plants,
-                                                    twenty five years of blood sweat and tears, and I’m never giving up, I’m just
-                                                    getting started.
-                                                </p>
-                                            </div>
-                                            <div class="vk-sparta-about-author">
-                                                <p>Victor Henderson - <span>Manager</span></p>
-                                            </div>
-                                        </div>
+                                    <div class="vk-iamge-item-caption">
+                                        <img src="~/CustomerLayout/images/01_01_default/vk-sparta-image-icon/spa2.png" alt="">
+                                        <h2>Spa</h2>
                                     </div>
-                                    <div class="row" style="margin-top:80px">
-                                        @{
-                                            //var search = Request["txtRoom"];
-                                            //if (string.IsNullOrEmpty(search))
-                                            //{
-                                            foreach (var item in Model)
-                                            {
-                                                <div class="roomitem item">
-                                                    <div class="col-md-6 vk-dark-our-room-item-left  vk-clear-padding">
-                                                        <div class="vk-dark-our-room-item-img">
-                                                            <img src="~/CustomerLayout/images/04_01_room_list/img/img.jpg" alt="" class="img-responsive">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 vk-dark-our-room-item-right vk-clear-padding">
-                                                        <div class="vk-dark-our-room-item-content">
-                                                            <h3><a href="#">@item.typeName</a></h3>
-                                                            <ul>
-                                                                <li><p><i class="fa fa-users" aria-hidden="true"></i> Max Occupancy <span> : @item.numberOfAdults</span></p></li>
-                                                                <li><p><i class="fa fa-info-circle" aria-hidden="true"></i> Details <span> : @item.description</span></p></li>
-                                                                @{
-                                                                    if (item.isPromoted == true)
-                                                                    {
-                                                                        if (item.Promotions != null)
-                                                                        {
-                                                                            //var discount = item.Promotion.roomDiscount * (decimal)100;
-                                                                            <li>
-                                                                                <p>
-                                                                                    <i class="fa fa-angle-double-up" aria-hidden="true"></i> Discount
-                                                                                    @*<span> : @string.Format("{0:N0}", discount) %</span>*@
-                                                                                </p>
-                                                                            </li>
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            <li>
-                                                                                <p>
-                                                                                    <i class="fa fa-angle-double-up" aria-hidden="true"></i> Discount
-                                                                                    <span> @*: @item.Promotion.promotionDescription*@</span>
-                                                                                </p>
-                                                                            </li>
-                                                                        }
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        <li><p><i class="fa fa-angle-double-up" aria-hidden="true"></i> Discount <span> : Not Available</span></p></li>
-                                                                    }
-
-                                                                }
-
-                                                            </ul>
-                                                            <div class="vk-dark-our-room-item-book">
-                                                                <div class="vk-dark-our-room-item-book-left">
-                                                                    <ul>
-                                                                        <li>
-                                                                            <p>Price: </p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p>$@item.price/ <span>Night</span></p>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="vk-dark-our-room-item-book-right">
-                                                                    <a href="@Url.Action("Details","Homes", new { id = item.typeId})"> Details <i class="fa fa-caret-right" aria-hidden="true"></i></a>
-                                                                </div>
-                                                                <div class="clearfix"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                            }
-                                        }
-
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6  vk-clear-padding">
+                                <div class="vk-sparta-image-item">
+                                    <div class="vk-sparta-item-img">
+                                        <a href="#">
+                                            <img src="~/CustomerLayout/images/01_01_default/vk-sparta-image/img2.jpg" alt="" class="img-responsive">
+                                        </a>
+                                    </div>
+                                    <div class="vk-iamge-item-caption">
+                                        <img src="~/CustomerLayout/images/01_01_default/vk-sparta-image-icon/food.png" alt="">
+                                        <h2>Restaurant</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 vk-clear-padding">
+                                <div class="vk-sparta-image-item">
+                                    <div class="vk-sparta-item-img">
+                                        <a href="#">
+                                            <img src="~/CustomerLayout/images/01_01_default/vk-sparta-image/img3.jpg" alt="" class="img-responsive">
+                                        </a>
+                                    </div>
+                                    <div class="vk-iamge-item-caption">
+                                        <img src="~/CustomerLayout/images/01_01_default/vk-sparta-image-icon/gym.png" alt="">
+                                        <h2>Gym</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 vk-clear-padding">
+                                <div class="vk-sparta-image-item">
+                                    <div class="vk-sparta-item-img">
+                                        <a href="#">
+                                            <img src="~/CustomerLayout/images/01_01_default/vk-sparta-image/img4.jpg" alt="" class="img-responsive">
+                                        </a>
+                                    </div>
+                                    <div class="vk-iamge-item-caption">
+                                        <img src="~/CustomerLayout/images/01_01_default/vk-sparta-image-icon/event.png" alt="">
+                                        <h2>Event</h2>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
                 <div class="clearfix"></div>
+
+                <!-- Review -->
+                <div class="vk-trasparents-testimonial" data-parallax="scroll" data-image-src="../CustomerLayout/images/01_05_transparents_1/background1.jpg">
+                    <div class="container">
+                        <div class="vk-sparta-head-title">
+                            <h3>Testimonial</h3>
+                            <h2>Customer Satisfaction</h2>
+                            <div class="vk-sparta-about-border"></div>
+                        </div>
+                        <div class="vk-sparta-testimonial-content">
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <div id="vk-owl-testimonial" class="vk-owl-one-item owl-carousel owl-theme">
+                                        <div class="item">
+                                            <div class="vk-sparta-star">
+                                                <p>
+                                                    <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                                                    <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                                                    <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                                                    <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                                                    <span><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                                                </p>
+                                            </div>
+                                            <div class="vk-sparta-testimonial-text">
+                                                <p>
+                                                    Lorem Khaled Ipsum is a major key to success. Bless up. The
+                                                    weather is amazing, walk with me through the pathway of more
+                                                    success. Take this journey with me, Lion! Let me be clear, you
+                                                    have to make it through the jungle to make it to paradise, that’s
+                                                    the key, Lion! Wraith talk. They key is to have every key,
+                                                    the key to open every door.
+                                                </p>
+                                            </div>
+                                            <div class="vk-sparta-testimonial-author">
+                                                <p>Adam Smith - <span>Traveller</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="vk-sparta-star">
+                                                <p>
+                                                    <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                                                    <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                                                    <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                                                    <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                                                    <span><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                                                </p>
+                                            </div>
+                                            <div class="vk-sparta-testimonial-text">
+                                                <p>
+                                                    Lorem Khaled Ipsum is a major key to success. Bless up. The
+                                                    weather is amazing, walk with me through the pathway of more
+                                                    success. Take this journey with me, Lion! Let me be clear, you
+                                                    have to make it through the jungle to make it to paradise, that’s
+                                                    the key, Lion! Wraith talk. They key is to have every key,
+                                                    the key to open every door.
+                                                </p>
+                                            </div>
+                                            <div class="vk-sparta-testimonial-author">
+                                                <p>Adam Smith - <span>Traveller</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="vk-sparta-star">
+                                                <p>
+                                                    <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                                                    <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                                                    <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                                                    <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                                                    <span><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                                                </p>
+                                            </div>
+                                            <div class="vk-sparta-testimonial-text">
+                                                <p>
+                                                    Lorem Khaled Ipsum is a major key to success. Bless up. The
+                                                    weather is amazing, walk with me through the pathway of more
+                                                    success. Take this journey with me, Lion! Let me be clear, you
+                                                    have to make it through the jungle to make it to paradise, that’s
+                                                    the key, Lion! Wraith talk. They key is to have every key,
+                                                    the key to open every door.
+                                                </p>
+                                            </div>
+                                            <div class="vk-sparta-testimonial-author">
+                                                <p>Adam Smith - <span>Traveller</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blog -->
+                <div class="vk-transparents-blogs">
+                    <div class="container">
+                        <div class="vk-sparta-head-title">
+                            <h3>Blog</h3>
+                            <h2>Latest Posts From Blog</h2>
+                            <div class="vk-sparta-about-border"></div>
+                        </div>
+                        <div class="vk-sparta-home-blog-content-destop">
+                            <div class="vk-sparta-home-blog-content">
+                                <div id="vk-owl-home-blog" class="vk-owl-three-dots owl-carousel owl-theme">
+                                    <div class="item">
+                                        <div class="vk-sparta-item-blog-content">
+                                            <div class="vk-item-img">
+                                                <a href="#">
+                                                    <img src="~/CustomerLayout/images/01_02_dark_background/blog/img6.jpg" alt="" class="img-responsive">
+                                                </a>
+                                            </div>
+                                            <div class="vk-item-text">
+                                                <h2>
+                                                    <a href="#">Why choose Sparta Plaza Hotel to travel this summer</a>
+                                                </h2>
+                                                <div class="time">26 June,2017</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="vk-sparta-item-blog-content">
+                                            <div class="vk-item-img">
+                                                <a href="#">
+                                                    <img src="~/CustomerLayout/images/01_02_dark_background/blog/img7.jpg" alt="" class="img-responsive">
+                                                </a>
+                                            </div>
+                                            <div class="vk-item-text">
+                                                <h2><a href="#">Why choose Sparta Plaza Hotel to travel this summer</a></h2>
+                                                <div class="time">26 June,2017</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="vk-sparta-item-blog-content">
+                                            <div class="vk-item-img">
+                                                <a href="#">
+                                                    <img src="~/CustomerLayout/images/01_02_dark_background/blog/img8.jpg" alt="" class="img-responsive">
+                                                </a>
+                                            </div>
+                                            <div class="vk-item-text">
+                                                <h2><a href="#">Why choose Sparta Plaza Hotel to travel this summer</a></h2>
+                                                <div class="time">26 June,2017</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="vk-sparta-item-blog-content">
+                                            <div class="vk-item-img">
+                                                <a href="#">
+                                                    <img src="~/CustomerLayout/images/01_02_dark_background/blog/img6.jpg" alt="" class="img-responsive">
+                                                </a>
+                                            </div>
+                                            <div class="vk-item-text">
+                                                <h2><a href="#">Why choose Sparta Plaza Hotel to travel this summer</a></h2>
+                                                <div class="time">26 June,2017</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="vk-sparta-item-blog-content">
+                                            <div class="vk-item-img">
+                                                <a href="#">
+                                                    <img src="~/CustomerLayout/images/01_02_dark_background/blog/img7.jpg" alt="" class="img-responsive">
+                                                </a>
+                                            </div>
+                                            <div class="vk-item-text">
+                                                <h2><a href="#">Why choose Sparta Plaza Hotel to travel this summer</a></h2>
+                                                <div class="time">26 June,2017</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="vk-sparta-item-blog-content">
+                                            <div class="vk-item-img">
+                                                <a href="#">
+                                                    <img src="~/CustomerLayout/images/01_02_dark_background/blog/img8.jpg" alt="" class="img-responsive">
+                                                </a>
+                                            </div>
+                                            <div class="vk-item-text">
+                                                <h2><a href="#">Why choose Sparta Plaza Hotel to travel this summer</a></h2>
+                                                <div class="time">26 June,2017</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="vk-sparta-item-blog-content">
+                                            <div class="vk-item-img">
+                                                <a href="#">
+                                                    <img src="~/CustomerLayout/images/01_02_dark_background/blog/img6.jpg" alt="" class="img-responsive">
+                                                </a>
+                                            </div>
+                                            <div class="vk-item-text">
+                                                <h2><a href="#">Why choose Sparta Plaza Hotel to travel this summer</a></h2>
+                                                <div class="time">26 June,2017</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="vk-sparta-item-blog-content">
+                                            <div class="vk-item-img">
+                                                <a href="#"><img src="~/CustomerLayout/images/01_02_dark_background/blog/img7.jpg" alt="" class="img-responsive"></a>
+                                            </div>
+                                            <div class="vk-item-text">
+                                                <h2><a href="#">Why choose Sparta Plaza Hotel to travel this summer</a></h2>
+                                                <div class="time">26 June,2017</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="vk-sparta-item-blog-content">
+                                            <div class="vk-item-img">
+                                                <a href="#"><img src="~/CustomerLayout/images/01_02_dark_background/blog/img8.jpg" alt="" class="img-responsive"></a>
+                                            </div>
+                                            <div class="vk-item-text">
+                                                <h2><a href="#">Why choose Sparta Plaza Hotel to travel this summer</a></h2>
+                                                <div class="time">26 June,2017</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vk-sparta-home-blog-content-mobile">
+                            <div class="item">
+                                <div class="vk-sparta-item-blog-content">
+                                    <div class="vk-item-img">
+                                        <a href="#"><img src="~/CustomerLayout/images/01_02_dark_background/blog/img6.jpg" alt="" class="img-responsive"></a>
+                                    </div>
+                                    <div class="vk-item-text">
+                                        <h2><a href="#">Why choose Sparta Plaza Hotel to travel this summer</a></h2>
+                                        <div class="time">26 June,2017</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="vk-sparta-item-blog-content">
+                                    <div class="vk-item-img">
+                                        <a href="#"><img src="~/CustomerLayout/images/01_02_dark_background/blog/img7.jpg" alt="" class="img-responsive"></a>
+                                    </div>
+                                    <div class="vk-item-text">
+                                        <h2><a href="#">Why choose Sparta Plaza Hotel to travel this summer</a></h2>
+                                        <div class="time">26 June,2017</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="vk-sparta-item-blog-content">
+                                    <div class="vk-item-img">
+                                        <a href="#"><img src="~/CustomerLayout/images/01_02_dark_background/blog/img8.jpg" alt="" class="img-responsive"></a>
+                                    </div>
+                                    <div class="vk-item-text">
+                                        <h2><a href="#">Why choose Sparta Plaza Hotel to travel this summer</a></h2>
+                                        <div class="time">26 June,2017</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Gallery -->
+                <div class="vk-sparta-image-gallery">
+                    <div class="vk-sparta-image-gallery-img">
+                        <div id="lightgallery">
+                            <div class="col-md-2 col-md-6 col-xs-6 vk-clear-padding" data-src="../CustomerLayout/images/01_01_default/gallery/1-1.jpg">
+                                <div class="vk-gallery-item-img">
+                                    <img src="../CustomerLayout/images/01_01_default/gallery/1.jpg" alt="" class="img-responsive">
+                                    <div class="vk-item-caption">
+                                        <div class="featured-slider-overlay"></div>
+                                        <div class="vk-item-caption-text">
+                                            <h2>Master Chef</h2>
+                                            <h4>Restaurant</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2  col-md-6 col-xs-6 vk-clear-padding" data-src="../CustomerLayout/images/01_01_default/gallery/1-2.jpg">
+                                <div class="vk-gallery-item-img">
+                                    <img src="../CustomerLayout/images/01_01_default/gallery/2.jpg" alt="" class="img-responsive">
+                                    <div class="vk-item-caption">
+                                        <div class="featured-slider-overlay"></div>
+                                        <div class="vk-item-caption-text">
+                                            <h2>Master Chef</h2>
+                                            <h4>Restaurant</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-md-6 col-xs-6 vk-clear-padding" data-src="../CustomerLayout/images/01_01_default/gallery/1-3.jpg">
+                                <div class="vk-gallery-item-img">
+                                    <img src="../CustomerLayout/images/01_01_default/gallery/3.jpg" alt="" class="img-responsive">
+                                    <div class="vk-item-caption">
+                                        <div class="featured-slider-overlay"></div>
+                                        <div class="vk-item-caption-text">
+                                            <h2>Master Chef</h2>
+                                            <h4>Restaurant</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-md-6 col-xs-6 vk-clear-padding" data-src="../CustomerLayout/images/01_01_default/gallery/1-4.jpg">
+                                <div class="vk-gallery-item-img">
+                                    <img src="../CustomerLayout/images/01_01_default/gallery/4.jpg" alt="" class="img-responsive">
+                                    <div class="vk-item-caption">
+                                        <div class="featured-slider-overlay"></div>
+                                        <div class="vk-item-caption-text">
+                                            <h2>Master Chef</h2>
+                                            <h4>Restaurant</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-md-6 col-xs-6 vk-clear-padding" data-src="../CustomerLayout/images/01_01_default/gallery/1-5.jpg">
+                                <div class="vk-gallery-item-img">
+                                    <img src="../CustomerLayout/images/01_01_default/gallery/5.jpg" alt="" class="img-responsive">
+                                    <div class="vk-item-caption">
+                                        <div class="featured-slider-overlay"></div>
+                                        <div class="vk-item-caption-text">
+                                            <h2>Master Chef</h2>
+                                            <h4>Restaurant</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-md-6 col-xs-6 vk-clear-padding" data-src="../CustomerLayout/images/01_01_default/gallery/1-6.jpg">
+                                <div class="vk-gallery-item-img">
+                                    <img src="../CustomerLayout/images/01_01_default/gallery/6.jpg" alt="" class="img-responsive">
+                                    <div class="vk-item-caption">
+                                        <div class="featured-slider-overlay"></div>
+                                        <div class="vk-item-caption-text">
+                                            <h2>Master Chef</h2>
+                                            <h4>Restaurant</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vk-sparta-image-gallery-text">
+                        <span><a href="02_03_gallery_grid_full_width.html">GALLERY</a></span>
+                    </div>
+                </div>
+                @*<div class="clearfix"></div>*@
             </div>
         </div>
     </div>

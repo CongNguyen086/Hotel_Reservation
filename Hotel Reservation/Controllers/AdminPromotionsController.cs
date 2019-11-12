@@ -18,7 +18,6 @@ namespace Hotel_Reservation.Controllers
         public ActionResult Index()
         {
             var promotions = db.Promotions.Include(p => p.Room_Catalog);
-            var pro = db.Promotions.Where(p => p.Room_Catalog.numberOfAdults == 4);
             return View(promotions.ToList());
         }
 

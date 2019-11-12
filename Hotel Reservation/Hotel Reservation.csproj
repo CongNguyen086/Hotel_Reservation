@@ -148,6 +148,7 @@
     <Content Include="Assets\js\demo\chart-bar-demo.js" />
     <Content Include="Assets\js\demo\chart-pie-demo.js" />
     <Content Include="Assets\js\demo\datatables-demo.js" />
+    <Content Include="Assets\js\demo\self-define.js" />
     <Content Include="Assets\js\sb-admin.js" />
     <Content Include="Assets\js\sb-admin.min.js" />
     <Content Include="Assets\libs\angular-1.7.2\angular-animate.js" />
@@ -4943,6 +4944,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="HtmlPage1.html" />
+    <Content Include="img\DB_room_3 .jpg" />
+    <Content Include="img\DT_room_1.jpg" />
+    <Content Include="img\DB_room_1.jpg" />
+    <Content Include="img\ABC_room_1.jpg" />
+    <Content Include="img\ABC_room_3.jpg" />
+    <Content Include="img\STD_room_3.jpg" />
+    <Content Include="img\DT_room_3.jpg" />
+    <Content Include="img\SD_room_3.jpg" />
+    <Content Include="img\SD_room_1.jpg" />
+    <Content Include="img\STD_room_1.jpg" />
+    <Content Include="img\img_2.1.jpg" />
     <Content Include="Models\ModelContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelContext.edmx</DependentUpon>
@@ -5917,6 +5929,8 @@
     <Content Include="Views\Rooms\Index.cshtml" />
     <Content Include="Views\PayPals\Success.cshtml" />
     <Content Include="Views\PayPals\Failure.cshtml" />
+    <Content Include="Views\Customer_Pages\Restaurant.cshtml" />
+    <Content Include="Views\Reservations\SelectRoom.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -5927,8 +5941,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Assets\libs\angular-1.7.2\i18n\ngLocale\" />
-    <Folder Include="img\" />
-    <Folder Include="Views\Reservations\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -78,9 +78,9 @@
                                     }
                                     else
                                     {*@
-                                        <label>$</label> @Html.DisplayFor(modelItem => item.price)
-                                    @*}
-                                }*@
+                                <label>$</label> @Html.DisplayFor(modelItem => item.price)
+                                @*}
+                                    }*@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.description)
@@ -91,7 +91,7 @@
                             <td>
                                 <label class="adultNum">
                                     @Html.DisplayFor(modelItem => item.numberOfAdults)&nbsp;
-                                </label> 
+                                </label>
                                 <label>, </label>
                                 <label class="childNum">
                                     @Html.DisplayFor(modelItem => item.numberOfChild)&nbsp;
@@ -145,43 +145,7 @@
 </div>
 
 <script src="~/Assets/libs/jQuery/dist/jquery.js"></script>
+<script src="~/Assets/js/demo/self-define.js"></script>
 <script>
-    function PluralDetect() {
-        let adultIdCount = 0
-        let childIdCount = 0
-        $('.adultNum').each(function () {
-            let adult = parseInt($(this).text())
-            adultIdCount++
-            if (adult > 1) {
-                let adultId = "adultLbl" + adultIdCount.toString()
-                let adultLabel = $(`<label id=${adultId}></label>`).text('Adults')
-                $(this).after(adultLabel)
-                console.log('adults')
-            } else {
-                let adultId = "adultLbl" + adultIdCount.toString()
-                let adultLabel = $(`<label id=${adultId}></label>`).text('Adult')
-                $(this).after(adultLabel)
-                console.log('adult')
-            }
-            console.log(this)
-        })
-
-        $('.childNum').each(function () {
-            let child = parseInt($(this).text())
-            childIdCount++
-            if (child > 1) {
-                let childId = "childLbl" + childIdCount.toString()
-                let childLabel = $(`<label id=${childId}></label>`).text('Children')
-                $(this).after(childLabel)
-                console.log('children')
-            } else {
-                let childId = "adultLbl" + childIdCount.toString()
-                let childLabel = $(`<label id=${childId}></label>`).text('Child')
-                $(this).after(childLabel)
-                console.log('child')
-            }
-        })
-    }
-
-    $(document).ready(PluralDetect())
+    $(document).ready(PluralDetect('.adultNum', '.childNum'))
 </script>

@@ -1,0 +1,222 @@
+﻿@using Hotel_Reservation.Models
+@model List<RoomCatalog_Promotion>
+
+@{
+    ViewBag.Title = "SelectRoom";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+<section class="site-content-area">
+    <div class="vk-gallery-grid-full-banner">
+        <div class="vk-about-banner">
+            <div class="vk-about-banner-destop">
+                <div class="vk-banner-img"></div>
+                <div class="vk-about-banner-caption">
+                    <h2>Reservation</h2>
+                    <h3>
+                        <a href="#">Reservation</a>
+                        <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                        <a href="#">Select room</a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="vk-select-room-content">
+        <div class="container">
+            <div class="vk-select-room-breakcrumb">
+                <ul>
+                    <li class="active">
+                        <a href="javascript:void(0);">1. Select Room</a>
+                        <span class="round-tabs five">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">2. Make A Reservation</a>
+                        <span class="round-tabs five">
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">3. Confirmation</a>
+                        <span class="round-tabs five">
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row">
+                <div class="vk-select-room-info">
+                    <div class="col-md-8">
+                        @foreach (var room in Model)
+                        {
+                            <div class="vk-select-room-info-item">
+                                <div class="vk-select-room-item-img ">
+                                    @{
+                                        var image_Details = room.image.FirstOrDefault(i => i.imageOrder == 2);
+                                    }
+                                    <img src="@image_Details.image" alt="" style="max-width:210px" />
+                                </div>
+                                <div class="vk-select-room-item-info">
+                                    <h2>@room.typeName</h2>
+                                    <div class="vk-select-room-item-body">
+                                        <ul>
+                                            <li>
+                                                <p><i class="fa fa-bed" aria-hidden="true"></i> Bed: <span>2 King Bed</span></p>
+                                            </li>
+                                            <li>
+                                                <p>
+                                                    <i class="fa fa-users" aria-hidden="true"></i> Occupancy:
+                                                    <span class="adultNum"> @room.numberOfAdults&nbsp;</span>
+                                                    <span>, </span>
+                                                    <span class="childNum">@room.numberOfChild&nbsp;</span>
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <p><i class="fa fa-binoculars" aria-hidden="true"></i> View: <span>Lake View</span></p>
+                                            </li>
+                                            <li>
+                                                <p>
+                                                    @if (room.promotionDescription != null)
+                                                    {
+                                                        <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+                                                        <span style="color: #b0914f;font-weight:bold">
+                                                            &nbsp;@room.promotionDescription
+                                                        </span>
+                                                    }
+                                                </p>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="vk-select-room-item-footer">
+                                        <div class="vk-select-room-footer-left">
+                                            <ul>
+                                                <li>
+                                                    Price:
+                                                </li>
+                                                <li>
+                                                    <p>$@string.Format("{0:N0}", room.price)/ <span>NIGHT</span></p>
+                                                </li>
+                                            </ul>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="vk-select-room-footer-right">
+                                            <h4><a href="@Url.Action()" class="select"> SELECT</a></h4>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="vk-select-room-pagination">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-angle-left" aria-hidden="true"></i> PREV</a></li>
+                                <li><a href="#">1</a></li>
+                                <li class="active"><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">NEXT <i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <form action="http://html.vikitheme.com/sparta/action.php" class="form-horizontal">
+                        <div class="col-md-4">
+                            <div class="vk-room-details-content-right" style="background:#b0914f;padding-bottom:unset">
+                                <h3 style="border-bottom:unset">Your Reservation</h3>
+                                <div class="vk-select-room1 vk-select-room-overide"
+                                     style="margin: 10px 30px 0 30px;padding: 10px 0 10px 0;">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <h2>No.1: Superior Double Room</h2>
+                                        </div>
+                                        <div class="col-md-2" style="padding-top:5px;text-align: right">
+                                            <a href="#">
+                                                <i class="fa fa-times-circle-o remove-btn" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <!-- Adults input -->
+                                        <div class="col-md-6">
+                                            <label class="control-label" style="font-size: 14px">Adults</label>
+                                            <select id="night" class="form-control">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                            </select>
+                                        </div>
+                                        <!-- Children input -->
+                                        <div class="col-md-6">
+                                            <label class="control-label" style="font-size: 14px">Children</label>
+                                            <select id="room" class="form-control">
+                                                <option>1</option>
+                                                <option>2</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="background-color:#8c7033;padding-bottom:20px">
+                                    <!-- Date input -->
+                                    <div class="form-group date-input">
+                                        <div class="col-md-12">
+                                            <label class="control-label">CHECK - IN</label>
+                                            <div class="input-group date date-check-in" data-date="12-02-2017" data-date-format="mm-dd-yyyy">
+                                                <input name="date1" class="form-control" type="text" value="12-02-2017">
+                                                <span class="input-group-addon btn"><span class="ti-calendar" id="ti-calendar1"></span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group date-input">
+                                        <div class="col-md-12">
+                                            <label class="control-label date-check-out">CHECK - OUT</label>
+                                            <div class="input-group date date-check-out" data-date="12-02-2017" data-date-format="mm-dd-yyyy">
+                                                <input name="date2" class="form-control" type="text" value="12-02-2017">
+                                                <span class="input-group-addon btn"><span class="ti-calendar" id="ti-calendar2"></span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Button -->
+                                    <div class="booking-wrapper">
+                                        <a href="#" class=" vk-btn vk-btn-transparent
+                                                        vk-border-brown vk-btn-l vk-btn-default
+                                                        text-uppercase booking-btn">
+                                            <span class="title">Make booking</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/Assets/libs/jQuery/dist/jquery.js"></script>
+<script src="~/Assets/js/demo/self-define.js"></script>
+<script>
+    function submitForm() {
+        $('.booking-btn').click(function (e) {
+            e.preventDefault();
+            var form = $(this).closest('form')
+            form.submit()
+        })
+    }
+    $(document).ready(() => {
+        PluralDetect('.adultNum', '.childNum')
+        submitForm()
+        $('.select').each(function () {
+
+        })
+    })
+</script>
+

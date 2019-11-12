@@ -1,283 +1,124 @@
-﻿@using Hotel_Reservation.Models
-@model List<RoomCatalog_Promotion>
+﻿@model IEnumerable<Hotel_Reservation.Models.Room_Catalog>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
 }
 
-<div id="main-content" class="site-main-content">
-    <div id="home-main-content" class="site-home-main-content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="vk-sparta-center-logo-slide">
-                    <div class="vk-slide">
-                        <div id="owl-slide-home" class="owl-carousel owl-theme">
-                            <div class="item">
-                                <div class="vk-item-slide">
-                                    <img src="~/CustomerLayout/images/01_05_transparents_1/banner21.jpg" alt="" class="img-responsive">
-                                    <div class="vk-slide-caption">
-                                        <div class="container">
-                                            <h3 class="animated fadeInDown slide-delay-1">Swimming Pool</h3>
-                                            <h2 class="animated fadeInUp slide-delay-2">Sparta Plaza Hotel</h2>
-                                            <div class="clearfix"></div>
-                                            @*<div class="vk-slide-cation-btn">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">OUR ROOMS</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">BOOK NOW <span class="ti-arrow-right"></span></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>*@
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="vk-item-slide">
-                                    <img src="~/CustomerLayout/images/01_05_transparents_1/banner20.jpg" alt="" class="img-responsive">
-                                    <div class="vk-slide-caption">
-                                        <div class="container">
-                                            <h3 class="animated fadeInDown slide-delay-1">Swimming Pool</h3>
-                                            <h2 class="animated fadeInUp slide-delay-2">Sparta Plaza Hotel</h2>
-                                            <div class="clearfix"></div>
-                                            @*<div class="vk-slide-cation-btn">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">OUR ROOMS</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">BOOK NOW <span class="ti-arrow-right"></span></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>*@
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="vk-item-slide">
-                                    <img src="~/CustomerLayout/images/01_05_transparents_1/banner23.jpg" alt="" class="img-responsive">
-                                    <div class="vk-slide-caption">
-                                        <div class="container">
-                                            <h3 class="animated fadeInDown slide-delay-1">Swimming Pool</h3>
-                                            <h2 class="animated fadeInUp slide-delay-2">Sparta Plaza Hotel</h2>
-                                            <div class="clearfix"></div>
-                                            @*<div class="vk-slide-cation-btn">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">OUR ROOMS</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">BOOK NOW <span class="ti-arrow-right"></span></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>*@
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="vk-booking-transparent-1">
-                            <div class="container">
-                                @using (Ajax.BeginForm("Index", "Rooms",
-                                    new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "Get" }, new { @class = "form-horizontal  booking-hotel-all" })
-                                    )
-                                {
-                                    <ul>
-                                        <li>
-                                            <h4>Check - In</h4>
-                                            <div class="input-group date date-check-in" data-date="12-02-2017" data-date-format="mm-dd-yyyy">
-                                                <input id="checkIn" name="checkIn" class="form-control" type="text" value="@Request["checkIn"]">
-                                                <span class="input-group-addon btn"><span class="ti-calendar" id="ti-calendar1"></span></span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <h4>Check - Out</h4>
-                                            <div class="input-group date date-check-out" data-date="12-02-2017" data-date-format="mm-dd-yyyy">
-                                                <input id="checkOut" name="checkOut" class="form-control" type="text" value="@Request["checkOut"]">
-                                                <span class="input-group-addon btn"><span class="ti-calendar" id="ti-calendar2"></span></span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <h4>Adults</h4>
-                                            <div class="wrap-select">
-                                                <div id="dd" class="wrapper-dropdown-3">
-                                                    <span>1</span>
-                                                    <ul class="dropdown">
-                                                        <li><a href="#">2</a></li>
-                                                        <li><a href="#">3</a></li>
-                                                        <li><a href="#">4</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <h4>Children</h4>
-                                            <div class="wrap-select">
-                                                <div id="dda" class="wrapper-dropdown-3">
-                                                    <span>0</span>
-                                                    <ul class="dropdown">
-                                                        <li><a href="#">1</a></li>
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="vk-btn-check">
-                                                <button type="submit" class="btn vk-btn-primary btn-block btn-check">
-                                                    Check  Availability
-                                                </button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                }
-                                <div class="clearfix"></div>
-                            </div>
+<section class="site-content-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="vk-gallery-grid-full-banner">
+                <div class="vk-about-banner">
+                    <div class="vk-about-banner-destop">
+                        <div class="vk-banner-img"></div>
+                        <div class="vk-about-banner-caption">
+                            <h2>Our Room</h2>
+                            @*<h3 style="color: white">
+                                Luxurious & Convenient
+                            </h3>*@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <section class="site-content-area">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="vk-room-list-content" style="padding-top: 80px">
-                                <div class="container">
-                                    <div class="vk-room-list-header">
-                                        <h3>Welcome To</h3>
-                                        <h2>Sparta Plaza Hotel</h2>
-                                        <div class="vk-sparta-about-border"></div>
+            <div class="vk-room-list-content">
+                <div class="container">
+                    <div class="vk-room-list-header">
+                        <h2>Luxurious & Convenient</h2>
+                        <div class="vk-room-list-border"></div>
+                    </div>
+                    <div class="row" style="margin-top:80px">
+                        @{
+                            //var search = Request["txtRoom"];
+                            //if (string.IsNullOrEmpty(search))
+                            //{
+                            foreach (var room in Model)
+                            {
+                                <div class="roomitem item">
+                                    <div class="col-md-6 vk-dark-our-room-item-left  vk-clear-padding">
+                                        <div class="vk-dark-our-room-item-img">
+                                            @{
+                                                var image_Details = room.Image_Details.FirstOrDefault(i => i.imageOrder == 1);
+                                                var promotion = room.Promotions
+                                                                .FirstOrDefault(p => p.appliedRoomType.Equals(room.typeId) && p.promotionStatus == "Processing");
+                                            }
+                                            <img src="@image_Details.image" class="img-responsive" />
+                                        </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-10 col-md-offset-1">
-                                            <div class="vk-sparta-about-text">
-                                                <p>
-                                                    Sparta Plaza Hotel is a luxurious place. The weather is amazing,
-                                                    walk with me through the pathway of more success. Take this journey with me, Lion!
-                                                    Let me be clear, you have to make it through the jungle to make it to paradise,
-                                                    that’s the key, Lion! Wraith talk. They key is to have every key, the key to open
-                                                    every door. Put it this way, it took me twenty five years to get these plants,
-                                                    twenty five years of blood sweat and tears, and I’m never giving up, I’m just
-                                                    getting started.
-                                                </p>
-                                            </div>
-                                            <div class="vk-sparta-about-author">
-                                                <p>Victor Henderson - <span>Manager</span></p>
+                                    <div class="col-md-6 vk-dark-our-room-item-right vk-clear-padding">
+                                        <div class="vk-dark-our-room-item-content">
+                                            <h3><a href="#">@room.typeName</a></h3>
+                                            <ul>
+                                                <li>
+                                                    <p>
+                                                        <i class="fa fa-users" aria-hidden="true"></i>
+                                                        Max Occupancy : <span class="adultNum">@room.numberOfAdults&nbsp;</span>
+                                                        <span>, </span>
+                                                        <span class="childNum">@room.numberOfChild&nbsp;</span>
+                                                    </p>
+                                                </li>
+                                                <li><p><i class="fa fa-info-circle" aria-hidden="true"></i> Info <span> : @room.description</span></p></li>
+                                                <li>
+                                                    <p>
+                                                        @if (promotion != null)
+                                                        {
+                                                            <i class="fa fa-angle-double-up" aria-hidden="true" style="margin-left: 2px"></i>
+                                                            <label style="color: #b0914f">
+                                                                @promotion.promotionDescription
+                                                            </label>
+                                                        }
+                                                    </p>
+                                                </li>
+                                            </ul>
+
+                                            @*<div class="room-details">
+                                                    <a href="@Url.Action("Details","Homes", new { id = room.typeId})"> Details <i class="fa fa-caret-right" aria-hidden="true"></i></a>
+                                                </div>*@
+
+                                            <div class="vk-dark-our-room-item-book" style="margin-top:50px">
+                                                <div class="vk-dark-our-room-item-book-left">
+                                                    <ul>
+                                                        <li>
+                                                            <p>Price: </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>$@string.Format("{0:N0}", room.price)/ <span>Night</span></p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="vk-dark-our-room-item-book-right">
+                                                    <h4>
+                                                        @{
+                                                            var promotionId = promotion != null ? promotion.promotionId : null;
+                                                        }
+                                                        <a href="@Url.Action("Details","Homes", new { id = room.typeId, promotionId = promotionId })" class="btn-book-now">
+                                                            &nbsp;DETAILS
+                                                        </a>
+                                                    </h4>
+                                                    @*<div class="clearfix"></div>*@
+                                                </div>
+                                                <div class="clearfix"></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row" style="margin-top:80px">
-                                        @{
-                                            //var search = Request["txtRoom"];
-                                            //if (string.IsNullOrEmpty(search))
-                                            //{
-                                            foreach (RoomCatalog_Promotion room in Model)
-                                            {
-                                                <div class="roomitem item">
-                                                    <div class="col-md-6 vk-dark-our-room-item-left  vk-clear-padding">
-                                                        <div class="vk-dark-our-room-item-img">
-                                                            @{
-                                                                var image_Details = room.image.Where(i => i.imageOrder == 1).FirstOrDefault();
-                                                            }
-                                                            <img src="@image_Details.image" class="img-responsive" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 vk-dark-our-room-item-right vk-clear-padding">
-                                                        <div class="vk-dark-our-room-item-content">
-                                                            <h3><a href="#">@room.typeName</a></h3>
-                                                            <ul>
-                                                                <li><p><i class="fa fa-users" aria-hidden="true"></i>Max Occupancy <span> : @room.numberOfAdults</span></p></li>
-                                                                <li><p><i class="fa fa-info-circle" aria-hidden="true"></i> Info <span> : @room.description</span></p></li>
-                                                                @{
-                                                                    if (room.roomDiscount != null)
-                                                                    {
-                                                                        var discount = room.roomDiscount * (decimal)100;
-                                                                        <li>
-                                                                            <p>
-                                                                                <i class="fa fa-angle-double-up" aria-hidden="true" style="margin-left: 2px"></i>
-                                                                                <label style="color: #b0914f">
-                                                                                    Discount @string.Format("{0:N0}", discount)% per room
-                                                                                </label>
-                                                                                @*<span> : @string.Format("{0:N0}", discount) % per room</span>*@
-                                                                            </p>
-                                                                        </li>
-                                                                    }
-                                                                    else if (room.roomDiscount == null && room.appliedRoomType != null)
-                                                                    {
-                                                                        <li>
-                                                                            <p>
-                                                                                <i class="fa fa-angle-double-up" aria-hidden="true" style="margin-left: 2px"></i>
-                                                                                <label style="color: #b0914f">@room.promotionDescription</label>
-                                                                            </p>
-                                                                        </li>
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        <li><p style="height:40px"></p></li>
-                                                                    }
-                                                                }
-
-                                                            </ul>
-
-                                                            @*<div class="room-details">
-                                                                    <a href="@Url.Action("Details","Homes", new { id = room.typeId})"> Details <i class="fa fa-caret-right" aria-hidden="true"></i></a>
-                                                                </div>*@
-
-                                                            <div class="vk-dark-our-room-item-book" style="margin-top:50px">
-                                                                <div class="vk-dark-our-room-item-book-left">
-                                                                    <ul>
-                                                                        <li>
-                                                                            <p>Price: </p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p>$@string.Format("{0:N0}", room.price)/ <span>Night</span></p>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="vk-dark-our-room-item-book-right">
-                                                                    <h4>
-                                                                        <a href="@Url.Action("Details","Homes", new { id = room.typeId, promotionId = room.promotionId })" class="btn-book-now">
-                                                                            &nbsp;BOOK NOW
-                                                                        </a>
-                                                                    </h4>
-                                                                    @*<div class="clearfix"></div>*@
-                                                                </div>
-                                                                <div class="clearfix"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                            }
-                                        }
-
-                                    </div>
+                                    <div class="clearfix"></div>
                                 </div>
-                            </div>
-                        </div>
+                            }
+                        }
+
                     </div>
-                </section>
-                <div class="clearfix"></div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
+<div class="clearfix"></div>
 
-@*<script src="~/Assets/libs/jQuery/dist/jquery.js"></script>
+<script src="~/Assets/libs/jQuery/dist/jquery.js"></script>
+<script src="~/Assets/js/demo/self-define.js"></script>
 <script>
-    $(document).ready(() => {
-        $('.btn-book-now').click(() => {
-            $.ajax({
-                type: 'POST',
-                data: model
-            })
-        })
-    })
-</script>*@
+    $(document).ready(PluralDetect('.adultNum', '.childNum'))
+</script>
 
 

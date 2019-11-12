@@ -52,7 +52,7 @@
     <div class="form-group" style="display:none">
         @Html.LabelFor(model => model.quantityOfRooms, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.promotionId, new { @Value = 0 })
+            @Html.TextBoxFor(model => model.quantityOfRooms, new { @Value = 0 })
         </div>
     </div>
 
@@ -81,9 +81,9 @@
     </div>
 
     <div class="form-group" style="display:none">
-        @Html.LabelFor(model => model.promotionId, "Promotion ID", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.isPromoted, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.promotionId, new { @Value = "" })
+            @Html.TextBoxFor(model => model.isPromoted, new { @Value = false })
         </div>
     </div>
 

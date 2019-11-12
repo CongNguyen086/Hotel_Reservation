@@ -15,15 +15,9 @@ namespace Hotel_Reservation.Controllers
         private ModelContext db = new ModelContext();
 
         // GET: Homes
-        public ActionResult Index(string txtRoom)
+        public ActionResult Index()
         {
-            var room_Catalogs = db.Room_Catalogs.Include(r => r.Promotions).Where(m => m.catalogStatus == "Active");
-            if (!string.IsNullOrEmpty(txtRoom))
-            {
-                room_Catalogs = room_Catalogs.Where(b => b.typeName.Contains(txtRoom));
-            }
-
-            return View(room_Catalogs.ToList());
+            return View();
         }
 
         // GET: Homes/Details/5
