@@ -331,8 +331,10 @@ jQuery(document).ready(function ($) {
     var bugun = moment(date).format("DD/MM/YYYY");
     var bugun2 = moment(date2).format("DD/MM/YYYY");
 
-    var date_input1=$('input[name="checkIn"]'); //our date input has the name "date"
-    var date_input2=$('input[name="checkOut"]'); //our date input has the name "date"
+    var date_input1 = $('input[name="checkInDefault"]'); //our date input has the name "date"
+    var date_input2 = $('input[name="checkOutDefault"]'); //our date input has the name "date"
+    var date_input3 = $('input[name="checkIn"]'); //our date input has the name "date"
+    var date_input4 = $('input[name="checkOut"]'); //our date input has the name "date"
     var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
     var options={
         container: container,
@@ -346,6 +348,10 @@ jQuery(document).ready(function ($) {
     });
     date_input2.val(bugun2);
     date_input2.datepicker(options).on('focus', function(date_input){
+    });
+    date_input3.datepicker(options).on('focus', function (date_input) {
+    });
+    date_input4.datepicker(options).on('focus', function (date_input) {
     });
 
 

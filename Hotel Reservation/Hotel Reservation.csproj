@@ -5855,7 +5855,7 @@
     <Compile Include="Models\Admin.cs">
       <DependentUpon>ModelContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\BookingItem.cs" />
     <Compile Include="Models\Image_Detail.cs">
       <DependentUpon>ModelContext.tt</DependentUpon>
     </Compile>
@@ -5931,6 +5931,7 @@
     <Content Include="Views\PayPals\Failure.cshtml" />
     <Content Include="Views\Customer_Pages\Restaurant.cshtml" />
     <Content Include="Views\Reservations\SelectRoom.cshtml" />
+    <Content Include="Views\Reservations\ViewBooking.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

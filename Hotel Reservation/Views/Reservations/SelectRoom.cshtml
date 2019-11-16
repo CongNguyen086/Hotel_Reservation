@@ -1,9 +1,18 @@
-﻿@using Hotel_Reservation.Models
-@model List<RoomCatalog_Promotion>
+﻿@*@using Hotel_Reservation.Models
+@model List<RoomCatalog_Promotion>*@
+@model Hotel_Reservation.Models.BookingViewModel
 
 @{
     ViewBag.Title = "SelectRoom";
     Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+    var checkIn = DateTime.Now.ToString("dd/MM/yyyy");
+    var checkOut = DateTime.Now.ToString("dd/MM/yyyy");
+    if (Session["CheckIn"] != null)
+    {
+        checkIn = ((DateTime)Session["CheckIn"]).ToString("dd/MM/yyyy");
+        checkOut = ((DateTime)Session["CheckOut"]).ToString("dd/MM/yyyy");
+    }
+    var activeRoomList = (List<Hotel_Reservation.Models.RoomCatalog_Promotion>)ViewData["ActiveRoomList"];
 }
 
 <section class="site-content-area">
@@ -50,7 +59,7 @@
             <div class="row">
                 <div class="vk-select-room-info">
                     <div class="col-md-8">
-                        @foreach (var room in Model)
+                        @foreach (var room in activeRoomList)
                         {
                             <div class="vk-select-room-info-item">
                                 <div class="vk-select-room-item-img ">
@@ -104,7 +113,13 @@
                                             <div class="clearfix"></div>
                                         </div>
                                         <div class="vk-select-room-footer-right">
-                                            <h4><a href="@Url.Action()" class="select"> SELECT</a></h4>
+                                            <h4>
+                                                <a href="@Url.Action("CreateBookingItem","Reservations",new { id = room.typeId, name = room.typeName })" 
+                                                   onclick="addNewBookingRoom(this.href); return false;" class="select"> 
+                                                    &nbsp;SELECT
+                                                    <span style="display:none" class="room-name"></span>
+                                                </a>
+                                            </h4>
                                             <div class="clearfix"></div>
                                         </div>
                                         <div class="clearfix"></div>
@@ -112,7 +127,7 @@
                                 </div>
                             </div>
                         }
-
+                        <!-- Page List -->
                         <div class="vk-select-room-pagination">
                             <ul>
                                 <li><a href="#"><i class="fa fa-angle-left" aria-hidden="true"></i> PREV</a></li>
@@ -123,41 +138,80 @@
                             </ul>
                         </div>
                     </div>
-                    <form action="http://html.vikitheme.com/sparta/action.php" class="form-horizontal">
+
+                    <!-- Booking List -->
+                    @using (Html.BeginForm("Create", "AdminRoom_Catalog",
+                                            FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
                         <div class="col-md-4">
                             <div class="vk-room-details-content-right" style="background:#b0914f;padding-bottom:unset">
                                 <h3 style="border-bottom:unset">Your Reservation</h3>
-                                <div class="vk-select-room1 vk-select-room-overide"
-                                     style="margin: 10px 30px 0 30px;padding: 10px 0 10px 0;">
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <h2>No.1: Superior Double Room</h2>
+                                <!-- Booking List -->
+                                @*<div class="vk-select-room1 vk-select-room-overide" id="bookingList"
+                                        style="margin: 10px 30px 0 30px;padding: 10px 0 10px 0;"></div>*@
+                                <!-- Temp booking item -->
+                                <div id="bookingItem" hidden>
+                                    <div class="vk-select-room1 vk-select-room-overide"
+                                         style="margin: 10px 30px 0 30px;padding: 10px 0 10px 0;">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <!-- Room Name -->
+                                                <h2><span class="name#"></span></h2>
+                                            </div>
+                                            <div class="col-md-2" style="padding-top:5px;text-align: right">
+                                                <a href="#">
+                                                    <i class="fa fa-times-circle-o remove-btn" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
                                         </div>
-                                        <div class="col-md-2" style="padding-top:5px;text-align: right">
-                                            <a href="#">
-                                                <i class="fa fa-times-circle-o remove-btn" aria-hidden="true"></i>
-                                            </a>
-                                        </div>
-                                    </div>
 
-                                    <div class="form-group">
-                                        <!-- Adults input -->
-                                        <div class="col-md-6">
-                                            <label class="control-label" style="font-size: 14px">Adults</label>
-                                            <select id="night" class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                            </select>
+                                        <div class="form-group" style="margin-bottom:0;">
+                                            <div class="col-md-5">
+                                                <label class="control-label" style="font-size: 14px">
+                                                    2 adults/room
+                                                </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <label class="control-label" 
+                                                       style="font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                    Sea view, 1 double beds, Free wifi
+                                                </label>
+                                            </div>
+                                            @*<ul>
+                                                <li>Adults: 2</li>
+                                                <li> Children: 1</li>
+                                                <li><a href="#"> 2 rooms</a></li>
+                                            </ul>*@
+                                             @*Adults input 
+                                            <div class="col-md-4">
+                                                <label class="control-label" style="font-size: 14px">Adults</label>
+                                                <select id="adult" name="adult" class="form-control">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                </select>
+                                            </div>
+                                             Children input 
+                                            <div class="col-md-4">
+                                                <label class="control-label" style="font-size: 14px">Children</label>
+                                                <select id="child" name="child" class="form-control">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                 Number of room 
+                                                <label class="control-label number#" style="font-size: 14px"></label>
+                                            </div>*@
                                         </div>
-                                        <!-- Children input -->
-                                        <div class="col-md-6">
-                                            <label class="control-label" style="font-size: 14px">Children</label>
-                                            <select id="room" class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                            </select>
+                                        <div class="form-group">
+                                            <div class="col-md-4">
+                                                <!-- Number of room -->
+                                                <label class="number#" style="font-size: 14px;font-style: italic">
+                                                    &nbsp;rooms
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -168,7 +222,7 @@
                                         <div class="col-md-12">
                                             <label class="control-label">CHECK - IN</label>
                                             <div class="input-group date date-check-in" data-date="12-02-2017" data-date-format="mm-dd-yyyy">
-                                                <input name="date1" class="form-control" type="text" value="12-02-2017">
+                                                <input name="checkIn" class="form-control" type="text" value="15/10/2019">
                                                 <span class="input-group-addon btn"><span class="ti-calendar" id="ti-calendar1"></span></span>
                                             </div>
                                         </div>
@@ -178,9 +232,30 @@
                                         <div class="col-md-12">
                                             <label class="control-label date-check-out">CHECK - OUT</label>
                                             <div class="input-group date date-check-out" data-date="12-02-2017" data-date-format="mm-dd-yyyy">
-                                                <input name="date2" class="form-control" type="text" value="12-02-2017">
+                                                <input name="checkOut" class="form-control" type="text" value="16/10/2019">
                                                 <span class="input-group-addon btn"><span class="ti-calendar" id="ti-calendar2"></span></span>
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group date-input">
+                                        <!-- Date input -->
+                                        <div class="col-md-6">
+                                            <label class="control-label">ADULTS</label>
+                                            <select id="adult" name="adult" class="form-control">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label class="control-label">CHILDREN</label>
+                                            <select id="child" name="child" class="form-control">
+                                                <option>1</option>
+                                                <option>2</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <!-- Button -->
@@ -190,11 +265,32 @@
                                                         text-uppercase booking-btn">
                                             <span class="title">Make booking</span>
                                         </a>
+                                        <a href="#" class=" vk-btn vk-btn-transparent
+                                                        vk-border-brown vk-btn-l vk-btn-default
+                                                        text-uppercase booking-btn" hidden="hidden">
+                                            <span class="title">Update date</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                        <!-- Form element for post -->
+                        <div id="list" hidden></div>
+                        <div id="newItem" style="display:none">
+                            <input type="text" name="bookingItems[#].roomNumber" />
+                            <input type="text" name="bookingItems[#].typeId" />
+                            @*<input type="text" name="bookingItems[#].numberOfAdult" />
+                            <input type="text" name="bookingItems[#].numberOfChild" />*@
+                        </div>
+                    }
+                    <!-- Form for update date -->
+                    @using (Ajax.BeginForm("UpdateDate", "Reservations",
+                            new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "Get" },
+                            new { @id = "updateDate" }))
+                    {
+                        <input name="checkInFake" class="form-control" type="text" value="12-02-2017" hidden />
+                        <input name="checkOutFake" class="form-control" type="text" value="12-02-2017" hidden />
+                    }
                 </div>
             </div>
         </div>
@@ -204,19 +300,88 @@
 <script src="~/Assets/libs/jQuery/dist/jquery.js"></script>
 <script src="~/Assets/js/demo/self-define.js"></script>
 <script>
-    function submitForm() {
-        $('.booking-btn').click(function (e) {
-            e.preventDefault();
-            var form = $(this).closest('form')
-            form.submit()
+    // Set ID for Select button bring typeID
+    function setId() {
+        let parseList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(activeRoomList));
+        $('.select').each(function (index) {
+            var id = parseList[index].typeId
+            $(this).attr('id', parseList[index].typeId)
+            var span = `#${id} .room-name`
+            //$(span).attr('id', `${id}-name`)
+            $(span).text(parseList[index].typeName)
         })
     }
+    // Add new room to booking list
+    function addNewBookingRoom(href) {
+        //$('.select').each(function (index) {
+        //let typeId = $(this).attr('id')
+        // Add data to the right List
+        // Create hidden input for form submit
+        //$(this).click(function (id) {
+        //    return function () {
+        $.ajax({
+            url: href,
+            type: "GET",
+            dataType: "json",
+            contentType: "application/jsonrequest; charset=utf-8",
+        }).done(function (data) {
+            let id = data.typeId
+            let roomName = data.typeName
+            let number = data.numberOfRoom
+            let cloneItem1 = replaceId('#newItem', id)
+            $('#list').append(cloneItem1)
+            let cloneItem2 = replaceClass('#bookingItem', id)
+            $('#bookingItem').before(cloneItem2)
+            $(`span.name${id}`).text(roomName)
+            $(`label.number${id}`).prepend(number)
+            console.log(data.typeId)
+            console.log(href)
+            })
+    }
+            //    }
+            //}(index))
+            //$(this).click(function (id, typeId) {
+            //    return function () {
+            //        let roomName = $(`#${typeId} span`).text()
+            //        let cloneItem1 = replaceId('#newItem', id)
+            //        $('#list').append(cloneItem1)
+            //        let cloneItem2 = replaceClass('#bookingItem', id)
+            //        $('#bookingItem').before(cloneItem2)
+            //        $(`span.name${id}`).text(roomName)
+            //        console.log(cloneItem2)
+            //        return false
+            //    }
+            //}(index, typeId))
+        //})
+    // Replace # id
+    function replaceId(idTag, id) {
+        let clone = $(idTag).clone(); // clone the BatchProducts item
+        // Update the index of the clone
+        clone.html($(clone).html().replace(/\[#\]/g, '[' + id + ']'));
+        //clone.html($(clone).html().replace(/"%"/g, '"' + index + '"'));
+        return clone.html()
+    }
+    function replaceClass(idTag, id) {
+        let clone = $(idTag).clone(); // clone the BatchProducts item
+        // Update the index of the clone
+        clone.html($(clone).html().replace(/[#]/g, `${id}`));
+        //clone.html($(clone).html().replace(/"%"/g, '"' + index + '"'));
+        return clone.html()
+    }
     $(document).ready(() => {
+        //setId()
+        //addNewBookingRoom()
+        var checkIn = $('input[name="checkIn"]')
+        var checkOut = $('input[name="checkOut"]')
+        checkIn.val('@checkIn')
+        checkOut.val('@checkOut')
+        $('input[name="checkInFake"]').attr('value', checkIn.val())
+        $('input[name="checkOutFake"]').attr('value', checkOut.val())
         PluralDetect('.adultNum', '.childNum')
+        onDateChange(checkIn, 'input[name="checkInFake"]')
+        onDateChange(checkOut, 'input[name="checkOutFake"]')
+        onDateSubmit()
         submitForm()
-        $('.select').each(function () {
-
-        })
     })
 </script>
 

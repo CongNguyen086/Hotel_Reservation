@@ -1,7 +1,7 @@
 ﻿@using Hotel_Reservation.Models
-@model List<CartItem>
+@model List<BookingItem>
 @{
-    ViewBag.Title = "Cart";
+    ViewBag.Title = "Booking";
     Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
 }
 @if (Model == null || Model.Count == 0)
@@ -49,7 +49,7 @@ else
                         </thead>
                         <tbody class="vk-shop-cart4-cnt">
 
-                            @foreach (CartItem item in Model)
+                            @foreach (BookingItem item in Model)
                             {
                                 <tr>
                                     <td class="w-td" style="width: 25%">
@@ -58,9 +58,9 @@ else
                                     <td>
                                         <h3 class="h3-a">@item.typeName</h3>
                                     </td>
-                                    <td>
+                                    @*<td>
                                         <h3 class="h3-a">@item.guest</h3>
-                                    </td>
+                                    </td>*@
                                     <td class="price-hide">
                                         <span class="price">$@item.unitPrice</span>
                                         @{
@@ -76,7 +76,7 @@ else
                                     <td><span class="price">$@item.itemTotalPrice</span></td>
                                     <td>
                                         <span class="del del-hide">
-                                            <a href="@Url.Action("DeleteItem", new { roomNumber = item.roomNumber })">
+                                            <a href="@Url.Action("DeleteItem", new { roomNumber = item.typeId })">
                                                 <i class="fa fa-times-circle-o" aria-hidden="true"></i>
                                             </a>
                                         </span>

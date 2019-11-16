@@ -11,6 +11,7 @@ namespace Hotel_Reservation.Models
     {
         [Key]
         public string typeId { get; set; }
+        public int numberOfAvailableRoom { get; set; } 
         public string typeName { get; set; }
 
         [Display(Name = "Price")]
@@ -25,7 +26,7 @@ namespace Hotel_Reservation.Models
         public decimal extraFee { get; set; }
         public string catalogStatus { get; set; }
         public List<Image_Detail> image { get; set; }
-        public string promotionId { get; set; }
+        //public string promotionId { get; set; }
         public string promotionDescription { get; set; }
         public string appliedRoomType { get; set; }
         public Nullable<decimal> roomDiscount { get; set; }

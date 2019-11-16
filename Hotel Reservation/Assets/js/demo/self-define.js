@@ -3,15 +3,9 @@ function PluralDetect(adult, child) {
     $(adult).each(function () {
         let adultNum = parseInt($(this).text())
         if (adultNum > 1) {
-            //let adultId = "adultLbl" + adultIdCount.toString()
-            //let adultLabel = $(`<label id=${adultId}></label>`).text('Adults')
-            //$(this).after(adultLabel)
             $(this).append('Adults')
             console.log('adults')
         } else {
-            //let adultId = "adultLbl" + adultIdCount.toString()
-            //let adultLabel = $(`<label id=${adultId}></label>`).text('Adult')
-            //$(this).after(adultLabel)
             $(this).append('Adult')
             console.log('adult')
         }
@@ -21,22 +15,37 @@ function PluralDetect(adult, child) {
     $(child).each(function () {
         let childNum = parseInt($(this).text())
         if (childNum > 1) {
-            //let childId = "childLbl" + childIdCount.toString()
-            //let childLabel = $(`<label id=${childId}></label>`).text('Children')
-            //$(this).after(childLabel)
             $(this).append('Children')
             console.log('children')
         } else {
-            //let childId = "adultLbl" + childIdCount.toString()
-            //let childLabel = $(`<label id=${childId}></label>`).text('Child')
-            //$(this).after(childLabel)
             $(this).append('Child')
             console.log('child')
         }
     })
 }
 
-// Add new room to booking list
-function addNewBookingRoom() {
+// Trigger button when date chage in Select Room
+function onDateChange(dateElement, fakeDateElement) {
+    $(dateElement).change(function () {
+        $('.booking-wrapper a:last-of-type').removeAttr('hidden')
+        $('.booking-wrapper a:first-of-type').attr('hidden', true)
+        $(fakeDateElement).attr('value', $(dateElement).val())
+        console.log($(dateElement).val())
+    })
+}
 
+// Update date in Select Room
+function onDateSubmit() {
+    $('.booking-wrapper a:last-of-type').click(function (e) {
+        e.preventDefault();
+        var form = $('#updateDate')
+        form.submit()
+    })
+}
+function submitForm() {
+    $('.booking-wrapper a:first-of-type').click(function (e) {
+        e.preventDefault();
+        var form = $(this).closest('form')
+        form.submit()
+    })
 }

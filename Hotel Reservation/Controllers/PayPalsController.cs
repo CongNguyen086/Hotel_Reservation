@@ -42,12 +42,6 @@ namespace Hotel_Reservation.Controllers
             List<BookingItem> cart = Session[strCart] as List<BookingItem>;
             foreach (var cartItem in cart)
             {
-                List<NameValuePair> supplementary_data = new List<NameValuePair>
-                {
-                    new NameValuePair{ name = "Adults", value = cartItem.numberOfAdult.ToString() },
-                    new NameValuePair{ name = "Children", value = cartItem.numberOfChild.ToString() },
-                    new NameValuePair{ name = "Discount", value = cartItem.discount.ToString() }
-                };
                 //itemList.items.Add(new Item()
                 //{
                 //    name = cartItem.typeName,
@@ -63,7 +57,6 @@ namespace Hotel_Reservation.Controllers
                     currency = "USD",
                     price = cartItem.unitPrice.ToString(),
                     description = cartItem.promotion,
-                    supplementary_data = supplementary_data,
                 });
             }
 

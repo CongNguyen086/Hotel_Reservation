@@ -52,21 +52,21 @@
                         <div class="vk-booking-transparent-1">
                             <div class="container">
                                 @using (Ajax.BeginForm("Index", "Rooms",
-                                    new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "Get" }, 
-                                    new { @class = "form-horizontal  booking-hotel-all" }))
+                                        new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "Get" }, 
+                                        new { @class = "form-horizontal  booking-hotel-all" }))
                                 {
                                     <ul>
                                         <li>
                                             <h4>Check - In</h4>
                                             <div class="input-group date date-check-in" data-date="12-02-2017" data-date-format="mm-dd-yyyy">
-                                                <input id="checkIn" name="checkIn" class="form-control" type="text" value="@Request["checkIn"]">
+                                                <input id="checkIn" name="checkInDefault" class="form-control" type="text" value="@Request["checkIn"]">
                                                 <span class="input-group-addon btn"><span class="ti-calendar" id="ti-calendar1"></span></span>
                                             </div>
                                         </li>
                                         <li>
                                             <h4>Check - Out</h4>
                                             <div class="input-group date date-check-out" data-date="12-02-2017" data-date-format="mm-dd-yyyy">
-                                                <input id="checkOut" name="checkOut" class="form-control" type="text" value="@Request["checkOut"]">
+                                                <input id="checkOut" name="checkOutDefault" class="form-control" type="text" value="@Request["checkOut"]">
                                                 <span class="input-group-addon btn"><span class="ti-calendar" id="ti-calendar2"></span></span>
                                             </div>
                                         </li>

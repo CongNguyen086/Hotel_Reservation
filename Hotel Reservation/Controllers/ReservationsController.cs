@@ -14,7 +14,7 @@ namespace Hotel_Reservation.Controllers
     public class ReservationsController : Controller
     {
         private ModelContext db = new ModelContext();
-
+        private string strCart = "giohang";
         // Create Booking
         public RedirectToRouteResult Create()
         {
@@ -32,12 +32,12 @@ namespace Hotel_Reservation.Controllers
             {
                 Reservation_Detail rd = new Reservation_Detail();
                 rd.reservationId = rs.reservationId;
-                rd.roomNumber = item.roomNumber;
-                rd.numberOfTravelers = item.guest;
+                //rd.roomNumber = item.typeId;
+                //rd.numberOfTravelers = item.guest;
                 rd.extraFee = item.extraFee;
                 rd.totalPrice = item.itemTotalPrice;
 
-                Room room = db.Rooms.Find(item.roomNumber);
+                Room room = db.Rooms.Find(item.typeId);
                 room.roomStatus = "Reserved";
                 //Room_Catalog rc = db.Room_Catalogs.SingleOrDefault(m => m.typeId == room.typeId);
                 //int room2 = db.Rooms.Where(m => m.typeId == rc.typeId).Where(m => m.roomStatus == "Available").Count();
@@ -59,6 +59,7 @@ namespace Hotel_Reservation.Controllers
 
         public ActionResult SelectRoom(string checkIn, string checkOut)
         {
+            // Get the left list in View
             var room_Catalogs = db.Room_Catalogs.Where(m => m.catalogStatus == "Active");
             var promotions = db.Promotions.Where(p => p.promotionStatus == "Processing");
             List<RoomCatalog_Promotion> activeRoomList = new List<RoomCatalog_Promotion>();
@@ -72,7 +73,8 @@ namespace Hotel_Reservation.Controllers
             var isPromoted = false;
             foreach (var rc in room_Catalogs)
             {
-                if (!isFullReserved(rc, checkIn, checkOut))
+                var availableRoomInDateRange = GetAvailableRoomInDateRange(rc, checkIn, checkOut);
+                if (availableRoomInDateRange != 0)
                 {
                     var imageList = rc.Image_Details.Where(i => i.typeId.Equals(rc.typeId));
                     List<Image_Detail> imageList_Promotion = new List<Image_Detail>();
@@ -93,6 +95,7 @@ namespace Hotel_Reservation.Controllers
                             activeRoom = new RoomCatalog_Promotion()
                             {
                                 typeId = rc.typeId,
+                                numberOfAvailableRoom = availableRoomInDateRange,
                                 typeName = rc.typeName,
                                 price = rc.price,
                                 description = rc.description,
@@ -115,6 +118,7 @@ namespace Hotel_Reservation.Controllers
                         activeRoom = new RoomCatalog_Promotion()
                         {
                             typeId = rc.typeId,
+                            numberOfAvailableRoom = availableRoomInDateRange,
                             typeName = rc.typeName,
                             price = rc.price,
                             description = rc.description,
@@ -136,11 +140,14 @@ namespace Hotel_Reservation.Controllers
                     }
                 }
             }
-
-            return View(activeRoomList);
+            ViewData["ActiveRoomList"] = activeRoomList;
+            // Create model for the right list in View
+            //BookingViewModel bookingView = new BookingViewModel();
+            //var bookingList = (List<BookingItem>)Session["DynamicBookingList"];
+            return View();
         }
 
-        public Boolean isDateRangeOverlap(string checkIn, string checkOut, string start2, string end2)
+        public Boolean IsDateRangeOverlap(string checkIn, string checkOut, string start2, string end2)
         {
             if ((checkIn != null) && (checkOut != null))
             {
@@ -155,29 +162,31 @@ namespace Hotel_Reservation.Controllers
             return false;
         }
 
-        public Boolean hasAvailableRoom(Room_Catalog rc)
+        public int GetAvailableRoom(Room_Catalog rc)
         {
-            var availableRoomList = db.Rooms.Where(r => r.typeId.Equals(rc.typeId)
+            var availableRoom = db.Rooms.Where(r => r.typeId.Equals(rc.typeId)
                                                         && r.roomStatus.Equals("Available")
                                                         && r.operationStatus.Equals("Active")
                                                     ).FirstOrDefault();
-            return availableRoomList != null ? true : false;
+            return availableRoom != null ? availableRoom.roomNumber : 0;
         }
 
-        public Boolean isFullReserved(Room_Catalog rc, string checkIn, string checkOut)
+        public int GetAvailableRoomInDateRange(Room_Catalog rc, string checkIn, string checkOut)
         {
-            if (!hasAvailableRoom(rc))
+            var availableRoom = GetAvailableRoom(rc);
+            if (availableRoom == 0)
             {
                 // get all reserve details that relate to rc
                 var reservationDt = db.Reservation_Details.Where(rd => rd.Room.typeId.Equals(rc.typeId));
                 var roomList = db.Rooms.Where(r => r.typeId.Equals(rc.typeId));
                 ArrayList reservedRoomList = new ArrayList();
-                var hasAvailableInDateRange = false;
+                // Add RoomNumber to reservedList that has date-range overlap
                 foreach (var rd in reservationDt)
                 {
                     var reservation = db.Reservations.Find(rd.reservationId);
-                    if (isDateRangeOverlap(checkIn, checkOut, reservation.checkInDate.ToString("dd/MM/yyyy"), reservation.checkOutDate.ToString("dd/MM/yyyy")))
+                    if (IsDateRangeOverlap(checkIn, checkOut, reservation.checkInDate.ToString("dd/MM/yyyy"), reservation.checkOutDate.ToString("dd/MM/yyyy")))
                     {
+                        // Check duplicated RoomNumber in reservedList
                         if (!reservedRoomList.Contains(rd.roomNumber))
                         {
                             reservedRoomList.Add(rd.roomNumber);
@@ -190,16 +199,98 @@ namespace Hotel_Reservation.Controllers
                     {
                         if (!reservedRoomList.Contains(room.roomNumber) && room.operationStatus.Equals("Active"))
                         {
-                            hasAvailableInDateRange = true;
+                            availableRoom = room.roomNumber;
                         }
-                    }
-                    if (!hasAvailableInDateRange)
-                    {
-                        return true;
                     }
                 }
             }
-            return false;
+            return availableRoom;
+        }
+
+        // Return temp booking list
+        public JsonResult CreateBookingItem(string id, string name)
+        {
+            TempBooking tempItem = new TempBooking
+            {
+                typeId = id,
+                typeName = name,
+                numberOfRoom = 1,
+            };
+            return Json(tempItem, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        // View reservation
+        public ActionResult MakeBooking(BookingViewModel bookingView)
+        {
+            Session[strCart] = new List<BookingItem>();
+            List<BookingItem> booking = Session[strCart] as List<BookingItem>;
+
+            Session["bookingCheckIn"] = bookingView.checkIn;
+            Session["bookingCheckOut"] = bookingView.checkOut;
+            Session["nights"] = (bookingView.checkOut - bookingView.checkIn).Days;
+            Session["adults"] = bookingView.numberOfAdult;
+            Session["children"] = bookingView.numberOfChild;
+            var bookingList = bookingView.bookingItems;
+
+            foreach (var item in bookingList) {
+                Room_Catalog rc = db.Room_Catalogs.Find(item.typeId);
+                Image_Detail img = db.Image_Details.FirstOrDefault(m => m.typeId == rc.typeId);
+                decimal discount = 0;
+                var itemPromotion = "";
+                var promotion = db.Promotions.FirstOrDefault(p => (p.appliedRoomType.Equals(rc.typeId))
+                                                                    && (p.promotionStatus.Equals("Processing")));
+                if (promotion != null)
+                {
+                    discount = promotion.roomDiscount ?? 0;
+                    itemPromotion = promotion.promotionDescription;
+                }
+                BookingItem newItem = new BookingItem()
+                {
+                    typeId = item.typeId,
+                    image = img.image,
+                    typeName = rc.typeName,
+                    unitPrice = rc.price,
+                    night = (Int32)Session["nights"],
+                    extraFee = 0,
+                    discount = rc.price * discount,
+                    promotion = itemPromotion,
+                };
+
+                booking.Add(newItem);
+            }
+            return RedirectToAction("ViewBooking");
+        }
+
+        public ActionResult ViewBooking()
+        {
+            List<BookingItem> booking = Session[strCart] as List<BookingItem>;
+            if (booking != null)
+            {
+                var extraFee = booking.Select(m => m.extraFee).Sum();
+                var discount = booking.Select(m => m.extraFee).Sum();
+                ViewBag.Subtotal = booking.Select(m => m.itemTotalPrice).Sum();
+                ViewBag.Total = ViewBag.Subtotal + extraFee - discount;
+            }
+            return View(booking);
+        }
+
+        public RedirectToRouteResult UpdateDate(string checkInFake, string checkOutFake)
+        {
+            Session["CheckIn"] = DateTime.ParseExact(checkInFake, "dd/MM/yyyy", null);
+            Session["CheckOut"] = DateTime.ParseExact(checkOutFake, "dd/MM/yyyy", null);
+            return RedirectToAction("SelectRoom", new { checkIn = checkInFake, checkOut = checkOutFake });
+        }
+
+        public RedirectToRouteResult DeleteItem(string typeId)
+        {
+            List<BookingItem> giohang = Session[strCart] as List<BookingItem>;
+            BookingItem item = giohang.FirstOrDefault(m => m.typeId.Equals(typeId));
+            if (item != null)
+            {
+                giohang.Remove(item);
+            }
+            return RedirectToAction("SelectRoom");
         }
 
         protected override void Dispose(bool disposing)

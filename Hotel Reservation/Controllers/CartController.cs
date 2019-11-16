@@ -42,8 +42,6 @@ namespace Hotel_Reservation.Controllers
             Image_Detail img = db.Image_Details.FirstOrDefault(m => m.typeId == typeId);
             var checkIn = (DateTime)Session["CheckIn"];
             var checkOut = (DateTime)Session["CheckOut"];
-            //var checkInParse = DateTime.ParseExact(checkIn.ToString("dd/MM/yyyy"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            //var checkOutParse = DateTime.ParseExact(checkOut.ToString("dd/MM/yyyy"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
             var numberOfNight = (checkOut - checkIn).Days;
             decimal discount = 0;
             var itemPromotion = "";
@@ -54,22 +52,22 @@ namespace Hotel_Reservation.Controllers
                 discount = promotion.roomDiscount ?? 0;
                 itemPromotion = promotion.promotionDescription;
             }
-            BookingItem newItem = new BookingItem()
-            {
-                roomNumber = r.roomNumber,
-                image = img.image,
-                typeName = rc.typeName,
-                guest = rc.numberOfAdults + rc.numberOfChild,
-                numberOfAdult = rc.numberOfAdults,
-                numberOfChild = rc.numberOfChild,
-                unitPrice = rc.price,
-                night = numberOfNight,
-                extraFee = 0,
-                discount = rc.price * discount,
-                promotion = itemPromotion,
-            };
+            //BookingItem newItem = new BookingItem()
+            //{
+            //    typeId = r.roomNumber,
+            //    image = img.image,
+            //    typeName = rc.typeName,
+            //    guest = rc.numberOfAdults + rc.numberOfChild,
+            //    numberOfAdult = rc.numberOfAdults,
+            //    numberOfChild = rc.numberOfChild,
+            //    unitPrice = rc.price,
+            //    night = numberOfNight,
+            //    extraFee = 0,
+            //    discount = rc.price * discount,
+            //    promotion = itemPromotion,
+            //};
             
-            cart.Add(newItem);
+            //cart.Add(newItem);
 
             return RedirectToAction("Details", "Homes", new { id = typeId });
         }
@@ -81,10 +79,10 @@ namespace Hotel_Reservation.Controllers
             return RedirectToAction("Index");
         }
 
-        public RedirectToRouteResult DeleteItem(int roomNumber)
+        public RedirectToRouteResult DeleteItem(string typeId)
         {
             List<BookingItem> giohang = Session[strCart] as List<BookingItem>;
-            BookingItem item = giohang.FirstOrDefault(m => m.roomNumber == roomNumber);
+            BookingItem item = giohang.FirstOrDefault(m => m.typeId == typeId);
             if (item != null)
             {
                 giohang.Remove(item);
