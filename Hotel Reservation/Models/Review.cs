@@ -11,21 +11,16 @@ namespace Hotel_Reservation.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
-    public partial class Reservation_Detail
-    {
-        [Key]
-        public int detailsId { get; set; }
-        public int reservationId { get; set; }
-
-        public string typeId { get; set; }
-        public int roomNumber { get; set; }
-        public decimal discount { get; set; }
-        public decimal totalPrice { get; set; }
     
-        public virtual Reservation Reservation { get; set; }
-        public virtual Room Room { get; set; }
+    public partial class Review
+    {
+        public int reviewId { get; set; }
+        public Nullable<int> customerId { get; set; }
+        public string typeId { get; set; }
+        public string reviewContent { get; set; }
+        public Nullable<System.DateTime> date { get; set; }
+    
+        public virtual Registered_Customer Registered_Customer { get; set; }
+        public virtual Room_Catalog Room_Catalog { get; set; }
     }
 }

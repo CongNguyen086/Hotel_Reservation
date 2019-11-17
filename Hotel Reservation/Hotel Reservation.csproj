@@ -5888,11 +5888,17 @@
     <Compile Include="Models\Reservation_Detail.cs">
       <DependentUpon>ModelContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Review.cs">
+      <DependentUpon>ModelContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Room.cs">
       <DependentUpon>ModelContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RoomCatalog_Promotion.cs" />
     <Compile Include="Models\Room_Catalog.cs">
+      <DependentUpon>ModelContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Staff.cs">
       <DependentUpon>ModelContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

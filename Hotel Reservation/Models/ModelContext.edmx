@@ -54,18 +54,33 @@
           <Property Name="customerName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="phone" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="numberOfAdult" Type="int" />
+          <Property Name="numberOfChild" Type="int" />
+          <Property Name="discount" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="extraFee" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="total" Type="decimal" Precision="18" Scale="1" />
           <Property Name="reservationStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Reservation Details">
           <Key>
-            <PropertyRef Name="reservationId" />
-            <PropertyRef Name="roomNumber" />
+            <PropertyRef Name="detailsId" />
           </Key>
+          <Property Name="detailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="reservationId" Type="int" Nullable="false" />
+          <Property Name="typeId" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="roomNumber" Type="int" Nullable="false" />
-          <Property Name="numberOfTravelers" Type="int" Nullable="false" />
-          <Property Name="extraFee" Type="decimal" Precision="18" Scale="1" Nullable="false" />
+          <Property Name="discount" Type="decimal" Precision="18" Scale="1" Nullable="false" />
           <Property Name="totalPrice" Type="decimal" Precision="18" Scale="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="reviewId" />
+          </Key>
+          <Property Name="reviewId" Type="int" Nullable="false" />
+          <Property Name="customerId" Type="int" />
+          <Property Name="typeId" Type="nvarchar" MaxLength="50" />
+          <Property Name="reviewContent" Type="nvarchar" MaxLength="50" />
+          <Property Name="date" Type="datetime" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -90,6 +105,14 @@
           <Property Name="extraFee" Type="decimal" Precision="18" Scale="1" Nullable="false" />
           <Property Name="isPromoted" Type="bit" />
           <Property Name="catalogStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="staffId" />
+          </Key>
+          <Property Name="staffId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="role" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_Image Details_Room Catalog">
           <End Role="Room Catalog" Type="Self.Room Catalog" Multiplicity="1" />
@@ -151,6 +174,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Review_Registered Customer">
+          <End Role="Registered Customer" Type="Self.Registered Customer" Multiplicity="0..1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registered Customer">
+              <PropertyRef Name="customerId" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_Room Catalog">
+          <End Role="Room Catalog" Type="Self.Room Catalog" Multiplicity="0..1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room Catalog">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Room_Room Catalog1">
           <End Role="Room Catalog" Type="Self.Room Catalog" Multiplicity="1" />
           <End Role="Room" Type="Self.Room" Multiplicity="*" />
@@ -170,8 +217,10 @@
           <EntitySet Name="Registered Customer" EntityType="Self.Registered Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reservation Details" EntityType="Self.Reservation Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Room Catalog" EntityType="Self.Room Catalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Image Details_Room Catalog" Association="Self.FK_Image Details_Room Catalog">
             <End Role="Room Catalog" EntitySet="Room Catalog" />
             <End Role="Image Details" EntitySet="Image Details" />
@@ -191,6 +240,14 @@
           <AssociationSet Name="FK_Reservation_Registered Customer" Association="Self.FK_Reservation_Registered Customer">
             <End Role="Registered Customer" EntitySet="Registered Customer" />
             <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_Registered Customer" Association="Self.FK_Review_Registered Customer">
+            <End Role="Registered Customer" EntitySet="Registered Customer" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_Room Catalog" Association="Self.FK_Review_Room Catalog">
+            <End Role="Room Catalog" EntitySet="Room Catalog" />
+            <End Role="Review" EntitySet="Review" />
           </AssociationSet>
           <AssociationSet Name="FK_Room_Room Catalog1" Association="Self.FK_Room_Room Catalog1">
             <End Role="Room Catalog" EntitySet="Room Catalog" />
@@ -242,6 +299,7 @@
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservation_Registered_Customer" FromRole="Registered_Customer" ToRole="Reservation" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK_Review_Registered_Customer" FromRole="Registered_Customer" ToRole="Review" />
         </EntityType>
         <EntityType Name="Reservation">
           <Key>
@@ -254,22 +312,39 @@
           <Property Name="customerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="numberOfAdult" Type="Int32" />
+          <Property Name="numberOfChild" Type="Int32" />
+          <Property Name="discount" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="extraFee" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="total" Type="Decimal" Precision="18" Scale="1" />
           <Property Name="reservationStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Registered_Customer" Relationship="Self.FK_Reservation_Registered_Customer" FromRole="Reservation" ToRole="Registered_Customer" />
           <NavigationProperty Name="Reservation_Details" Relationship="Self.FK_Reservation_Details_Reservation" FromRole="Reservation" ToRole="Reservation_Details" />
         </EntityType>
         <EntityType Name="Reservation_Detail">
           <Key>
-            <PropertyRef Name="reservationId" />
-            <PropertyRef Name="roomNumber" />
+            <PropertyRef Name="detailsId" />
           </Key>
+          <Property Name="detailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="reservationId" Type="Int32" Nullable="false" />
+          <Property Name="typeId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="roomNumber" Type="Int32" Nullable="false" />
-          <Property Name="numberOfTravelers" Type="Int32" Nullable="false" />
-          <Property Name="extraFee" Type="Decimal" Precision="18" Scale="1" Nullable="false" />
+          <Property Name="discount" Type="Decimal" Precision="18" Scale="1" Nullable="false" />
           <Property Name="totalPrice" Type="Decimal" Precision="18" Scale="1" Nullable="false" />
           <NavigationProperty Name="Reservation" Relationship="Self.FK_Reservation_Details_Reservation" FromRole="Reservation_Details" ToRole="Reservation" />
           <NavigationProperty Name="Room" Relationship="Self.FK_Reservation_Details_Room" FromRole="Reservation_Details" ToRole="Room" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="reviewId" />
+          </Key>
+          <Property Name="reviewId" Type="Int32" Nullable="false" />
+          <Property Name="customerId" Type="Int32" />
+          <Property Name="typeId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="reviewContent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Registered_Customer" Relationship="Self.FK_Review_Registered_Customer" FromRole="Review" ToRole="Registered_Customer" />
+          <NavigationProperty Name="Room_Catalog" Relationship="Self.FK_Review_Room_Catalog" FromRole="Review" ToRole="Room_Catalog" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -298,7 +373,16 @@
           <Property Name="catalogStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Image_Details" Relationship="Self.FK_Image_Details_Room_Catalog" FromRole="Room_Catalog" ToRole="Image_Details" />
           <NavigationProperty Name="Promotions" Relationship="Self.FK_Promotion_Room_Catalog" FromRole="Room_Catalog" ToRole="Promotion" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK_Review_Room_Catalog" FromRole="Room_Catalog" ToRole="Review" />
           <NavigationProperty Name="Rooms" Relationship="Self.FK_Room_Room_Catalog1" FromRole="Room_Catalog" ToRole="Room" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="staffId" />
+          </Key>
+          <Property Name="staffId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Image_Details_Room_Catalog">
           <End Role="Room_Catalog" Type="Self.Room_Catalog" Multiplicity="1" />
@@ -336,6 +420,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Review_Registered_Customer">
+          <End Role="Registered_Customer" Type="Self.Registered_Customer" Multiplicity="0..1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registered_Customer">
+              <PropertyRef Name="customerId" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Reservation_Details_Reservation">
           <End Role="Reservation" Type="Self.Reservation" Multiplicity="1" />
           <End Role="Reservation_Details" Type="Self.Reservation_Detail" Multiplicity="*" />
@@ -360,6 +456,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Review_Room_Catalog">
+          <End Role="Room_Catalog" Type="Self.Room_Catalog" Multiplicity="0..1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room_Catalog">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Room_Room_Catalog1">
           <End Role="Room_Catalog" Type="Self.Room_Catalog" Multiplicity="1" />
           <End Role="Room" Type="Self.Room" Multiplicity="*" />
@@ -379,8 +487,10 @@
           <EntitySet Name="Registered_Customers" EntityType="Self.Registered_Customer" />
           <EntitySet Name="Reservations" EntityType="Self.Reservation" />
           <EntitySet Name="Reservation_Details" EntityType="Self.Reservation_Detail" />
+          <EntitySet Name="Reviews" EntityType="Self.Review" />
           <EntitySet Name="Rooms" EntityType="Self.Room" />
           <EntitySet Name="Room_Catalogs" EntityType="Self.Room_Catalog" />
+          <EntitySet Name="Staffs" EntityType="Self.Staff" />
           <AssociationSet Name="FK_Image_Details_Room_Catalog" Association="Self.FK_Image_Details_Room_Catalog">
             <End Role="Room_Catalog" EntitySet="Room_Catalogs" />
             <End Role="Image_Details" EntitySet="Image_Details" />
@@ -393,6 +503,10 @@
             <End Role="Registered_Customer" EntitySet="Registered_Customers" />
             <End Role="Reservation" EntitySet="Reservations" />
           </AssociationSet>
+          <AssociationSet Name="FK_Review_Registered_Customer" Association="Self.FK_Review_Registered_Customer">
+            <End Role="Registered_Customer" EntitySet="Registered_Customers" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
           <AssociationSet Name="FK_Reservation_Details_Reservation" Association="Self.FK_Reservation_Details_Reservation">
             <End Role="Reservation" EntitySet="Reservations" />
             <End Role="Reservation_Details" EntitySet="Reservation_Details" />
@@ -400,6 +514,10 @@
           <AssociationSet Name="FK_Reservation_Details_Room" Association="Self.FK_Reservation_Details_Room">
             <End Role="Room" EntitySet="Rooms" />
             <End Role="Reservation_Details" EntitySet="Reservation_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_Room_Catalog" Association="Self.FK_Review_Room_Catalog">
+            <End Role="Room_Catalog" EntitySet="Room_Catalogs" />
+            <End Role="Review" EntitySet="Reviews" />
           </AssociationSet>
           <AssociationSet Name="FK_Room_Room_Catalog1" Association="Self.FK_Room_Room_Catalog1">
             <End Role="Room_Catalog" EntitySet="Room_Catalogs" />
@@ -464,6 +582,11 @@
                 <ScalarProperty Name="customerName" ColumnName="customerName" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="numberOfAdult" ColumnName="numberOfAdult" />
+                <ScalarProperty Name="numberOfChild" ColumnName="numberOfChild" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="extraFee" ColumnName="extraFee" />
+                <ScalarProperty Name="total" ColumnName="total" />
                 <ScalarProperty Name="reservationStatus" ColumnName="reservationStatus" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -471,11 +594,23 @@
           <EntitySetMapping Name="Reservation_Details">
             <EntityTypeMapping TypeName="Hotel_ReservationModel.Reservation_Detail">
               <MappingFragment StoreEntitySet="Reservation Details">
+                <ScalarProperty Name="detailsId" ColumnName="detailsId" />
                 <ScalarProperty Name="reservationId" ColumnName="reservationId" />
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
                 <ScalarProperty Name="roomNumber" ColumnName="roomNumber" />
-                <ScalarProperty Name="numberOfTravelers" ColumnName="numberOfTravelers" />
-                <ScalarProperty Name="extraFee" ColumnName="extraFee" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
                 <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="Hotel_ReservationModel.Review">
+              <MappingFragment StoreEntitySet="Review">
+                <ScalarProperty Name="reviewId" ColumnName="reviewId" />
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="reviewContent" ColumnName="reviewContent" />
+                <ScalarProperty Name="date" ColumnName="date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -502,6 +637,15 @@
                 <ScalarProperty Name="extraFee" ColumnName="extraFee" />
                 <ScalarProperty Name="isPromoted" ColumnName="isPromoted" />
                 <ScalarProperty Name="catalogStatus" ColumnName="catalogStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staffs">
+            <EntityTypeMapping TypeName="Hotel_ReservationModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="staffId" ColumnName="staffId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="role" ColumnName="role" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

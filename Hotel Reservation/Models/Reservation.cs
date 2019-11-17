@@ -39,6 +39,11 @@ namespace Hotel_Reservation.Models
         public string customerName { get; set; }
         public string phone { get; set; }
         public string email { get; set; }
+        public Nullable<int> numberOfAdult { get; set; }
+        public Nullable<int> numberOfChild { get; set; }
+        public Nullable<decimal> discount { get; set; }
+        public Nullable<decimal> extraFee { get; set; }
+        public Nullable<decimal> total { get; set; }
         public string reservationStatus { get; set; }
     
         public virtual Registered_Customer Registered_Customer { get; set; }

@@ -4,20 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="636730d53a9e48dcb29dfcef4fb4c574" Name="Diagram1">
-        <EntityTypeShape EntityType="Hotel_ReservationModel.Admin" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Hotel_ReservationModel.Image_Detail" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Hotel_ReservationModel.Promotion" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Hotel_ReservationModel.Registered_Customer" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Hotel_ReservationModel.Reservation" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="Hotel_ReservationModel.Reservation_Detail" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Hotel_ReservationModel.Room" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Hotel_ReservationModel.Room_Catalog" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+      <Diagram DiagramId="826c5a0dbe624cfaa4226c57dd24ed58" Name="Diagram1">
+        <EntityTypeShape EntityType="Hotel_ReservationModel.Admin" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_ReservationModel.Image_Detail" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_ReservationModel.Promotion" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_ReservationModel.Registered_Customer" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_ReservationModel.Reservation" Width="1.5" PointX="3" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_ReservationModel.Reservation_Detail" Width="1.5" PointX="5.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_ReservationModel.Review" Width="1.5" PointX="6" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_ReservationModel.Room" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_ReservationModel.Room_Catalog" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_ReservationModel.Staff" Width="1.5" PointX="5.75" PointY="2.375" IsExpanded="true" />
         <AssociationConnector Association="Hotel_ReservationModel.FK_Image_Details_Room_Catalog" ManuallyRouted="false" />
         <AssociationConnector Association="Hotel_ReservationModel.FK_Promotion_Room_Catalog" ManuallyRouted="false" />
         <AssociationConnector Association="Hotel_ReservationModel.FK_Reservation_Registered_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="Hotel_ReservationModel.FK_Review_Registered_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="Hotel_ReservationModel.FK_Reservation_Details_Reservation" ManuallyRouted="false" />
         <AssociationConnector Association="Hotel_ReservationModel.FK_Reservation_Details_Room" ManuallyRouted="false" />
+        <AssociationConnector Association="Hotel_ReservationModel.FK_Review_Room_Catalog" ManuallyRouted="false" />
         <AssociationConnector Association="Hotel_ReservationModel.FK_Room_Room_Catalog1" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

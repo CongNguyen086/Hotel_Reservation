@@ -43,12 +43,12 @@ namespace Hotel_Reservation.Models
     {
         [Column(TypeName = "date")]
         [Display(Name = "Checkin Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime checkIn { get; set; }
 
         [Column(TypeName = "date")]
         [Display(Name = "Checkout Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime checkOut { get; set; }
 
         public int numberOfAdult { get; set; }

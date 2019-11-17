@@ -107,6 +107,47 @@
     text-align: center;
     margin: 20px 50px 0 50px;
 }
+
+.title-font {
+    font-family: "Playfair Display", serif !important;
+}
+
+.vk-make-a-reservation-left ul li .payment_box {
+    padding-left: 20px;
+}
+
+    .vk-make-a-reservation-left ul li .payment_box p {
+        font-family: "Raleway", sans-serif;
+        font-size: 14px;
+        line-height: 1.86;
+        text-align: left;
+        color: #7b7b7b;
+    }
+
+.vk-make-a-reservation-left .place-order input {
+    width: 100%;
+    height: 50px;
+    background-color: #b0914f;
+    border: 1px solid #b0914f;
+    font-family: "Raleway", sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 2.77;
+    text-align: center;
+    color: #ffffff;
+    -webkit-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+    .vk-make-a-reservation-left .place-order input:hover {
+        background: #fff;
+        color: #b0914f;
+        -webkit-transition: all 0.5s;
+        -o-transition: all 0.5s;
+        transition: all 0.5s;
+    }
+
 /*.booking-btn a {
     font-family: "Raleway", sans-serif;
     font-size: 16px;

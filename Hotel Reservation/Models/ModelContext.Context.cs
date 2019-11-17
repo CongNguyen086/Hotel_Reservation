@@ -31,9 +31,9 @@ namespace Hotel_Reservation.Models
         public virtual DbSet<Registered_Customer> Registered_Customers { get; set; }
         public virtual DbSet<Reservation> Reservations { get; set; }
         public virtual DbSet<Reservation_Detail> Reservation_Details { get; set; }
+        public virtual DbSet<Review> Reviews { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<Room_Catalog> Room_Catalogs { get; set; }
-
-        public System.Data.Entity.DbSet<Hotel_Reservation.Models.BookingItem> CartItems { get; set; }
+        public virtual DbSet<Staff> Staffs { get; set; }
     }
 }

@@ -13,6 +13,7 @@
         checkOut = ((DateTime)Session["CheckOut"]).ToString("dd/MM/yyyy");
     }
     var activeRoomList = (List<Hotel_Reservation.Models.RoomCatalog_Promotion>)ViewData["ActiveRoomList"];
+    var indexCount = 0;
 }
 
 <section class="site-content-area">
@@ -59,17 +60,17 @@
             <div class="row">
                 <div class="vk-select-room-info">
                     <div class="col-md-8">
-                        @foreach (var room in activeRoomList)
+                        @for (int i = 0; i < activeRoomList.Count; i++)
                         {
                             <div class="vk-select-room-info-item">
                                 <div class="vk-select-room-item-img ">
                                     @{
-                                        var image_Details = room.image.FirstOrDefault(i => i.imageOrder == 2);
+                                        var image_Details = activeRoomList[i].image.FirstOrDefault(m => m.imageOrder == 2);
                                     }
                                     <img src="@image_Details.image" alt="" style="max-width:210px" />
                                 </div>
                                 <div class="vk-select-room-item-info">
-                                    <h2>@room.typeName</h2>
+                                    <h2>@activeRoomList[i].typeName</h2>
                                     <div class="vk-select-room-item-body">
                                         <ul>
                                             <li>
@@ -78,9 +79,9 @@
                                             <li>
                                                 <p>
                                                     <i class="fa fa-users" aria-hidden="true"></i> Occupancy:
-                                                    <span class="adultNum"> @room.numberOfAdults&nbsp;</span>
+                                                    <span class="adultNum"> @activeRoomList[i].numberOfAdults&nbsp;</span>
                                                     <span>, </span>
-                                                    <span class="childNum">@room.numberOfChild&nbsp;</span>
+                                                    <span class="childNum">@activeRoomList[i].numberOfChild&nbsp;</span>
                                                 </p>
                                             </li>
                                             <li>
@@ -88,11 +89,11 @@
                                             </li>
                                             <li>
                                                 <p>
-                                                    @if (room.promotionDescription != null)
+                                                    @if (activeRoomList[i].promotionDescription != null)
                                                     {
                                                         <i class="fa fa-angle-double-up" aria-hidden="true"></i>
                                                         <span style="color: #b0914f;font-weight:bold">
-                                                            &nbsp;@room.promotionDescription
+                                                            &nbsp;@activeRoomList[i].promotionDescription
                                                         </span>
                                                     }
                                                 </p>
@@ -107,14 +108,15 @@
                                                     Price:
                                                 </li>
                                                 <li>
-                                                    <p>$@string.Format("{0:N0}", room.price)/ <span>NIGHT</span></p>
+                                                    <p>$@string.Format("{0:N0}", activeRoomList[i].price)/ <span>NIGHT</span></p>
                                                 </li>
                                             </ul>
                                             <div class="clearfix"></div>
                                         </div>
                                         <div class="vk-select-room-footer-right">
                                             <h4>
-                                                <a href="@Url.Action("CreateBookingItem","Reservations",new { id = room.typeId, name = room.typeName })" 
+                                                <a href="@Url.Action("CreateBookingItem","Reservations",
+                                                        new { id = activeRoomList[i].typeId, name = activeRoomList[i].typeName })" 
                                                    onclick="addNewBookingRoom(this.href); return false;" class="select"> 
                                                     &nbsp;SELECT
                                                     <span style="display:none" class="room-name"></span>
@@ -140,7 +142,7 @@
                     </div>
 
                     <!-- Booking List -->
-                    @using (Html.BeginForm("Create", "AdminRoom_Catalog",
+                    @using (Html.BeginForm("MakeBooking", "Reservations",
                                             FormMethod.Post, new { @class = "form-horizontal" }))
                     {
                         <div class="col-md-4">
@@ -177,33 +179,6 @@
                                                     Sea view, 1 double beds, Free wifi
                                                 </label>
                                             </div>
-                                            @*<ul>
-                                                <li>Adults: 2</li>
-                                                <li> Children: 1</li>
-                                                <li><a href="#"> 2 rooms</a></li>
-                                            </ul>*@
-                                             @*Adults input 
-                                            <div class="col-md-4">
-                                                <label class="control-label" style="font-size: 14px">Adults</label>
-                                                <select id="adult" name="adult" class="form-control">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                </select>
-                                            </div>
-                                             Children input 
-                                            <div class="col-md-4">
-                                                <label class="control-label" style="font-size: 14px">Children</label>
-                                                <select id="child" name="child" class="form-control">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-4">
-                                                 Number of room 
-                                                <label class="control-label number#" style="font-size: 14px"></label>
-                                            </div>*@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-4">
@@ -242,7 +217,7 @@
                                         <!-- Date input -->
                                         <div class="col-md-6">
                                             <label class="control-label">ADULTS</label>
-                                            <select id="adult" name="adult" class="form-control">
+                                            <select id="adult" name="numberOfAdult" class="form-control">
                                                 <option>1</option>
                                                 <option>2</option>
                                                 <option>3</option>
@@ -252,7 +227,7 @@
 
                                         <div class="col-md-6">
                                             <label class="control-label">CHILDREN</label>
-                                            <select id="child" name="child" class="form-control">
+                                            <select id="child" name="numberOfChild" class="form-control">
                                                 <option>1</option>
                                                 <option>2</option>
                                             </select>
@@ -277,10 +252,9 @@
                         <!-- Form element for post -->
                         <div id="list" hidden></div>
                         <div id="newItem" style="display:none">
-                            <input type="text" name="bookingItems[#].roomNumber" />
                             <input type="text" name="bookingItems[#].typeId" />
-                            @*<input type="text" name="bookingItems[#].numberOfAdult" />
-                            <input type="text" name="bookingItems[#].numberOfChild" />*@
+                            <input type="text" name="bookingItems[#].typeName" />
+                            <input type="text" name="bookingItems[#].numberOfRoom" />
                         </div>
                     }
                     <!-- Form for update date -->
@@ -313,47 +287,34 @@
     }
     // Add new room to booking list
     function addNewBookingRoom(href) {
-        //$('.select').each(function (index) {
-        //let typeId = $(this).attr('id')
-        // Add data to the right List
-        // Create hidden input for form submit
-        //$(this).click(function (id) {
-        //    return function () {
         $.ajax({
             url: href,
             type: "GET",
             dataType: "json",
             contentType: "application/jsonrequest; charset=utf-8",
         }).done(function (data) {
-            let id = data.typeId
-            let roomName = data.typeName
-            let number = data.numberOfRoom
-            let cloneItem1 = replaceId('#newItem', id)
+            let element = data[data.length - 1]
+            let id = element.typeId
+            let roomName = element.typeName
+            let number = element.numberOfRoom
+            let cloneItem1 = replaceId('#newItem', data.length - 1)
             $('#list').append(cloneItem1)
+            addDataHiddenInput(element, data.length - 1)
+            console.log($(`input[name="bookingItems[${data.length - 1}].typeId"]`).val())
+
             let cloneItem2 = replaceClass('#bookingItem', id)
             $('#bookingItem').before(cloneItem2)
             $(`span.name${id}`).text(roomName)
             $(`label.number${id}`).prepend(number)
-            console.log(data.typeId)
-            console.log(href)
-            })
+            console.log(data)
+        })
     }
-            //    }
-            //}(index))
-            //$(this).click(function (id, typeId) {
-            //    return function () {
-            //        let roomName = $(`#${typeId} span`).text()
-            //        let cloneItem1 = replaceId('#newItem', id)
-            //        $('#list').append(cloneItem1)
-            //        let cloneItem2 = replaceClass('#bookingItem', id)
-            //        $('#bookingItem').before(cloneItem2)
-            //        $(`span.name${id}`).text(roomName)
-            //        console.log(cloneItem2)
-            //        return false
-            //    }
-            //}(index, typeId))
-        //})
-    // Replace # id
+    // Add data to hidden input
+    function addDataHiddenInput(data, index) {
+        $(`input[name="bookingItems[${index}].typeId"]`).val(data.typeId)
+        $(`input[name="bookingItems[${index}].typeName"]`).val(data.typeName)
+        $(`input[name="bookingItems[${index}].numberOfRoom"]`).val(data.numberOfRoom)
+    }
     function replaceId(idTag, id) {
         let clone = $(idTag).clone(); // clone the BatchProducts item
         // Update the index of the clone
@@ -369,15 +330,14 @@
         return clone.html()
     }
     $(document).ready(() => {
-        //setId()
-        //addNewBookingRoom()
         var checkIn = $('input[name="checkIn"]')
         var checkOut = $('input[name="checkOut"]')
         checkIn.val('@checkIn')
         checkOut.val('@checkOut')
+        PluralDetect('.adultNum', '.childNum')
+
         $('input[name="checkInFake"]').attr('value', checkIn.val())
         $('input[name="checkOutFake"]').attr('value', checkOut.val())
-        PluralDetect('.adultNum', '.childNum')
         onDateChange(checkIn, 'input[name="checkInFake"]')
         onDateChange(checkOut, 'input[name="checkOutFake"]')
         onDateSubmit()

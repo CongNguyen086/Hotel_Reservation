@@ -20,6 +20,7 @@ namespace Hotel_Reservation.Models
         {
             this.Image_Details = new HashSet<Image_Detail>();
             this.Promotions = new HashSet<Promotion>();
+            this.Reviews = new HashSet<Review>();
             this.Rooms = new HashSet<Room>();
         }
     
@@ -43,6 +44,8 @@ namespace Hotel_Reservation.Models
         public virtual ICollection<Image_Detail> Image_Details { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Promotion> Promotions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Review> Reviews { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Room> Rooms { get; set; }
     }

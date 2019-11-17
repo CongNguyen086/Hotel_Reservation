@@ -18,6 +18,7 @@ namespace Hotel_Reservation.Models
         public Registered_Customer()
         {
             this.Reservations = new HashSet<Reservation>();
+            this.Reviews = new HashSet<Review>();
         }
     
         public int customerId { get; set; }
@@ -28,5 +29,7 @@ namespace Hotel_Reservation.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservation> Reservations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Review> Reviews { get; set; }
     }
 }

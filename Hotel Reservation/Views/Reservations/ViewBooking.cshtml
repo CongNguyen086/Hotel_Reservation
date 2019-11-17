@@ -5,5 +5,203 @@
     Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
 }
 
-<h2>ViewBooking</h2>
+<section class="site-content-area">
+    <div class="vk-gallery-grid-full-banner">
+        <div class="vk-about-banner">
+            <div class="vk-about-banner-destop">
+                <div class="vk-banner-img"></div>
+                <div class="vk-about-banner-caption">
+                    <h2>Reservation</h2>
+                    <h3>
+                        <a href="#">Reservation</a>
+                        <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                        <a href="#">Make booking</a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="vk-make-a-reservation-content">
+        <div class="container">
+            <div class="vk-select-room-breakcrumb">
+                <ul>
+                    <li class="active">
+                        <a href="javascript:void(0);">1. Select Room</a>
+                        <span class="round-tabs five">
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">2. Make A Reservation</a>
+                        <span class="round-tabs five">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">3. Confirmation</a>
+                        <span class="round-tabs five">
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row">
+                <div class="vk-make-a-reservation-info">
+                    <div class="col-md-8">
+                        <div class="vk-make-a-reservation-left">
+                            <h3 class="title-font">Your Informations</h3>
+                            <div class="row">
+                                <form action="http://html.vikitheme.com/sparta/action.php">
+                                    <div class="form-group">
+                                        <div class="col-md-6">
+                                            <input type="text" id="firstName" placeholder="First name *" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-6">
+                                            <input type="text" id="lastName" placeholder="Last name *" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-6">
+                                            <input type="email" id="email" placeholder="Email *" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-6">
+                                            <input type="tel" id="phone" placeholder="Phone *" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-6">
+                                            <textarea class="form-control" id="address" name="address" placeholder="Address Note"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-6">
+                                            <textarea class="form-control" id="additional" name="additional" placeholder="Additional Note"></textarea>
+                                        </div>
+                                    </div>
+                                    @*<div class="form-group">
+                                        <div class="col-md-6">
+                                            <input type="text" id="couponName" placeholder="Counpon Code" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-6">
+                                            <div class="vk-btn-send">
+                                                <h4><a href="#">Contact Now</a></h4>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                </form>
+                            </div>
+                        </div>
+                        <div class="vk-make-a-reservation-left" style="margin-top:30px">
+                            <h3 class="title-font" style="text-align:left">Payment</h3>
+                            <ul class="wc_payment_methods payment_methods">
+                                <li class="wc_payment_method payment_method_paypal">
+                                    <input id="payment_method_paypal" type="radio" class="input-radio" name="payment_method" value="paypal" data-order_button_text="Proceed to PayPal">
+                                    <label for="payment_method_paypal">
+                                        <a href="@Url.Action("PaymentWithPaypal", "PayPals")">
+                                            <img src="~/CustomerLayout/images/09_01_shop/paypal.jpg" alt="PayPal acceptance mark" class="img-responsive" />
+                                        </a>
+                                    </label>
+                                    <div class="payment_box payment_method_paypal" style="display:none;">
+                                        <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
+                                    </div>
+                                </li>
+                                <li><hr></li>
+                                <li class="wc_payment_method payment_method_cheque">
+                                    <input id="payment_method_cheque" type="radio" class="input-radio" name="payment_method" value="cheque" checked="checked" data-order_button_text="">
+                                    <label for="payment_method_cheque">
+                                        Cash
+                                    </label>
+                                    <div class="payment_box payment_method_cheque">
+                                        <p>You will pay after checkout.</p>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="form-row place-order" style="padding-top:20px">
+                                <input type="submit" class="button alt" name="woocommerce_checkout_place_order" id="place_order" value="PLACE ORDER" data-value="Place order">
+
+                                <input type="hidden" id="_wpnonce" name="_wpnonce" value="341d89a24a"><input type="hidden" name="_wp_http_referer" value="/structure-contruction/checkout/?wc-ajax=update_order_review">
+                            </div>
+                            @*<div class="row">
+                                <div class="col-md-6">
+                                    <div class="vk-make-a-re-left-img">
+                                        <a href="#">
+
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="vk-make-a-left-btn">
+                                        <h4><a href="#"> Pay Now</a></h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>*@
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="vk-make-a-reservation-right">
+                            <h3>Your Reservation</h3>
+                            <div class="vk-make-a-room">
+                                <div class="vk-make-a-room1">
+                                    <h3>Room 1 : Double Room <span>($100/night)</span></h3>
+                                    <ul>
+                                        <li>Adult: 2</li>
+                                        <li>Children: 1</li>
+                                        <li>night(s): 2</li>
+                                    </ul>
+                                    <h4>$300.0</h4>
+                                </div>
+                                <div class="vk-make-a-room2">
+                                    <h3>Room 2 : Double Twin Room <span>($150/night)</span></h3>
+                                    <ul>
+                                        <li>Adult: 2</li>
+                                        <li>Children: 1</li>
+                                        <li>night(s): 2</li>
+                                    </ul>
+                                    <h4>$450.0</h4>
+                                </div>
+                            </div>
+                            <div class="vk-make-a-total">
+                                <table class="shop_table shop_table_responsive">
+                                    <tbody>
+                                        <tr class="order-total">
+                                            <th>Total</th>
+                                            <td data-title="Tổng cộng">$800.00 </td>
+                                        </tr>
+                                        <tr class="tax-total">
+                                            <th>Tax 10%</th>
+                                            <td data-title="Thuế">$80.00</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="vk-make-a-grand-total">
+                                <table class="shop_table shop_table_responsive">
+                                    <tbody>
+                                        <tr class="order-total">
+                                            <th>Grand Total</th>
+                                            <td data-title="Grand-total">$880.00 </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="vk-make-a-btn">
+                                <h4><a href="#">Edit Booking</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

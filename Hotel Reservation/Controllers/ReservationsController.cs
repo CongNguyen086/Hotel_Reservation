@@ -18,27 +18,29 @@ namespace Hotel_Reservation.Controllers
         // Create Booking
         public RedirectToRouteResult Create()
         {
-            List<BookingItem> booking = Session["giohang"] as List<BookingItem>;
+            List<BookingItem> booking = Session[strCart] as List<BookingItem>;
             Reservation rs = new Reservation();
             rs.customerId = Int32.Parse(Session["customerId"].ToString());
             rs.customerName = Session["customerName"].ToString();
             rs.phone = Session["phone"].ToString();
             rs.email = Session["email"].ToString();
-            rs.reservationStatus = "Processing";
-            rs.checkInDate = Convert.ToDateTime(Session["CheckIn"]);
-            rs.checkOutDate = Convert.ToDateTime(Session["CheckOut"]);
+            rs.checkInDate = Convert.ToDateTime(Session["bookingCheckIn"]);
+            rs.checkOutDate = Convert.ToDateTime(Session["bookingCheckOut"]);
+            rs.numberOfAdult = (Int32)Session["adults"];
+            rs.numberOfChild = (Int32)Session["children"];
+            rs.reservationStatus = "Reserved";
 
             foreach (var item in booking)
             {
                 Reservation_Detail rd = new Reservation_Detail();
                 rd.reservationId = rs.reservationId;
-                //rd.roomNumber = item.typeId;
-                //rd.numberOfTravelers = item.guest;
-                rd.extraFee = item.extraFee;
+                rd.typeId = item.typeId;
+                rd.roomNumber = 0;
+                rd.discount = item.discount;
                 rd.totalPrice = item.itemTotalPrice;
 
                 Room room = db.Rooms.Find(item.typeId);
-                room.roomStatus = "Reserved";
+                room.roomStatus = "Processing";
                 //Room_Catalog rc = db.Room_Catalogs.SingleOrDefault(m => m.typeId == room.typeId);
                 //int room2 = db.Rooms.Where(m => m.typeId == rc.typeId).Where(m => m.roomStatus == "Available").Count();
                 //if (room2 == 0)
@@ -210,13 +212,19 @@ namespace Hotel_Reservation.Controllers
         // Return temp booking list
         public JsonResult CreateBookingItem(string id, string name)
         {
-            TempBooking tempItem = new TempBooking
+            if (Session["tempBooking"] == null)
+            {
+                Session["tempBooking"] = new List<TempBooking>();
+            }
+
+            List<TempBooking> tempBookings = (List<TempBooking>)Session["tempBooking"];
+            tempBookings.Add(new TempBooking
             {
                 typeId = id,
                 typeName = name,
-                numberOfRoom = 1,
-            };
-            return Json(tempItem, JsonRequestBehavior.AllowGet);
+                numberOfRoom = 1, 
+            });
+            return Json(tempBookings, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -228,9 +236,9 @@ namespace Hotel_Reservation.Controllers
 
             Session["bookingCheckIn"] = bookingView.checkIn;
             Session["bookingCheckOut"] = bookingView.checkOut;
-            Session["nights"] = (bookingView.checkOut - bookingView.checkIn).Days;
             Session["adults"] = bookingView.numberOfAdult;
             Session["children"] = bookingView.numberOfChild;
+            var nights = (bookingView.checkOut - bookingView.checkIn).Days;
             var bookingList = bookingView.bookingItems;
 
             foreach (var item in bookingList) {
@@ -251,9 +259,9 @@ namespace Hotel_Reservation.Controllers
                     image = img.image,
                     typeName = rc.typeName,
                     unitPrice = rc.price,
-                    night = (Int32)Session["nights"],
+                    night = 2,
                     extraFee = 0,
-                    discount = rc.price * discount,
+                    discount = Math.Round(rc.price * discount, 1),
                     promotion = itemPromotion,
                 };
 
@@ -265,10 +273,11 @@ namespace Hotel_Reservation.Controllers
         public ActionResult ViewBooking()
         {
             List<BookingItem> booking = Session[strCart] as List<BookingItem>;
+            Console.Write("{0}", Session[strCart]);
             if (booking != null)
             {
                 var extraFee = booking.Select(m => m.extraFee).Sum();
-                var discount = booking.Select(m => m.extraFee).Sum();
+                var discount = booking.Select(m => m.discount).Sum();
                 ViewBag.Subtotal = booking.Select(m => m.itemTotalPrice).Sum();
                 ViewBag.Total = ViewBag.Subtotal + extraFee - discount;
             }

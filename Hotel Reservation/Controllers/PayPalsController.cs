@@ -42,14 +42,6 @@ namespace Hotel_Reservation.Controllers
             List<BookingItem> cart = Session[strCart] as List<BookingItem>;
             foreach (var cartItem in cart)
             {
-                //itemList.items.Add(new Item()
-                //{
-                //    name = cartItem.typeName,
-                //    currency = "USD",
-                //    price = cartItem.unitPrice.ToString(),
-                //    supplementary_data = supplementary_data,
-                //    description = cartItem.promotion,
-                //});
                 itemList.items.Add(new Item()
                 {
                     name = cartItem.typeName,
