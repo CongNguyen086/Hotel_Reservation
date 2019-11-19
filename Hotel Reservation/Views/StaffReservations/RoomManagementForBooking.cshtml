@@ -1,0 +1,541 @@
+﻿
+@{
+    ViewBag.Title = "RoomManagementForBooking";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    addEventListener("load", () => {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    const hideURLbar = () => {
+        window.scrollTo(0, 1);
+    }
+</script>
+<!-- //Meta-Tags -->
+<!-- Index-Page-CSS -->
+<link href="~/BookingStaffLayout/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- //Custom-Stylesheet-Links -->
+<!--fonts -->
+<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+<!-- //fonts -->
+
+<div onload="onLoaderFunc()">
+    @*<h2>Movie Seat Selection</h2>*@
+    <div class="container">
+
+        <div class="w3ls-reg">
+            <!-- Info label -->
+            <div class="inputForm" style="width:100%">
+                <div class="mr_agilemain">
+                    <div class="agileits-left" style="flex-basis: 80%;">
+                        <h1 style="font-weight:bold">
+                            number of booking:&nbsp;
+                            <label style="color:#ff9800">0/5</label>
+                        </h1>
+                    </div>
+                    <div class="agileits-right" style="flex-basis: 20%;margin-top:12px">
+                        <button>Next Booking&nbsp;>></button>
+                    </div>
+                </div>
+                <!-- ID -->
+                <div class="mr_agilemain">
+                    <div class="agileits-left">
+                        <label>
+                            Reservation ID:&nbsp;
+                        </label>
+                        <label>2 </label>
+                    </div>
+                    <div class="agileits-right">
+                        <label>
+                            Customer ID:&nbsp;
+                        </label>
+                        <label>1 </label>
+                    </div>
+                </div>
+                <!-- Details -->
+                <div class="mr_agilemain">
+                    <div class="agileits-left">
+                        <label>
+                            Total Room:&nbsp;
+                        </label>
+                        <label>5 </label>
+                    </div>
+                    <div class="agileits-right">
+                        <label>
+                            Customer Name:&nbsp;
+                        </label>
+                        <label id="Username">Jack </label>
+                    </div>
+                </div>
+                <!-- Date -->
+                <div class="mr_agilemain" style="margin-top: 1.5em;">
+                    <div class="agileits-left">
+                        <label>
+                            CheckIn:&nbsp;
+                        </label>
+                        <label>01/10/2019 </label>
+                    </div>
+                    <div class="agileits-right">
+                        <label>
+                            CheckOut:&nbsp;
+                        </label>
+                        <label>03/10/2019 </label>
+                    </div>
+                </div>
+                @*<button onclick="takeData()">Start Selecting</button>*@
+            </div>
+            <!-- //input fields -->
+            <!-- seat availabilty list -->
+            <ul class="seat_w3ls">
+                <li class="smallBox yellowBox">Double Room (Done)</li>
+
+                <li class="smallBox greenBox">Superior Double Room (1/2)</li>
+
+                <li class="smallBox redBox">Double Twin Room (Done)</li>
+
+                <li class="smallBox greyBox">Reserved Room</li>
+            </ul>
+            <!-- seat availabilty list -->
+            <!-- seat layout -->
+            <div class="seatStructure txt-center" style="overflow-x:auto;">
+                <table id="seatsBlock">
+                    <p id="notification"></p>
+                    <!-- Floor 3 -->
+                    <!-- Floor 3 odd -->
+                    <tr>
+                        <td></td>
+                        <td>301</td>
+                        <td>303</td>
+                        <td>305</td>
+                        <td>307</td>
+                        <td>309</td>
+                        <td>311</td>
+                        <td>313</td>
+                        <td>315</td>
+                        <td>317</td>
+                        <td>319</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="width:80px">FLOOR 3</td>
+                        <td>
+                            <input type="checkbox" class="seats" value="301">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="303">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="305">
+                        </td>
+                        @*<td class="seatGap"></td>*@
+                        <td>
+                            <input type="checkbox" class="seats" value="307">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="309">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="311">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="313">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="315">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="317">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="319">
+                        </td>
+                        <td style="width:100px">Primary floor</td>
+                    </tr>
+
+                    <!-- FLoor 3 even -->
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="checkbox" class="seats" value="302">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="304">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="306">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="308">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="310">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="312">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="314">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="316">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="318">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="320">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>302</td>
+                        <td>304</td>
+                        <td>306</td>
+                        <td>308</td>
+                        <td>310</td>
+                        <td>312</td>
+                        <td>314</td>
+                        <td>316</td>
+                        <td>318</td>
+                        <td>320</td>
+                    </tr>
+
+                    <tr class="seatVGap"></tr>
+
+                    <!-- Floor 2 -->
+                    <!-- Floor 2 odd -->
+                    <tr>
+                        <td></td>
+                        <td>201</td>
+                        <td>203</td>
+                        <td>205</td>
+                        <td>207</td>
+                        <td>209</td>
+                        <td>211</td>
+                        <td>213</td>
+                        <td>215</td>
+                        <td>217</td>
+                        <td>219</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="width:80px">FLOOR 2</td>
+                        <td>
+                            <input type="checkbox" class="seats" value="201">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="203">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="205">
+                        </td>
+                        @*<td class="seatGap"></td>*@
+                        <td>
+                            <input type="checkbox" class="seats" value="207">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="209">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="211">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="213">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="215">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="217">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="219">
+                        </td>
+                        @*<td style="width:80px">Secondary floor</td>*@
+                    </tr>
+
+                    <!-- FLoor 2 even -->
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="checkbox" class="seats" value="202">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="204">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="206">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="208">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="210">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="212">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="214">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="216">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="218">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="220">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>202</td>
+                        <td>204</td>
+                        <td>206</td>
+                        <td>208</td>
+                        <td>210</td>
+                        <td>212</td>
+                        <td>214</td>
+                        <td>216</td>
+                        <td>218</td>
+                        <td>220</td>
+                    </tr>
+
+                    <tr class="seatVGap"></tr>
+
+                    <!-- Floor 1 -->
+                    <!-- Floor 1 odd -->
+                    <tr>
+                        <td></td>
+                        <td>101</td>
+                        <td>103</td>
+                        <td>105</td>
+                        <td>107</td>
+                        <td>109</td>
+                        <td>111</td>
+                        <td>113</td>
+                        <td>115</td>
+                        <td>117</td>
+                        <td>119</td>
+                    </tr>
+                    <tr>
+                        <td style="width:80px">FLOOR 1</td>
+                        <td>
+                            <input type="checkbox" class="seats" value="101">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="103">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="105">
+                        </td>
+                        @*<td class="seatGap"></td>*@
+                        <td>
+                            <input type="checkbox" class="seats" value="107">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="109">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="111">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="113">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="115">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="117">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="119">
+                        </td>
+                    </tr>
+
+                    <!-- FLoor 1 even -->
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="checkbox" class="seats" value="102">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="104">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="106">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="108">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="110">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="112">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="114">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="116">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="118">
+                        </td>
+                        <td>
+                            <input type="checkbox" class="seats" value="120">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>102</td>
+                        <td>104</td>
+                        <td>106</td>
+                        <td>108</td>
+                        <td>110</td>
+                        <td>112</td>
+                        <td>114</td>
+                        <td>116</td>
+                        <td>118</td>
+                        <td>120</td>
+                    </tr>
+                </table>
+                <button onclick="updateTextArea()" style="margin-top:30px">Confirm Selection</button>
+            </div>
+            <!-- //seat layout -->
+            <!-- details after booking displayed here -->
+            <div class="displayerBoxes txt-center" style="overflow-x:auto;">
+                <table class="Displaytable w3ls-table" width="100%">
+                    <tr>
+                        <th>Name</th>
+                        <th>Room Type</th>
+                        <th>Room Number</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea id="nameDisplay">Jack</textarea>
+                        </td>
+                        <td>
+                            <textarea id="NumberDisplay"
+                                      style="height:65px">Double Room, Superior Double Room, Double Twin Room</textarea>
+                        </td>
+                        <td>
+                            <textarea id="seatsDisplay">301, 304, 308, 309, 310, 315</textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- //details after booking displayed here -->
+        </div>
+    </div>
+</div>
+
+<!-- js -->
+<script src="~/BookingStaffLayout/js/jquery-2.2.3.min.js"></script>
+<!-- //js -->
+<!-- script for seat selection -->
+<script>
+    $(document).ready(() => {
+        onClickCheckBox()
+    })
+
+    const onLoaderFunc = () => {
+        $(".seatStructure *").prop("disabled", true);
+        $(".displayerBoxes *").prop("disabled", true);
+        $('footer.sticky-footer').prop("hidden", true)
+    }
+
+    //const takeData = () => {
+    //    if (($("#Username").val().length == 0) || ($("#Numseats").val().length == 0)) {
+    //        alert("Please Enter your Name and Number of Seats");
+    //    } else {
+    //        $(".inputForm *").prop("disabled", true);
+    //        $(".seatStructure *").prop("disabled", false);
+    //        document.getElementById("notification").innerHTML =
+    //            "<b style='margin-bottom:0px;background:#ff9800;letter-spacing:1px;'>Please Select your Seats NOW!</b>";
+    //    }
+    //}
+
+
+    const updateTextArea = () => {
+
+        //if ($("input:checked").length == ($("#Numseats").val())) {
+            $(".seatStructure *").prop("disabled", true);
+
+            var allNameVals = [];
+            var allNumberVals = [];
+            var allSeatsVals = [];
+
+            //Storing in Array
+            allNameVals.push($("#Username").val());
+            allNumberVals.push($("#Numseats").val());
+            $('#seatsBlock :checked').each((i, ele) => {
+                allSeatsVals.push($(ele).val());
+            });
+
+            //Displaying
+            $('#nameDisplay').val(allNameVals);
+            $('#NumberDisplay').val(allNumberVals);
+            $('#seatsDisplay').val(allSeatsVals);
+        //} else {
+        //    alert("Please select " + ($("#Numseats").val()) + " seats")
+        //}
+    }
+
+
+    //const myFunction = () => {
+    //    alert($("input:checked").length);
+    //}
+
+    /*
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+    */
+
+    const onClickCheckBox = () => {
+        $(":checkbox").each((i, ele) => {
+            //$(ele).click(((ele) => {
+            //    return () => {
+            //        //if ($("input:checked").length == ($("#Numseats").val())) {
+            //        //    $(":checkbox").prop('disabled', true);
+            //        //    $(':checked').prop('disabled', false);
+            //        //} else {
+            //        $(":checkbox").prop('disabled', false);
+            //        var color = '#B4C4AE'
+            //        switch ($(ele).val()) {
+            //            case 'DB':
+            //                color = 'Yellow'
+            //                console.log(color)
+            //                break
+            //            case 'SD':
+            //                color = '#B4C4AE'
+            //                break
+            //            case 'DT':
+            //                color = 'Red'
+            //                break
+            //        }
+            //        //$(ele.selector + ':checked').css('background-color', color);
+            //        //console.log($(ele.selector + ':checked').css('background-color'))
+            //        //}
+            //    }
+            //})(ele));
+        })
+    }
+</script>
+<!-- //script for seat selection -->

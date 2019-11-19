@@ -231,6 +231,7 @@ namespace Hotel_Reservation.Controllers
         // View reservation
         public ActionResult MakeBooking(BookingViewModel bookingView)
         {
+            Session["tempBooking"] = null;
             Session[strCart] = new List<BookingItem>();
             List<BookingItem> booking = Session[strCart] as List<BookingItem>;
 

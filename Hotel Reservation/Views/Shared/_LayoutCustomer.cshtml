@@ -137,6 +137,7 @@
             </div>
         </nav>
         <!-- End mobile menu -->
+
         <div id="wrapper-container" class="site-wrapper-container">
             <header class="site-header header-default header-sticky">
                 <nav class="main-navigation">
@@ -169,7 +170,7 @@
                                             </ul>
                                             <ul class="nav-bar vk-navbar-right">
                                                 <li>
-                                                    <a href="@Url.Action("Index","Cart")">Booking</a>
+                                                    <a href="@Url.Action("SelectRoom","Reservations")">Booking</a>
                                                 </li>
                                                 <li>
                                                     <a href="#">Review</a>
@@ -217,12 +218,15 @@
                                                 <div class="ui selection dropdown">
                                                     <input type="hidden" name="selection">
                                                     <i class="fa fa-angle-down" aria-hidden="true"></i>
-                                                    <div class="default text" style="margin-right: 5px">Welcome, @Session["customerName"]</div>
+                                                    <div class="default text" style="margin-right: 5px">
+                                                        Welcome, @Session["customerName"]
+                                                    </div>
+                                                    @*<div class="default text" style="margin-right: 5px">Login</div>*@
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
-                                    <li><a href="@Url.Action("LogoutCustomer", "Registered_Customer")">Logout </a> </li>
+                                    <li><a href="@Url.Action("LogoutCustomer", "Registered_Customer")">Logout </a></li>
                                 </ul>
                             </div>
                             <div class="quick-address vk-navbar-left">

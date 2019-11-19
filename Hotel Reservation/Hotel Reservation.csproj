@@ -4532,6 +4532,10 @@
     <Content Include="Assets\libs\jQuery\test\unit\traversing.js" />
     <Content Include="Assets\libs\jQuery\test\unit\tween.js" />
     <Content Include="Assets\libs\jQuery\test\unit\wrap.js" />
+    <Content Include="BookingStaffLayout\css\font-awesome.css" />
+    <Content Include="BookingStaffLayout\css\style.css" />
+    <Content Include="BookingStaffLayout\images\banner.jpg" />
+    <Content Include="BookingStaffLayout\js\jquery-2.2.3.min.js" />
     <Content Include="Content\Login\css\main.css" />
     <Content Include="Content\Login\css\util.css" />
     <Content Include="Content\Login\fonts\font-awesome-4.7.0\css\font-awesome.css" />
@@ -4904,6 +4908,7 @@
     <Content Include="CustomerLayout\images\09_01_shop\p2.jpg" />
     <Content Include="CustomerLayout\images\09_01_shop\p3.jpg" />
     <Content Include="CustomerLayout\images\09_01_shop\paypal.jpg" />
+    <Content Include="CustomerLayout\images\check_icon.png" />
     <Content Include="CustomerLayout\images\logo-footer.png" />
     <Content Include="CustomerLayout\img\video-play.html" />
     <Content Include="CustomerLayout\img\vimeo-play.html" />
@@ -5818,6 +5823,11 @@
     <Content Include="Models\ModelContext.edmx.diagram">
       <DependentUpon>ModelContext.edmx</DependentUpon>
     </Content>
+    <Content Include="BookingStaffLayout\fonts\fontawesome-webfont.eot" />
+    <Content Include="BookingStaffLayout\fonts\fontawesome-webfont.ttf" />
+    <Content Include="BookingStaffLayout\fonts\fontawesome-webfont.woff" />
+    <Content Include="BookingStaffLayout\fonts\fontawesome-webfont.woff2" />
+    <Content Include="BookingStaffLayout\fonts\FontAwesome.otf" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
@@ -5849,6 +5859,7 @@
     <Compile Include="Controllers\AdminRoomsController.cs" />
     <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
+    <Compile Include="Controllers\StaffReservationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -5938,6 +5949,7 @@
     <Content Include="Views\Customer_Pages\Restaurant.cshtml" />
     <Content Include="Views\Reservations\SelectRoom.cshtml" />
     <Content Include="Views\Reservations\ViewBooking.cshtml" />
+    <Content Include="Views\StaffReservations\RoomManagementForBooking.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
