@@ -4536,6 +4536,9 @@
     <Content Include="BookingStaffLayout\css\style.css" />
     <Content Include="BookingStaffLayout\images\banner.jpg" />
     <Content Include="BookingStaffLayout\js\jquery-2.2.3.min.js" />
+    <Content Include="Content\facebook.png" />
+    <Content Include="Content\google_1.png" />
+    <Content Include="Content\google_2.png" />
     <Content Include="Content\Login\css\main.css" />
     <Content Include="Content\Login\css\util.css" />
     <Content Include="Content\Login\fonts\font-awesome-4.7.0\css\font-awesome.css" />
@@ -4580,6 +4583,7 @@
     <Content Include="Content\Login\vendor\select2\select2.min.js" />
     <Content Include="Content\Login_v15\css\main.css" />
     <Content Include="Content\Login_v15\css\util.css" />
+    <Content Include="Content\facebook_1.png" />
     <Content Include="Content\Login_v15\fonts\font-awesome-4.7.0\css\font-awesome.css" />
     <Content Include="Content\Login_v15\fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
     <Content Include="Content\Login_v15\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
@@ -5845,6 +5849,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminChartsController.cs" />
     <Compile Include="Controllers\AdminRoom_CatalogController.cs" />
     <Compile Include="Controllers\AdminsController.cs" />
     <Compile Include="Controllers\CartController.cs" />
@@ -5867,6 +5872,7 @@
       <DependentUpon>ModelContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BookingItem.cs" />
+    <Compile Include="Models\ChartItem.cs" />
     <Compile Include="Models\Image_Detail.cs">
       <DependentUpon>ModelContext.tt</DependentUpon>
     </Compile>
@@ -5950,6 +5956,7 @@
     <Content Include="Views\Reservations\SelectRoom.cshtml" />
     <Content Include="Views\Reservations\ViewBooking.cshtml" />
     <Content Include="Views\StaffReservations\RoomManagementForBooking.cshtml" />
+    <Content Include="Views\AdminCharts\Dashboard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

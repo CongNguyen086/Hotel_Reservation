@@ -35,5 +35,7 @@ namespace Hotel_Reservation.Models
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<Room_Catalog> Room_Catalogs { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
+
+        public System.Data.Entity.DbSet<Hotel_Reservation.Models.ChartItem> ChartItems { get; set; }
     }
 }
