@@ -39,7 +39,7 @@ namespace Hotel_Reservation.Controllers
                         Session["customerName"] = acc.customerName;
                         Session["phone"] = acc.phone;
                         Session["email"] = acc.email;
-                        return RedirectToAction("Index", "Rooms");
+                        return RedirectToAction("Index", "Homes");
                     }
                     else
                     {
